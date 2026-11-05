@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Matemático I — Facultad de Ciencias Económicas | Unidad 1: Límites y continuidad</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tipografías académicas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- KaTeX para renderizado matemático de calidad editorial -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Iconos Phosphor -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 9999px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1d4ed8;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.28);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.14);
+        }
+
+        input[type="range"].epsilon-slider::-webkit-slider-thumb {
+            background: #7c3aed;
+        }
+
+        input[type="range"].delta-slider::-webkit-slider-thumb {
+            background: #0284c7;
+        }
+
+        input[type="range"].econ-slider::-webkit-slider-thumb {
+            background: #059669;
+        }
+
+        .step-card {
+            animation: slideFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.35rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- ========================================================= -->
+    <!-- CABECERA PRINCIPAL CON 3 APARTADOS Y BARRA DE UNIDADES     -->
+    <!-- ========================================================= -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3.5 gap-3">
+                <!-- Identidad de la cátedra -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-700 to-indigo-800 text-white flex items-center justify-center font-serif font-bold text-lg shadow-sm shrink-0">
+                            $\int$
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Unidad 1</span>
+                                <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Ciencias Económicas</span>
+                            </div>
+                            <h1 class="text-base sm:text-xl font-bold text-slate-900 tracking-tight mt-0.5">Análisis Matemático I</h1>
+                        </div>
+                    </div>
+
+                    <!-- Botón de unidades en móvil -->
+                    <button id="btn-temario" type="button" class="lg:hidden inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition">
+                        <i class="ph ph-books text-base"></i>
+                        <span>Unidades</span>
+                    </button>
+                </div>
+
+                <!-- Navegación Principal: 3 Apartados uno al lado del otro -->
+                <nav aria-label="Apartados de la Unidad" class="grid grid-cols-1 sm:grid-cols-3 lg:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/80 gap-1">
+                    <button id="tab-teoria" type="button" onclick="switchMainTab('teoria')"
+                        class="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-blue-700 shadow-sm">
+                        <i class="ph-fill ph-book-open-text text-base"></i>
+                        <span>Apartado Teórico</span>
+                    </button>
+                    <button id="tab-practica" type="button" onclick="switchMainTab('practica')"
+                        class="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+                        <i class="ph-fill ph-pencil-ruler text-base"></i>
+                        <span>Apartado Práctico</span>
+                    </button>
+                    <button id="tab-economicas" type="button" onclick="switchMainTab('economicas')"
+                        class="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900">
+                        <i class="ph-fill ph-trend-up text-base"></i>
+                        <span>Aplicaciones Económicas</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Barra secundaria de unidades del programa -->
+            <div class="hidden lg:flex items-center gap-2 py-2 border-t border-slate-100 text-xs overflow-x-auto">
+                <span class="text-slate-400 font-medium mr-1 shrink-0">Programa de la materia:</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs">
+                    <i class="ph-bold ph-check-circle"></i> Unidad 1: Límites y continuidad
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-medium shrink-0 cursor-not-allowed">
+                    <i class="ph ph-lock-simple"></i>
+                    <span>Unidad 2: Derivadas</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wide bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-full">Próximamente</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-medium shrink-0 cursor-not-allowed">
+                    <i class="ph ph-lock-simple"></i>
+                    <span>Unidad 3: Teoremas del Cálculo Diferencial. Formas indeterminadas</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wide bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-full">Próximamente</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- CONTENIDO PRINCIPAL                                       -->
+    <!-- ========================================================= -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- HERO DE LA UNIDAD 1 -->
+        <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\lim$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-blue-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 1: Límites y Continuidad
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Explorá la interpretación geométrica del límite, la continuidad en un punto y en intervalos, el levantamiento algebraico de las 7 indeterminaciones, los límites notables y sus aplicaciones económicas.
+                </p>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 1: APARTADO TEÓRICO                               -->
+        <!-- ========================================================= -->
+        <section id="section-teoria" class="space-y-10">
+
+            <!-- Índice rápido de teoría -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <a href="#idea-intuitiva" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 font-bold flex items-center justify-center text-sm group-hover:bg-blue-600 group-hover:text-white transition">1</span>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Idea Intuitiva</p>
+                        <p class="text-xs text-slate-500">Límites laterales y existencia</p>
+                    </div>
+                </a>
+                <a href="#definicion-formal" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-lg bg-purple-50 text-purple-700 font-bold flex items-center justify-center text-sm group-hover:bg-purple-600 group-hover:text-white transition">2</span>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Definición Formal $(\varepsilon - \delta)$</p>
+                        <p class="text-xs text-slate-500">Cauchy-Weierstrass en 4 bloques</p>
+                    </div>
+                </a>
+                <a href="#interpretacion-geometrica" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 font-bold flex items-center justify-center text-sm group-hover:bg-emerald-600 group-hover:text-white transition">3</span>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Laboratorio Geométrico</p>
+                        <p class="text-xs text-slate-500">Simulador de $f(x)=\frac{x^2-x-2}{x-2}$</p>
+                    </div>
+                </a>
+                <a href="#continuidad-teoria" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-teal-400 hover:shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 font-bold flex items-center justify-center text-sm group-hover:bg-teal-600 group-hover:text-white transition">4</span>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Continuidad</p>
+                        <p class="text-xs text-slate-500">Las 3 condiciones e intervalos</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 1. IDEA INTUITIVA DE LÍMITE -->
+            <article id="idea-intuitiva" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Idea intuitiva de Límite</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">¿Qué ocurre con las imágenes $f(x)$ cuando $x$ se aproxima indefinidamente a $a$?</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-7 space-y-4 text-slate-700 leading-relaxed text-sm sm:text-base">
+                        <p>
+                            Decimos que el <strong>límite de $f(x)$ cuando $x$ tiende a $a$ es igual a $L$</strong>, y lo expresamos como:
+                        </p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-lg">
+                            $$\lim_{x \to a} f(x) = L$$
+                        </div>
+                        <p>
+                            si podemos lograr que los valores de $f(x)$ estén <strong>tan cerca de $L$ como deseemos</strong> tomando valores de $x$ suficientemente próximos a $a$ (por ambos lados), pero <strong>sin exigir jamás que $x$ sea igual a $a$</strong> ($x \neq a$).
+                        </p>
+
+                        <!-- Diferencia entre el límite y la imagen f(a) -->
+                        <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 space-y-1.5">
+                            <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                                <i class="ph-fill ph-warning-circle text-lg"></i>
+                                <span>Diferencia clave: el valor del límite vs. la imagen $f(a)$</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-amber-900/90 leading-relaxed">
+                                Al calcular $\lim_{x \to a} f(x)$ <strong>no importa qué ocurre exactamente en $x = a$</strong>. La imagen $f(a)$ puede no estar definida (un hueco abierto en la gráfica) o estar definida en otro valor distinto ($f(a) \neq L$). El límite describe exclusivamente la tendencia en el <em>entorno reducido</em> de $a$.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Límites laterales y condición de existencia -->
+                    <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5 space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
+                            <i class="ph-fill ph-arrows-in-line-horizontal text-blue-600 text-xl"></i>
+                            Límites Laterales y Existencia
+                        </h4>
+                        <p class="text-xs sm:text-sm text-slate-600">
+                            Para acercarnos a un punto $a$ sobre el eje real disponemos de dos trayectorias laterales:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold uppercase text-sky-700">Límite por izquierda ($x < a$)</span>
+                                <p class="text-sm text-slate-700 mt-1">
+                                    $\displaystyle L^- = \lim_{x \to a^-} f(x)$
+                                </p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold uppercase text-indigo-700">Límite por derecha ($x > a$)</span>
+                                <p class="text-sm text-slate-700 mt-1">
+                                    $\displaystyle L^+ = \lim_{x \to a^+} f(x)$
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-600 text-white rounded-xl p-4 shadow-xs">
+                            <p class="text-xs uppercase tracking-wider font-semibold text-blue-100 mb-1">Condición de Existencia y Unicidad</p>
+                            <p class="text-xs sm:text-sm leading-relaxed">
+                                El límite ordinario existe y vale $L \in \mathbb{R}$ <strong>si y solo si</strong> ambos límites laterales existen, son finitos y coinciden:
+                            </p>
+                            <div class="mt-2 text-center text-sm bg-blue-700/60 rounded-lg py-2 px-2">
+                                $$L^- = L^+ = L \iff \lim_{x \to a} f(x) = L$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. DEFINICIÓN FORMAL CAUCHY-WEIERSTRASS -->
+            <article id="definicion-formal" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Definición Formal ($\varepsilon - \delta$ de Cauchy-Weierstrass)</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Precisión geométrica mediante entornos y distancias</p>
+                    </div>
+                </div>
+
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                    Sea $f$ una función definida en un intervalo abierto que contiene a $a$, salvo quizás en el propio punto $a$. Se dice que $\lim_{x \to a} f(x) = L$ cuando:
+                </p>
+
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 sm:p-7 shadow-md">
+                    <p class="text-xs uppercase tracking-widest text-purple-300 font-semibold mb-2">Enunciado Simbólico</p>
+                    <div class="text-base sm:text-xl text-center py-2">
+                        $$\forall \varepsilon > 0, \quad \exists \, \delta(\varepsilon) > 0 \quad \text{tal que si} \quad 0 < |x - a| < \delta \implies |f(x) - L| < \varepsilon$$
+                    </div>
+                </div>
+
+                <!-- 4 tarjetas didácticas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border-2 border-purple-200 bg-purple-50/50 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded-full">1. Tolerancia Vertical</span>
+                            <span class="font-semibold text-purple-900 text-sm">$\forall \varepsilon > 0$</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-900">"Para cualquier radio positivo épsilon..."</p>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Fijamos primero qué tan cerca queremos estar de $L$ en el eje vertical $Y$, creando la franja $(L - \varepsilon, L + \varepsilon)$.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border-2 border-sky-200 bg-sky-50/50 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-2.5 py-0.5 rounded-full">2. Respuesta Horizontal</span>
+                            <span class="font-semibold text-sky-900 text-sm">$\exists \, \delta(\varepsilon) > 0$</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-900">"...existe un radio positivo delta..."</p>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Podemos hallar un ancho $\delta$ sobre el eje $X$ alrededor de $a$ (que depende de cuán exigente haya sido $\varepsilon$).
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border-2 border-indigo-200 bg-indigo-50/50 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-100 px-2.5 py-0.5 rounded-full">3. Entorno Reducido</span>
+                            <span class="font-semibold text-indigo-900 text-sm">$0 < |x - a| < \delta$</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-900">"...para todo $x$ cercano a $a$, con $x \neq a$..."</p>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            La desigualdad $0 < |x - a|$ excluye explícitamente el punto $x = a$, mientras que $|x - a| < \delta$ ubica a $x \in (a - \delta, a + \delta)$.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border-2 border-emerald-200 bg-emerald-50/50 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">4. Garantía sobre las Imágenes</span>
+                            <span class="font-semibold text-emerald-900 text-sm">$|f(x) - L| < \varepsilon$</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-900">"...su imagen $f(x)$ cae dentro de la banda de $L$."</p>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Toda la curva correspondiente a ese entorno reducido queda encerrada dentro del rectángulo de tolerancia $(L - \varepsilon, L + \varepsilon)$.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. INTERPRETACIÓN GEOMÉTRICA INTERACTIVA -->
+            <article id="interpretacion-geometrica" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Laboratorio Geométrico Interactivo</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Exploración de $f(x) = \dfrac{x^2 - x - 2}{x - 2}$ cuando $x \to 2$ ($L = 3$)</p>
+                        </div>
+                    </div>
+
+                    <label class="inline-flex items-center gap-2 text-xs font-semibold text-amber-900 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl cursor-pointer select-none">
+                        <input id="chk-punto-aislado" type="checkbox" onchange="onLabChange()" class="rounded text-amber-600 focus:ring-amber-500">
+                        <span>Mostrar punto aislado $f(2) = 1$</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Lienzo HiDPI -->
+                    <div class="lg:col-span-7 space-y-3">
+                        <div id="canvas-wrapper" class="w-full aspect-[4/3] bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                            <canvas id="limit-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <div id="ed-status-banner" class="rounded-xl p-3.5 border bg-emerald-50 border-emerald-300 text-emerald-950 flex items-start gap-3 transition-colors">
+                            <i id="ed-status-icon" class="ph-fill ph-check-circle text-emerald-600 text-2xl shrink-0 mt-0.5"></i>
+                            <div class="text-xs sm:text-sm space-y-0.5">
+                                <p id="ed-status-title" class="font-bold">¡Validación correcta!</p>
+                                <p id="ed-status-desc" class="opacity-90 leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles deslizantes y lecturas -->
+                    <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5 space-y-5">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Aproximar $x \to 2$</span>
+                                <span id="badge-side" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800">Por izquierda</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono text-slate-600">
+                                <span>0.20</span>
+                                <span id="lbl-x-slider" class="font-bold text-blue-700">x = 1.35</span>
+                                <span>3.80</span>
+                            </div>
+                            <input id="slider-x" type="range" min="0.20" max="3.80" step="0.01" value="1.35" oninput="onLabChange()" class="w-full bg-blue-200">
+                            <div class="grid grid-cols-5 gap-1.5 pt-1 text-[11px] font-mono">
+                                <button type="button" onclick="setPointX(1.9)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500">1.90</button>
+                                <button type="button" onclick="setPointX(1.99)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500">1.99</button>
+                                <button type="button" onclick="setPointX(2.0)" class="py-1 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 font-bold">x=2</button>
+                                <button type="button" onclick="setPointX(2.01)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500">2.01</button>
+                                <button type="button" onclick="setPointX(2.1)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500">2.10</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2.5 text-xs">
+                            <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                <p class="text-slate-500">Abscisa $x$</p>
+                                <p id="readout-x" class="font-mono font-bold text-blue-700 text-base mt-0.5">1.350</p>
+                                <p id="readout-dx" class="font-mono text-[11px] text-slate-500 mt-0.5">|x - 2| = 0.650</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                <p class="text-slate-500">Imagen $f(x)$</p>
+                                <p id="readout-fx" class="font-mono font-bold text-indigo-700 text-base mt-0.5">2.350</p>
+                                <p id="readout-dfx" class="font-mono text-[11px] text-slate-500 mt-0.5">|f(x) - 3| = 0.650</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-200 pt-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Bandas $\varepsilon - \delta$</span>
+                                <button type="button" onclick="setOptimalDelta()" class="text-[11px] font-semibold text-purple-700 hover:text-purple-900 bg-purple-100 px-2.5 py-1 rounded-lg transition">
+                                    Ajustar $\delta = \varepsilon$ óptimo
+                                </button>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-purple-800">Tolerancia vertical ($\varepsilon$)</span>
+                                    <span id="lbl-eps" class="font-mono font-bold text-purple-700">ε = 0.60</span>
+                                </div>
+                                <input id="slider-eps" type="range" min="0.20" max="1.20" step="0.05" value="0.60" oninput="onLabChange()" class="w-full bg-purple-200 epsilon-slider">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-sky-800">Semiancho horizontal ($\delta$)</span>
+                                    <span id="lbl-delta" class="font-mono font-bold text-sky-700">δ = 0.50</span>
+                                </div>
+                                <input id="slider-delta" type="range" min="0.10" max="1.20" step="0.05" value="0.50" oninput="onLabChange()" class="w-full bg-sky-200 delta-slider">
+                            </div>
+
+                            <p id="lbl-max-delta-hint" class="text-[11px] text-slate-500 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accesos directos a la segunda parte teórica -->
+                <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p class="text-xs sm:text-sm text-slate-500">
+                        Con el concepto de límite claro, veamos ahora cuándo una función no presenta interrupciones.
+                    </p>
+                    <a href="#continuidad-teoria" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-teal-700 hover:text-teal-800 bg-teal-50 hover:bg-teal-100 px-3.5 py-2 rounded-xl border border-teal-200 transition">
+                        <span>Bajar a Continuidad de una Función</span>
+                        <i class="ph-bold ph-arrow-down"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- ========================================================= -->
+            <!-- 4. CONTINUIDAD DE UNA FUNCIÓN (PARTE 2 DE TEORÍA)         -->
+            <!-- ========================================================= -->
+            <article id="continuidad-teoria" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-8">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span class="w-9 h-9 rounded-xl bg-teal-600 text-white font-bold flex items-center justify-center shrink-0">4</span>
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">Segunda Parte • Unidad 1</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Continuidad de una Función</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Idea geométrica directa, definición en un punto $x = a$ y análisis en intervalos</p>
+                    </div>
+                </div>
+
+                <!-- a) Idea geométrica + Mini visualizador interactivo de las 3 condiciones -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="ph-fill ph-pen-nib text-teal-600 text-xl"></i>
+                                Idea geométrica rápida
+                            </h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Intuitivamente, una función es <strong>continua</strong> si podemos <strong>trazar su gráfica sin levantar el lápiz del papel</strong>: no presenta agujeros vacíos, ni saltos bruscos, ni puntos desplazados fuera de la curva.
+                            </p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Alterná los escenarios en $x = a$:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                                <button type="button" id="btn-cont-mode-ok" onclick="setContTheoryMode('ok')"
+                                    class="text-left px-3.5 py-2.5 rounded-xl border-2 border-teal-500 bg-teal-50 text-teal-950 text-xs sm:text-sm font-semibold transition flex items-center justify-between">
+                                    <span>1. Función Continua (cumple las 3)</span>
+                                    <i class="ph-fill ph-check-circle text-teal-600 text-lg"></i>
+                                </button>
+                                <button type="button" id="btn-cont-mode-nofa" onclick="setContTheoryMode('nofa')"
+                                    class="text-left px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 text-xs sm:text-sm font-medium transition flex items-center justify-between">
+                                    <span>2. Falla $f(a)$: hueco vacío</span>
+                                    <i class="ph-fill ph-circle-dashed text-rose-500 text-lg"></i>
+                                </button>
+                                <button type="button" id="btn-cont-mode-nolim" onclick="setContTheoryMode('nolim')"
+                                    class="text-left px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 text-xs sm:text-sm font-medium transition flex items-center justify-between">
+                                    <span>3. Falla el límite: salto ($L^- \neq L^+$)</span>
+                                    <i class="ph-fill ph-arrows-out-line-vertical text-rose-500 text-lg"></i>
+                                </button>
+                                <button type="button" id="btn-cont-mode-noeq" onclick="setContTheoryMode('noeq')"
+                                    class="text-left px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 text-xs sm:text-sm font-medium transition flex items-center justify-between">
+                                    <span>4. Falla la igualdad: punto desplazado</span>
+                                    <i class="ph-fill ph-warning-circle text-amber-500 text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini-canvas comparativo de continuidad -->
+                    <div class="lg:col-span-7 bg-slate-50 rounded-2xl border border-slate-200 p-4 sm:p-5 space-y-3.5">
+                        <div id="cont-theory-canvas-wrap" class="w-full aspect-[16/9] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                            <canvas id="cont-theory-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <!-- Tablero en vivo de las 3 condiciones para el modo elegido -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs" id="cont-theory-checks"></div>
+                        <p id="cont-theory-caption" class="text-xs sm:text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <!-- b) Definición formal simple: las 3 condiciones obligatorias -->
+                <div class="bg-gradient-to-br from-teal-950 via-slate-900 to-slate-900 text-white rounded-2xl p-6 sm:p-7 space-y-5 shadow-md">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-teal-300 font-semibold">Definición Puntual</span>
+                        <h4 class="text-lg sm:text-xl font-bold mt-1">Definición de Continuidad en un punto $x = a$</h4>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                            Decimos que una función $f(x)$ es <strong>continua en $x = a$</strong> si y solo si verifica simultáneamente estas <strong>tres condiciones obligatorias</strong>:
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white/10 backdrop-blur-xs border border-white/15 rounded-xl p-4 space-y-2">
+                            <span class="inline-block text-xs font-bold bg-teal-400/20 text-teal-200 px-2.5 py-0.5 rounded-full">Condición 1</span>
+                            <p class="font-bold text-sm sm:text-base">Existe la función en el punto</p>
+                            <div class="bg-slate-950/60 rounded-lg py-2 px-3 text-center text-sm">
+                                $$\exists \, f(a) \quad (a \in \operatorname{Dom} f)$$
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">La función tiene imagen definida y finita al evaluar exactamente en $x = a$.</p>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-xs border border-white/15 rounded-xl p-4 space-y-2">
+                            <span class="inline-block text-xs font-bold bg-teal-400/20 text-teal-200 px-2.5 py-0.5 rounded-full">Condición 2</span>
+                            <p class="font-bold text-sm sm:text-base">Existe el límite finito en $x \to a$</p>
+                            <div class="bg-slate-950/60 rounded-lg py-2 px-3 text-center text-sm">
+                                $$\exists \lim_{x \to a} f(x) = L \in \mathbb{R}$$
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">Los límites laterales por izquierda ($L^-$) y por derecha ($L^+$) existen, son finitos y coinciden.</p>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-xs border border-white/15 rounded-xl p-4 space-y-2">
+                            <span class="inline-block text-xs font-bold bg-teal-400/20 text-teal-200 px-2.5 py-0.5 rounded-full">Condición 3</span>
+                            <p class="font-bold text-sm sm:text-base">Límite e imagen coinciden</p>
+                            <div class="bg-slate-950/60 rounded-lg py-2 px-3 text-center text-sm">
+                                $$\lim_{x \to a} f(x) = f(a)$$
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">El valor al que tiende la curva coincide exactamente con el punto relleno $(a, f(a))$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- c) Continuidad en un intervalo y regla práctica para ejercicios -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-0.5 rounded-full">Intervalo Abierto $(a, b)$</span>
+                            <h5 class="font-bold text-slate-900 text-base">Continuidad interior</h5>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                $f$ es continua en $(a, b)$ si es continua en <strong>todos y cada uno de los puntos interiores</strong> $x \in (a, b)$, sin exigir nada en los extremos $a$ y $b$.
+                            </p>
+                        </div>
+
+                        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-teal-800 bg-teal-100 px-2.5 py-0.5 rounded-full">Intervalo Cerrado $[a, b]$</span>
+                            <h5 class="font-bold text-slate-900 text-base">Interior + Bordes</h5>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Es continua en el abierto $(a, b)$ y además cumple <strong>continuidad lateral en los extremos</strong>:
+                            </p>
+                            <div class="bg-white border border-slate-200 rounded-lg p-2 text-xs text-center">
+                                $\displaystyle \lim_{x \to a^+} f(x) = f(a)$ &nbsp;y&nbsp; $\displaystyle \lim_{x \to b^-} f(x) = f(b)$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 rounded-2xl border-2 border-amber-200 bg-amber-50/70 p-5 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-amber-950 font-bold text-sm">
+                                <i class="ph-fill ph-compass text-amber-600 text-lg"></i>
+                                <span>Regla práctica para ejercicios de parcial</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-amber-950/90 leading-relaxed">
+                                Las funciones elementales (<strong>polinomios, racionales, raíces y exponenciales</strong>) son continuas en todo su dominio natural.
+                            </p>
+                            <p class="text-xs sm:text-sm text-amber-950/90 leading-relaxed">
+                                Por eso, cuando nos piden estudiar continuidad en un intervalo dado, solo buscamos los <strong>"puntos conflictivos"</strong> que caigan dentro de ese intervalo (denominadores que se anulan o <strong>puntos de empalme</strong> donde cambia la fórmula en funciones por tramos) y verificamos allí las 3 condiciones.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navegación al cierre del Apartado Teórico -->
+                <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-slate-600">
+                        Pasá al Apartado Práctico para recorrer los límites algebraicos y el ejercicio resuelto de continuidad en un intervalo.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+                        <button type="button" onclick="switchMainTab('practica')"
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                            <span>Apartado Práctico</span>
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </button>
+                        <button type="button" onclick="switchMainTab('economicas')"
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                            <span>Aplicaciones Económicas</span>
+                            <i class="ph-bold ph-trend-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 2: APARTADO PRÁCTICO (LÍMITES + CONTINUIDAD)      -->
+        <!-- ========================================================= -->
+        <section id="section-practica" class="hidden space-y-8">
+
+            <!-- Selector de Sub-bloques de Límites + Acceso rápido a Continuidad -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">Parte 1 • Práctica de Límites</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Técnicas Algebraicas y Límites Notables</h3>
+                    <p class="text-xs sm:text-sm text-slate-500">Alterná los bloques de límites o bajá directo a la práctica de Continuidad en un intervalo.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <div class="flex flex-col sm:flex-row bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1">
+                        <button id="subtab-bloque-a" type="button" onclick="switchPracticeSubtab('A')"
+                            class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-blue-700 shadow-sm text-left sm:text-center">
+                            Bloque A • Las 7 Indeterminaciones
+                        </button>
+                        <button id="subtab-bloque-b" type="button" onclick="switchPracticeSubtab('B')"
+                            class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 text-left sm:text-center">
+                            Bloque B • Límites Notables
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="scrollToContinuidadPractica()"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs transition">
+                        <i class="ph-bold ph-arrow-down"></i>
+                        <span>Ir a Continuidad</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- SUB-BLOQUE A: LAS 7 INDETERMINACIONES (SIN L'HÔPITAL) -->
+            <!-- ===================================================== -->
+            <div id="practica-bloque-a" class="space-y-8">
+
+                <!-- Mapa Estratégico Interactivo de las 7 Indeterminaciones -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full">Álgebra Pura • Sin Regla de L'Hôpital</span>
+                            <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Mapa Estratégico de las 7 Indeterminaciones</h4>
+                            <p class="text-xs sm:text-sm text-slate-600">Tocá cualquier indeterminación para ver la herramienta algebraica estándar que la destraba y filtrar sus ejercicios.</p>
+                        </div>
+                        <button type="button" onclick="toggleFalsasIndet()"
+                            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-semibold transition self-start md:self-auto shrink-0">
+                            <i class="ph-fill ph-lightbulb"></i>
+                            <span>Ver Falsas Indeterminaciones</span>
+                            <i id="icon-falsas" class="ph-bold ph-caret-down"></i>
+                        </button>
+                    </div>
+
+                    <!-- Tarjetas de las 7 indeterminaciones -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5" id="indet-map-grid">
+                        <button type="button" onclick="selectIndetStrategy('0_0')" id="map-btn-0_0"
+                            class="p-3 rounded-xl border-2 border-blue-500 bg-blue-50 text-center transition hover:shadow-xs">
+                            <div class="text-base font-bold text-blue-900">$\frac{0}{0}$</div>
+                            <div class="text-[11px] font-medium text-blue-700 mt-1">Factoreo / Conjugado</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('inf_inf')" id="map-btn-inf_inf"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
+                            <div class="text-base font-bold text-slate-900">$\frac{\infty}{\infty}$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">Mayor potencia / $|x|$</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('inf_minus_inf')" id="map-btn-inf_minus_inf"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
+                            <div class="text-base font-bold text-slate-900">$\infty - \infty$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">Conjugado / Común den.</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('zero_dot_inf')" id="map-btn-zero_dot_inf"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
+                            <div class="text-base font-bold text-slate-900">$0 \cdot \infty$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">Llevar a cociente</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('one_pow_inf')" id="map-btn-one_pow_inf"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
+                            <div class="text-base font-bold text-slate-900">$1^\infty$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">Molde número $e$</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('inf_pow_0')" id="map-btn-inf_pow_0"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
+                            <div class="text-base font-bold text-slate-900">$\infty^0$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">$e^{B\ln A}$ + Factor dom.</div>
+                        </button>
+                        <button type="button" onclick="selectIndetStrategy('zero_pow_0')" id="map-btn-zero_pow_0"
+                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition col-span-2 sm:col-span-1">
+                            <div class="text-base font-bold text-slate-900">$0^0$</div>
+                            <div class="text-[11px] font-medium text-slate-500 mt-1">$e^{B\ln A}$ + Factor $\ln x$</div>
+                        </button>
+                    </div>
+
+                    <!-- Detalle dinámico de la estrategia seleccionada -->
+                    <div id="strategy-detail-box" class="bg-blue-50/70 border border-blue-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800"></div>
+
+                    <!-- Panel desplegable: Falsas Indeterminaciones -->
+                    <div id="falsas-indet-panel" class="hidden bg-amber-50/80 border border-amber-200 rounded-xl p-5 space-y-3">
+                        <div class="flex items-center gap-2 text-amber-950 font-bold text-sm">
+                            <i class="ph-fill ph-check-square-offset text-lg text-amber-600"></i>
+                            <span>Falsas Indeterminaciones: tienen resultado directo por álgebra de límites (no requieren artificios)</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                            <div class="bg-white rounded-lg p-3 border border-amber-200">
+                                <p class="font-bold text-slate-900">$\dfrac{k}{0} \longrightarrow \pm\infty$ <span class="font-normal text-slate-500">($k \neq 0$)</span></p>
+                                <p class="text-slate-600 mt-1">Un número no nulo dividido algo que se achica sin tope crece en módulo hacia infinito (analizar signo lateral).</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 border border-amber-200">
+                                <p class="font-bold text-slate-900">$\dfrac{k}{\infty} \longrightarrow 0$ <span class="font-normal text-slate-500">($k \in \mathbb{R}$)</span></p>
+                                <p class="text-slate-600 mt-1">Repartir una cantidad fija entre infinitas partes diluye el cociente a cero.</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 border border-amber-200">
+                                <p class="font-bold text-slate-900">$\dfrac{0}{\infty} \longrightarrow 0$</p>
+                                <p class="text-slate-600 mt-1">Equivale a $0 \cdot \frac{1}{\infty} = 0 \cdot 0 = 0$. Ambos efectos empujan hacia cero.</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 border border-amber-200">
+                                <p class="font-bold text-slate-900">$+\infty + (+\infty) \longrightarrow +\infty$</p>
+                                <p class="text-slate-600 mt-1">Dos términos que crecen sin límite en el mismo sentido refuerzan su divergencia (también $0^{+\infty} = 0$).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra de filtros por tipo de indeterminación -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-500 mr-1">Filtrar los 9 ejercicios:</span>
+                    <button type="button" onclick="filterBlockA('all')" id="filter-all"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition">Todos (9)</button>
+                    <button type="button" onclick="filterBlockA('0_0')" id="filter-0_0"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$0/0$</button>
+                    <button type="button" onclick="filterBlockA('inf_inf')" id="filter-inf_inf"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$\infty/\infty$</button>
+                    <button type="button" onclick="filterBlockA('inf_minus_inf')" id="filter-inf_minus_inf"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$\infty - \infty$</button>
+                    <button type="button" onclick="filterBlockA('zero_dot_inf')" id="filter-zero_dot_inf"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$0 \cdot \infty$</button>
+                    <button type="button" onclick="filterBlockA('one_pow_inf')" id="filter-one_pow_inf"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$1^\infty$</button>
+                    <button type="button" onclick="filterBlockA('inf_pow_0')" id="filter-inf_pow_0"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$\infty^0$</button>
+                    <button type="button" onclick="filterBlockA('zero_pow_0')" id="filter-zero_pow_0"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition">$0^0$</button>
+                </div>
+
+                <!-- Contenedor donde se renderizan las 9 tarjetas de ejercicios del Bloque A -->
+                <div id="block-a-exercises-list" class="space-y-6"></div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- SUB-BLOQUE B: LÍMITES NOTABLES (CIENCIAS ECONÓMICAS)  -->
+            <!-- ===================================================== -->
+            <div id="practica-bloque-b" class="hidden space-y-8">
+
+                <!-- Panel de Moldes Clave ("Idea del bloque u") -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full">La Idea del Bloque $u(x)$</span>
+                        <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Moldes de Límites Notables en Ciencias Económicas</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
+                            No memorices fórmulas rígidas con $x$: pensá en una "caja" o argumento $u(x)$ que se replica exactamente donde pide el molde.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Columna 1: Trigonométricos -->
+                        <div class="rounded-2xl border border-blue-200 bg-blue-50/40 p-5 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-bold text-blue-950 text-base flex items-center gap-2">
+                                    <i class="ph-fill ph-wave-sine text-blue-600 text-xl"></i>
+                                    1. Moldes Trigonométricos (cuando $u \to 0$)
+                                </h5>
+                                <span class="text-[11px] font-bold bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">$u(x) \to 0$</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                                <div class="bg-white rounded-xl p-3 border border-blue-100 text-center">
+                                    $$\lim_{u \to 0} \frac{\operatorname{sen}(u)}{u} = 1$$
+                                    <p class="text-[11px] text-slate-500">También $\lim_{u\to 0}\frac{u}{\operatorname{sen}(u)}=1$</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-blue-100 text-center">
+                                    $$\lim_{u \to 0} \frac{\operatorname{tg}(u)}{u} = 1$$
+                                    <p class="text-[11px] text-slate-500">Consecuencia directa de $\frac{\operatorname{sen} u}{\cos u}$</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-blue-100 text-center">
+                                    $$\lim_{x \to 0} \frac{\operatorname{sen}(ax)}{bx} = \frac{a}{b}$$
+                                    <p class="text-[11px] text-slate-500">Ajustando constantes ($b \neq 0$)</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-blue-100 text-center">
+                                    $$\lim_{u \to 0} \frac{1 - \cos(u)}{u^2} = \frac{1}{2}$$
+                                    <p class="text-[11px] text-slate-500">Multiplicando por $1 + \cos(u)$</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-xs text-amber-950 space-y-1">
+                                <p class="font-bold flex items-center gap-1.5">
+                                    <i class="ph-fill ph-warning text-amber-600 text-base"></i>
+                                    <span>¡Atención cuando $x \to \infty$! (Acotada por infinitésimo)</span>
+                                </p>
+                                <p class="leading-relaxed">
+                                    Si $x \to +\infty$, $\dfrac{\operatorname{sen}(x)}{x}$ <strong>NO es límite notable ni vale $1$</strong>: equivale a $\underbrace{\frac{1}{x}}_{\to 0} \cdot \underbrace{\operatorname{sen}(x)}_{\in [-1, 1]} = 0$ (infinitésimo por función acotada).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Columna 2: Número e -->
+                        <div class="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-bold text-emerald-950 text-base flex items-center gap-2">
+                                    <i class="ph-fill ph-chart-line-up text-emerald-600 text-xl"></i>
+                                    2. Moldes del Número $e$ ($e \approx 2.71828$)
+                                </h5>
+                                <span class="text-[11px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full">Capitalización Continua</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                                <div class="bg-white rounded-xl p-3 border border-emerald-100 text-center">
+                                    $$\lim_{u \to \infty} \left(1 + \frac{1}{u}\right)^u = e$$
+                                    <p class="text-[11px] text-slate-500">Indeterminación $1^\infty$</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-emerald-100 text-center">
+                                    $$\lim_{u \to 0} (1 + u)^{\frac{1}{u}} = e$$
+                                    <p class="text-[11px] text-slate-500">Forma en el origen ($1^\infty$)</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-emerald-100 text-center">
+                                    $$\lim_{u \to 0} \frac{e^u - 1}{u} = 1$$
+                                    <p class="text-[11px] text-slate-500">Variante exponencial ($0/0$)</p>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-emerald-100 text-center">
+                                    $$\lim_{u \to 0} \frac{\ln(1 + u)}{u} = 1$$
+                                    <p class="text-[11px] text-slate-500">Variante logarítmica ($0/0$)</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-emerald-200 rounded-xl p-3.5 text-xs text-slate-700 space-y-1">
+                                <p class="font-bold text-emerald-900 flex items-center gap-1.5">
+                                    <i class="ph-fill ph-check-circle text-emerald-600 text-base"></i>
+                                    <span>Atajo verificador para $1^\infty$ vs. Desarrollo de cátedra</span>
+                                </p>
+                                <p class="leading-relaxed">
+                                    Si $\lim f(x) = 1$ y $\lim g(x) = \infty$, podés verificar rápido el resultado con $\displaystyle e^{\lim g(x)\cdot [f(x) - 1]}$. En las resoluciones de abajo armamos paso a paso el bloque $\left(1 + \frac{1}{u}\right)^u$ tal como se desarrolla en pizarrón, y recordamos su origen financiero: $M = C_0 \lim_{m \to \infty} \left(1 + \frac{r}{m}\right)^{m \cdot t} = C_0 \cdot e^{r \cdot t}$.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor de los 4 ejercicios interactivos de Límites Notables -->
+                <div id="block-b-exercises-list" class="space-y-6"></div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- PARTE 2 DEL APARTADO PRÁCTICO: CONTINUIDAD EN INTERVALO -->
+            <!-- ===================================================== -->
+            <div id="practica-continuidad" class="pt-6 border-t-2 border-slate-200 space-y-6">
+                <div class="bg-white rounded-2xl border border-teal-200 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-teal-800 bg-teal-100 px-2.5 py-0.5 rounded-full">Parte 2 • Práctica de Continuidad</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Práctica de Continuidad en un Intervalo</h3>
+                        <p class="text-xs sm:text-sm text-slate-600">Resolución guiada verificando paso a paso el dominio de cada tramo y las 3 condiciones de la definición en el empalme.</p>
+                    </div>
+                </div>
+
+                <!-- Único Ejercicio Guiado de Continuidad en un Intervalo -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                        <div class="space-y-2 max-w-xl">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-600 text-white">Ejercicio de Continuidad</span>
+                                <span class="text-xs font-semibold text-slate-500">Función por tramos en el intervalo cerrado $[-1, 5]$</span>
+                            </div>
+                            <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                                Dada la función por tramos $f(x)$, determinar si es <strong>continua en el intervalo $[-1, 5]$</strong> verificando que cumpla las tres condiciones de la definición.
+                            </p>
+                        </div>
+
+                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-200 shadow-xs text-center self-start lg:self-auto overflow-x-auto max-w-full">
+                            $$f(x) = \begin{cases} \dfrac{x^2 - 4}{x - 2} & \text{si } x < 2 \\[8pt] 4 & \text{si } x = 2 \\[6pt] 3x - 2 & \text{si } x > 2 \end{cases}$$
+                        </div>
+                    </div>
+
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <!-- Columna izquierda: Controles y pasos interactivos -->
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                                <span id="cont1-progress-text" class="text-xs font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full">0 de 4 pasos revelados</span>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <button id="cont1-btn-next" type="button" onclick="nextStep('cont1')"
+                                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold shadow-xs transition">
+                                        <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                    </button>
+                                    <button type="button" onclick="showAllSteps('cont1')"
+                                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                        <i class="ph ph-list-checks"></i> <span>Ver resolución completa</span>
+                                    </button>
+                                    <button type="button" onclick="resetSteps('cont1', 0)"
+                                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                        <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="cont1-steps-container" class="space-y-3.5"></div>
+                        </div>
+
+                        <!-- Columna derecha: Mini-gráfico interactivo de f(x) en [-1, 5] -->
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 sm:p-5 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Gráfica en el intervalo $[-1, 5]$</h4>
+                                <span class="text-[11px] font-semibold text-teal-800 bg-teal-100 px-2.5 py-0.5 rounded-full">Empalme en $(2, 4)$</span>
+                            </div>
+
+                            <div id="cont-prac-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="cont-prac-canvas" class="w-full h-full block"></canvas>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                    <span>$x = -1$</span>
+                                    <span id="cont-prac-lbl-x" class="font-mono font-bold text-teal-700">x = 2.00 (Empalme)</span>
+                                    <span>$x = 5$</span>
+                                </div>
+                                <input id="cont-prac-slider" type="range" min="-1" max="5" step="0.05" value="2"
+                                    oninput="updateContPracPoint(this.value)" class="w-full bg-teal-200 econ-slider">
+                            </div>
+
+                            <div class="bg-white rounded-xl p-3 border border-slate-200 grid grid-cols-2 gap-2 text-xs">
+                                <div>
+                                    <p class="text-slate-500">Tramo activo en $[-1, 5]$</p>
+                                    <p id="cont-prac-piece" class="font-semibold text-slate-800 mt-0.5">Puntual: $x = 2$</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-slate-500">Valor $f(x)$</p>
+                                    <p id="cont-prac-val" class="font-mono font-bold text-teal-700 text-base">4.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 3: APLICACIONES ECONÓMICAS (ACTIVIDAD N° 8)       -->
+        <!-- ========================================================= -->
+        <section id="section-economicas" class="hidden space-y-8">
+
+            <!-- Introducción breve y directa -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">Actividad N° 8 • Unidad 1</span>
+                    <span class="text-xs font-medium text-slate-500">Modelos de Costo, Utilidad y Demanda</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">¿Cómo se aplica el concepto de Límite en Ciencias Económicas?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    En los modelos económicos de esta unidad, el límite traduce matemáticamente dos preguntas concretas de gestión y mercado:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                    <div class="rounded-xl bg-emerald-50/70 border border-emerald-200 p-4 flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">$\infty$</div>
+                        <div class="text-xs sm:text-sm">
+                            <p class="font-bold text-emerald-950">1. Escala ilimitada o largo plazo ($x \to +\infty$)</p>
+                            <p class="text-emerald-900/90 mt-0.5">Permite hallar pisos de <strong>costo promedio</strong> o techos de <strong>saturación de utilidad</strong> (asíntotas horizontales).</p>
+                        </div>
+                    </div>
+                    <div class="rounded-xl bg-blue-50/70 border border-blue-200 p-4 flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">$p \to a$</div>
+                        <div class="text-xs sm:text-sm">
+                            <p class="font-bold text-blue-950">2. Nivel o precio crítico ($p \to a$, indeterminación $\frac{0}{0}$)</p>
+                            <p class="text-blue-900/90 mt-0.5">Permite conocer a qué valor tiende la <strong>demanda</strong> al acercarnos a un precio donde la fórmula presenta una discontinuidad puntual.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- PROBLEMA 8.1: COSTO PROMEDIO CON CAPACIDAD ILIMITADA   -->
+            <!-- ===================================================== -->
+            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-600 text-white">Problema 8.1</span>
+                        <span class="text-xs font-semibold text-slate-500">Costo Promedio • Tendencia a escala ilimitada ($x \to +\infty$)</span>
+                    </div>
+                    <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                        Se conoce que el costo total de elaboración de un producto en dólares es $C(x) = 300 + 5x$, donde $x$ es la cantidad producida. Si se tuviera capacidad ilimitada de producción, ¿a qué valor tendería el costo promedio de producción?
+                    </p>
+                </div>
+
+                <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Columna izquierda: Traducción y Pasos Breves Interactivos -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="rounded-xl bg-emerald-50/70 border border-emerald-200 p-3.5 text-xs sm:text-sm text-emerald-950">
+                            <strong>Cómo interviene el límite:</strong> El costo promedio por unidad es $\overline{C}(x) = \dfrac{C(x)}{x} = \dfrac{300 + 5x}{x}$. Tener <em>"capacidad ilimitada"</em> equivale a calcular $\displaystyle \lim_{x \to +\infty} \overline{C}(x)$.
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span id="econ1-progress-text" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">1 de 3 pasos visibles</span>
+                            <div class="flex items-center gap-1.5">
+                                <button id="econ1-btn-next" type="button" onclick="nextStep('econ1')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('econ1')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <span>Ver todo</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('econ1', 1)"
+                                    class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="econ1-steps-container" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Columna derecha: Mini-visualización interactiva 8.1 -->
+                    <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Simulador de Producción $x$</h4>
+                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">Asíntota $y = 5$</span>
+                        </div>
+
+                        <div id="econ1-canvas-wrap" class="w-full aspect-[16/10] bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <canvas id="econ1-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                <span>$x = 10$ u.</span>
+                                <span id="econ1-lbl-x" class="font-mono font-bold text-emerald-700">x = 100 unidades</span>
+                                <span>$x = 1000$ u.</span>
+                            </div>
+                            <input id="econ1-slider" type="range" min="10" max="1000" step="10" value="100"
+                                oninput="updateEcon1(this.value)" class="w-full bg-emerald-200 econ-slider">
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-1.5 text-[11px]">
+                            <button type="button" onclick="updateEcon1(10)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 font-mono">x=10</button>
+                            <button type="button" onclick="updateEcon1(100)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 font-mono">x=100</button>
+                            <button type="button" onclick="updateEcon1(1000)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 font-mono">x=1.000</button>
+                            <button type="button" onclick="updateEcon1(100000)" class="py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-900 font-bold font-mono">x=100k</button>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
+                            <div>
+                                <p class="text-slate-500">Costo fijo por unidad ($300/x$)</p>
+                                <p id="econ1-cf-unit" class="font-mono font-bold text-slate-800 text-sm">USD 3.000</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-500">Costo Promedio $\overline{C}(x)$</p>
+                                <p id="econ1-cmed" class="font-mono font-bold text-emerald-700 text-base">USD 8.000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ===================================================== -->
+            <!-- PROBLEMA 8.2: TOPE DE UTILIDAD ANTE PUBLICIDAD         -->
+            <!-- ===================================================== -->
+            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-600 text-white">Problema 8.2</span>
+                        <span class="text-xs font-semibold text-slate-500">Saturación de Utilidad • Gasto publicitario ilimitado ($x \to +\infty$)</span>
+                    </div>
+                    <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                        De acuerdo con la estimación de una empresa, la utilidad $U$ por la venta de su nuevo producto está relacionada con el gasto publicitario $x$ mediante la fórmula $U(x) = \dfrac{23x + 15}{x + 4}$. ¿A qué valor se acercará la utilidad cuando el gasto en publicidad tienda a infinito?
+                    </p>
+                </div>
+
+                <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Columna izquierda: Traducción y Pasos Breves Interactivos -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="rounded-xl bg-indigo-50/70 border border-indigo-200 p-3.5 text-xs sm:text-sm text-indigo-950">
+                            <strong>Cómo interviene el límite:</strong> Hacer crecer el gasto publicitario indefinidamente significa evaluar $\displaystyle \lim_{x \to +\infty} U(x)$, determinando si existe un techo máximo de saturación comercial.
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span id="econ2-progress-text" class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">1 de 3 pasos visibles</span>
+                            <div class="flex items-center gap-1.5">
+                                <button id="econ2-btn-next" type="button" onclick="nextStep('econ2')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('econ2')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <span>Ver todo</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('econ2', 1)"
+                                    class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="econ2-steps-container" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Columna derecha: Mini-visualización interactiva 8.2 -->
+                    <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Simulador de Publicidad $x$</h4>
+                            <span class="text-[11px] font-semibold text-indigo-700 bg-indigo-100 px-2 py-0.5 rounded-full">Techo $U = 23$</span>
+                        </div>
+
+                        <div id="econ2-canvas-wrap" class="w-full aspect-[16/10] bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <canvas id="econ2-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                <span>$x = 0$</span>
+                                <span id="econ2-lbl-x" class="font-mono font-bold text-indigo-700">x = 20</span>
+                                <span>$x = 120$</span>
+                            </div>
+                            <input id="econ2-slider" type="range" min="0" max="120" step="1" value="20"
+                                oninput="updateEcon2(this.value)" class="w-full bg-indigo-200">
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-1.5 text-[11px]">
+                            <button type="button" onclick="updateEcon2(5)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-indigo-500 font-mono">x=5</button>
+                            <button type="button" onclick="updateEcon2(25)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-indigo-500 font-mono">x=25</button>
+                            <button type="button" onclick="updateEcon2(100)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-indigo-500 font-mono">x=100</button>
+                            <button type="button" onclick="updateEcon2(10000)" class="py-1 rounded-lg bg-indigo-50 border border-indigo-300 text-indigo-900 font-bold font-mono">x=10k</button>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
+                            <div>
+                                <p class="text-slate-500">Distancia al techo ($23 - U$)</p>
+                                <p id="econ2-gap" class="font-mono font-bold text-slate-800 text-sm">3.208</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-500">Utilidad estimada $U(x)$</p>
+                                <p id="econ2-uval" class="font-mono font-bold text-indigo-700 text-base">19.792</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ===================================================== -->
+            <!-- PROBLEMA 8.3: DEMANDA DE MEDICAMENTO EN PRECIO CRÍTICO -->
+            <!-- ===================================================== -->
+            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-600 text-white">Problema 8.3</span>
+                        <span class="text-xs font-semibold text-slate-500">Función de Demanda • Precio crítico ($p \to 1$, indeterminación $\frac{0}{0}$)</span>
+                    </div>
+                    <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                        La demanda de un medicamento responde a la función $q(p) = \dfrac{20\left(\sqrt{p + 3} - 2\right)}{p - 1}$, donde $p$ es el precio del medicamento en miles de dólares, y $q$ la cantidad de $\text{m}^3$ de medicamento demandado. Averiguar hacia qué valor se acercará la demanda cuando el precio se aproxime a $1$ (en miles de dólares).
+                    </p>
+                </div>
+
+                <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Columna izquierda: Traducción y Pasos Breves Interactivos -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="rounded-xl bg-blue-50/70 border border-blue-200 p-3.5 text-xs sm:text-sm text-blue-950">
+                            <strong>Cómo interviene el límite:</strong> En $p = 1$ exacto la expresión no se puede evaluar porque anula denominador y numerador ($\frac{0}{0}$). Calcular $\displaystyle \lim_{p \to 1} q(p)$ revela a qué volumen de demanda converge el mercado en torno a USD $1.000$.
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span id="econ3-progress-text" class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">1 de 3 pasos visibles</span>
+                            <div class="flex items-center gap-1.5">
+                                <button id="econ3-btn-next" type="button" onclick="nextStep('econ3')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('econ3')"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <span>Ver todo</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('econ3', 1)"
+                                    class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="econ3-steps-container" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Columna derecha: Mini-visualización interactiva 8.3 -->
+                    <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Simulador de Precio $p$</h4>
+                            <span class="text-[11px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Hueco en $(1, 5)$</span>
+                        </div>
+
+                        <div id="econ3-canvas-wrap" class="w-full aspect-[16/10] bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <canvas id="econ3-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                <span>$p = 0.2$</span>
+                                <span id="econ3-lbl-p" class="font-mono font-bold text-blue-700">p = 0.85 mil USD</span>
+                                <span>$p = 2.2$</span>
+                            </div>
+                            <input id="econ3-slider" type="range" min="0.20" max="2.20" step="0.01" value="0.85"
+                                oninput="updateEcon3(this.value)" class="w-full bg-blue-200">
+                        </div>
+
+                        <div class="grid grid-cols-5 gap-1 text-[11px]">
+                            <button type="button" onclick="updateEcon3(0.9)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500 font-mono">0.90</button>
+                            <button type="button" onclick="updateEcon3(0.99)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500 font-mono">0.99</button>
+                            <button type="button" onclick="updateEcon3(1.0)" class="py-1 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 font-bold font-mono">p=1</button>
+                            <button type="button" onclick="updateEcon3(1.01)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500 font-mono">1.01</button>
+                            <button type="button" onclick="updateEcon3(1.1)" class="py-1 rounded-lg bg-white border border-slate-200 hover:border-blue-500 font-mono">1.10</button>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
+                            <div>
+                                <p class="text-slate-500">Precio ($p$ en miles USD)</p>
+                                <p id="econ3-pval" class="font-mono font-bold text-slate-800 text-sm">USD 850</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-500">Demanda $q(p)$</p>
+                                <p id="econ3-qval" class="font-mono font-bold text-blue-700 text-base">5.048 m³</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL DE UNIDADES (MÓVIL) -->
+    <div id="modal-temario" class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-xs items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900">Unidades — Análisis Matemático I</h3>
+                <button type="button" onclick="toggleTemarioModal(false)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <ul class="space-y-2 text-sm">
+                <li class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold flex items-center justify-between gap-2">
+                    <span>Unidad 1: Límites y continuidad</span>
+                    <span class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 flex items-center justify-between gap-2">
+                    <span>Unidad 2: Derivadas</span>
+                    <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full shrink-0">Próximamente</span>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 flex items-center justify-between gap-2">
+                    <span>Unidad 3: Teoremas del Cálculo Diferencial. Formas indeterminadas</span>
+                    <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full shrink-0">Próximamente</span>
+                </li>
+            </ul>
+            <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-white border-t border-slate-200 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <p><strong>Análisis Matemático I</strong> — Facultad de Ciencias Económicas • Unidad 1: Límites y continuidad.</p>
+            <p>Plataforma de exploración interactiva • Teoría, Práctica Algebraica y Aplicaciones Económicas.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- LÓGICA JAVASCRIPT INTEGRAL                                -->
+    <!-- ========================================================= -->
+    <script>
+        /* ---------------------------------------------------------
+           1. RENDERIZADO MATEMÁTICO SEGURO CON KATEX
+           --------------------------------------------------------- */
+        function renderMath(container = document.body) {
+            if (typeof renderMathInElement === 'function' && container) {
+                try {
+                    renderMathInElement(container, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ],
+                        throwOnError: false
+                    });
+                } catch (err) {
+                    console.error('Error al renderizar KaTeX:', err);
+                }
+            }
+        }
+
+        /* ---------------------------------------------------------
+           2. NAVEGACIÓN ENTRE LOS 3 APARTADOS PRINCIPALES
+           --------------------------------------------------------- */
+        let currentMainTab = 'teoria';
+
+        function switchMainTab(tab) {
+            currentMainTab = tab;
+            const sections = {
+                teoria: document.getElementById('section-teoria'),
+                practica: document.getElementById('section-practica'),
+                economicas: document.getElementById('section-economicas')
+            };
+            const buttons = {
+                teoria: document.getElementById('tab-teoria'),
+                practica: document.getElementById('tab-practica'),
+                economicas: document.getElementById('tab-economicas')
+            };
+            const activeColors = {
+                teoria: 'bg-white text-blue-700 shadow-sm',
+                practica: 'bg-white text-blue-700 shadow-sm',
+                economicas: 'bg-white text-emerald-700 shadow-sm'
+            };
+
+            Object.keys(sections).forEach((key) => {
+                if (key === tab) {
+                    sections[key].classList.remove('hidden');
+                    buttons[key].className = `flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${activeColors[key]}`;
+                } else {
+                    sections[key].classList.add('hidden');
+                    buttons[key].className = 'flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900';
+                }
+            });
+
+            renderMath(sections[tab]);
+
+            if (tab === 'teoria') {
+                requestAnimationFrame(() => {
+                    resizeAndDrawLabCanvas();
+                    drawContTheoryCanvas();
+                });
+            } else if (tab === 'practica') {
+                requestAnimationFrame(() => drawContPracCanvas());
+            } else if (tab === 'economicas') {
+                requestAnimationFrame(() => drawAllEconCanvases());
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToContinuidadPractica() {
+            const el = document.getElementById('practica-continuidad');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                requestAnimationFrame(() => drawContPracCanvas());
+            }
+        }
+
+        function switchPracticeSubtab(sub) {
+            const blkA = document.getElementById('practica-bloque-a');
+            const blkB = document.getElementById('practica-bloque-b');
+            const btnA = document.getElementById('subtab-bloque-a');
+            const btnB = document.getElementById('subtab-bloque-b');
+
+            if (sub === 'A') {
+                blkA.classList.remove('hidden');
+                blkB.classList.add('hidden');
+                btnA.className = 'px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-blue-700 shadow-sm text-left sm:text-center';
+                btnB.className = 'px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 text-left sm:text-center';
+                renderMath(blkA);
+            } else {
+                blkA.classList.add('hidden');
+                blkB.classList.remove('hidden');
+                btnB.className = 'px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-indigo-700 shadow-sm text-left sm:text-center';
+                btnA.className = 'px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 text-left sm:text-center';
+                renderMath(blkB);
+            }
+        }
+
+        function toggleTemarioModal(show) {
+            const modal = document.getElementById('modal-temario');
+            modal.classList.toggle('hidden', !show);
+            modal.classList.toggle('flex', show);
+        }
+        document.getElementById('btn-temario').addEventListener('click', () => toggleTemarioModal(true));
+
+        /* ---------------------------------------------------------
+           3. LABORATORIO GEOMÉTRICO (APARTADO TEÓRICO)
+              f(x) = (x^2 - x - 2)/(x - 2) = x + 1 para x != 2
+              Hueco en (2, 3), punto aislado opcional f(2) = 1
+              Como |f(x) - 3| = |(x + 1) - 3| = |x - 2|, delta <= eps
+           --------------------------------------------------------- */
+        const LAB_A = 2.0;
+        const LAB_L = 3.0;
+        const LAB_ISO_Y = 1.0;
+
+        function fLab(x) {
+            return x + 1;
+        }
+
+        function setPointX(val) {
+            document.getElementById('slider-x').value = val;
+            onLabChange();
+        }
+
+        function setOptimalDelta() {
+            const eps = parseFloat(document.getElementById('slider-eps').value);
+            document.getElementById('slider-delta').value = eps.toFixed(2);
+            onLabChange();
+        }
+
+        function onLabChange() {
+            const x = parseFloat(document.getElementById('slider-x').value);
+            const eps = parseFloat(document.getElementById('slider-eps').value);
+            const delta = parseFloat(document.getElementById('slider-delta').value);
+            const showIso = document.getElementById('chk-punto-aislado').checked;
+            const isAtHole = Math.abs(x - LAB_A) < 0.004;
+
+            document.getElementById('lbl-x-slider').textContent = `x = ${x.toFixed(2)}`;
+            document.getElementById('readout-x').textContent = x.toFixed(3);
+            document.getElementById('readout-dx').textContent = `|x - 2| = ${Math.abs(x - LAB_A).toFixed(3)}`;
+
+            const badge = document.getElementById('badge-side');
+            if (isAtHole) {
+                badge.textContent = 'En x = 2 (Excluido del entorno reducido)';
+                badge.className = 'text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900';
+                document.getElementById('readout-fx').textContent = showIso ? '1.000 (f(2))' : 'No definida';
+                document.getElementById('readout-dfx').textContent = 'Hueco en y = 3.000';
+            } else {
+                const fx = fLab(x);
+                document.getElementById('readout-fx').textContent = fx.toFixed(3);
+                document.getElementById('readout-dfx').textContent = `|f(x) - 3| = ${Math.abs(fx - LAB_L).toFixed(3)}`;
+                if (x < LAB_A) {
+                    badge.textContent = 'Por izquierda (x → 2⁻)';
+                    badge.className = 'text-xs font-semibold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800';
+                } else {
+                    badge.textContent = 'Por derecha (x → 2⁺)';
+                    badge.className = 'text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800';
+                }
+            }
+
+            const isValid = delta <= eps + 1e-6;
+            document.getElementById('lbl-eps').textContent = `ε = ${eps.toFixed(2)}`;
+            document.getElementById('lbl-delta').textContent = `δ = ${delta.toFixed(2)}`;
+            document.getElementById('lbl-max-delta-hint').textContent =
+                `Como f(x) = x + 1 (pendiente 1), |f(x) - 3| = |x - 2|: la condición se cumple exactamente cuando δ ≤ ε (${eps.toFixed(2)}).`;
+
+            const banner = document.getElementById('ed-status-banner');
+            const icon = document.getElementById('ed-status-icon');
+            const title = document.getElementById('ed-status-title');
+            const desc = document.getElementById('ed-status-desc');
+
+            if (isValid) {
+                banner.className = 'rounded-xl p-3.5 border bg-emerald-50 border-emerald-300 text-emerald-950 flex items-start gap-3 transition-colors';
+                icon.className = 'ph-fill ph-check-circle text-emerald-600 text-2xl shrink-0 mt-0.5';
+                title.textContent = `¡Validación correcta! δ = ${delta.toFixed(2)} ≤ ε = ${eps.toFixed(2)}`;
+                desc.textContent = `Para todo x en (${(LAB_A - delta).toFixed(2)}, ${(LAB_A + delta).toFixed(2)}) con x ≠ 2, la imagen f(x) permanece dentro de (${(LAB_L - eps).toFixed(2)}, ${(LAB_L + eps).toFixed(2)}).`;
+            } else {
+                banner.className = 'rounded-xl p-3.5 border bg-rose-50 border-rose-300 text-rose-950 flex items-start gap-3 transition-colors';
+                icon.className = 'ph-fill ph-warning-octagon text-rose-600 text-2xl shrink-0 mt-0.5';
+                title.textContent = `δ = ${delta.toFixed(2)} supera a ε = ${eps.toFixed(2)} (Entorno demasiado ancho)`;
+                desc.textContent = `Los tramos rojos en los extremos del entorno 2 ± δ tienen imágenes que se salen de la banda horizontal 3 ± ε. Reducí δ hasta ${eps.toFixed(2)} o menos.`;
+            }
+
+            drawLabCanvas();
+        }
+
+        function resizeAndDrawLabCanvas() {
+            const canvas = document.getElementById('limit-canvas');
+            const wrapper = document.getElementById('canvas-wrapper');
+            if (!canvas || !wrapper) return;
+            const rect = wrapper.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            drawLabCanvas();
+        }
+
+        function drawLabCanvas() {
+            const canvas = document.getElementById('limit-canvas');
+            if (!canvas || canvas.width === 0) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const W = canvas.width / dpr;
+            const H = canvas.height / dpr;
+
+            ctx.save();
+            ctx.scale(dpr, dpr);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 48, right: 22, top: 20, bottom: 40 };
+            const plotW = W - pad.left - pad.right;
+            const plotH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 4.0;
+            const yMin = 0, yMax = 5.2;
+
+            const toPxX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * plotW;
+            const toPxY = (y) => pad.top + plotH - ((y - yMin) / (yMax - yMin)) * plotH;
+
+            // Cuadrícula
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let gx = 0.5; gx <= xMax; gx += 0.5) {
+                const px = toPxX(gx);
+                ctx.beginPath(); ctx.moveTo(px, pad.top); ctx.lineTo(px, pad.top + plotH); ctx.stroke();
+            }
+            for (let gy = 0.5; gy <= yMax; gy += 0.5) {
+                const py = toPxY(gy);
+                ctx.beginPath(); ctx.moveTo(pad.left, py); ctx.lineTo(pad.left + plotW, py); ctx.stroke();
+            }
+
+            const userX = parseFloat(document.getElementById('slider-x').value);
+            const eps = parseFloat(document.getElementById('slider-eps').value);
+            const delta = parseFloat(document.getElementById('slider-delta').value);
+            const showIso = document.getElementById('chk-punto-aislado').checked;
+            const isValid = delta <= eps + 1e-6;
+
+            // Banda horizontal Épsilon
+            const yTopEps = toPxY(LAB_L + eps);
+            const yBotEps = toPxY(LAB_L - eps);
+            ctx.fillStyle = 'rgba(124, 58, 237, 0.09)';
+            ctx.fillRect(pad.left, yTopEps, plotW, yBotEps - yTopEps);
+
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = 'rgba(124, 58, 237, 0.65)';
+            ctx.lineWidth = 1.3;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, yTopEps); ctx.lineTo(pad.left + plotW, yTopEps);
+            ctx.moveTo(pad.left, yBotEps); ctx.lineTo(pad.left + plotW, yBotEps);
+            ctx.stroke();
+
+            // Banda vertical Delta
+            const xLeftDelta = toPxX(LAB_A - delta);
+            const xRightDelta = toPxX(LAB_A + delta);
+            ctx.fillStyle = isValid ? 'rgba(16, 185, 129, 0.11)' : 'rgba(244, 63, 94, 0.09)';
+            ctx.fillRect(xLeftDelta, pad.top, xRightDelta - xLeftDelta, plotH);
+
+            // Rectángulo central de tolerancia
+            ctx.fillStyle = isValid ? 'rgba(16, 185, 129, 0.19)' : 'rgba(245, 158, 11, 0.14)';
+            ctx.fillRect(xLeftDelta, yTopEps, xRightDelta - xLeftDelta, yBotEps - yTopEps);
+            ctx.setLineDash([]);
+            ctx.strokeStyle = isValid ? '#10b981' : '#f43f5e';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(xLeftDelta, yTopEps, xRightDelta - xLeftDelta, yBotEps - yTopEps);
+
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = isValid ? 'rgba(5, 150, 105, 0.7)' : 'rgba(225, 29, 72, 0.7)';
+            ctx.beginPath();
+            ctx.moveTo(xLeftDelta, pad.top); ctx.lineTo(xLeftDelta, pad.top + plotH);
+            ctx.moveTo(xRightDelta, pad.top); ctx.lineTo(xRightDelta, pad.top + plotH);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Ejes X e Y
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top);
+            ctx.lineTo(pad.left, pad.top + plotH);
+            ctx.lineTo(pad.left + plotW, pad.top + plotH);
+            ctx.stroke();
+
+            ctx.fillStyle = '#475569';
+            ctx.font = '11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            for (let tx = 1; tx <= 3; tx++) {
+                ctx.fillText(tx.toString(), toPxX(tx), pad.top + plotH + 16);
+            }
+            ctx.textAlign = 'right';
+            for (let ty = 1; ty <= 5; ty++) {
+                ctx.fillText(ty.toString(), pad.left - 8, toPxY(ty) + 4);
+            }
+
+            ctx.fillStyle = '#6d28d9';
+            ctx.font = '600 10.5px Inter, sans-serif';
+            ctx.fillText('3+ε', pad.left - 5, yTopEps + 3);
+            ctx.fillText('3-ε', pad.left - 5, yBotEps + 3);
+
+            // Guías de a = 2 y L = 3
+            const pxA = toPxX(LAB_A);
+            const pyL = toPxY(LAB_L);
+            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(pxA, pad.top + plotH); ctx.lineTo(pxA, pyL); ctx.lineTo(pad.left, pyL);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('a = 2', pxA, pad.top + plotH + 29);
+            ctx.textAlign = 'right';
+            ctx.fillText('L = 3', pad.left - 6, pyL + 4);
+
+            // Gráfica base f(x) = x + 1
+            ctx.strokeStyle = '#1e3a8a';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath();
+            ctx.moveTo(toPxX(xMin), toPxY(fLab(xMin)));
+            ctx.lineTo(toPxX(xMax), toPxY(fLab(xMax)));
+            ctx.stroke();
+
+            // Tramo resaltado sobre (2 - delta, 2 + delta)
+            const subSteps = 80;
+            for (let i = 0; i < subSteps; i++) {
+                const xv1 = (LAB_A - delta) + (i / subSteps) * (2 * delta);
+                const xv2 = (LAB_A - delta) + ((i + 1) / subSteps) * (2 * delta);
+                const xm = 0.5 * (xv1 + xv2);
+                const inside = Math.abs(fLab(xm) - LAB_L) <= eps + 1e-6;
+                ctx.strokeStyle = inside ? '#10b981' : '#e11d48';
+                ctx.lineWidth = inside ? 4.2 : 4.8;
+                ctx.beginPath();
+                ctx.moveTo(toPxX(xv1), toPxY(fLab(xv1)));
+                ctx.lineTo(toPxX(xv2), toPxY(fLab(xv2)));
+                ctx.stroke();
+            }
+
+            // Proyecciones del punto móvil x
+            const isAtHole = Math.abs(userX - LAB_A) < 0.004;
+            if (!isAtHole) {
+                const userY = fLab(userX);
+                const pxU = toPxX(userX);
+                const pyU = toPxY(userY);
+
+                ctx.setLineDash([4, 3]);
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(pxU, pad.top + plotH); ctx.lineTo(pxU, pyU); ctx.lineTo(pad.left, pyU);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = '#2563eb';
+                ctx.beginPath(); ctx.arc(pxU, pad.top + plotH, 4, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = '#4f46e5';
+                ctx.beginPath(); ctx.arc(pad.left, pyU, 4, 0, Math.PI * 2); ctx.fill();
+
+                ctx.fillStyle = '#2563eb';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.arc(pxU, pyU, 6.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            }
+
+            // Punto aislado f(2) = 1
+            if (showIso) {
+                const pyIso = toPxY(LAB_ISO_Y);
+                ctx.fillStyle = '#d97706';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(pxA, pyIso, 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#92400e';
+                ctx.font = '600 11px Inter, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('f(2) = 1', pxA + 10, pyIso + 4);
+            }
+
+            // Hueco abierto en (2, 3)
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#1e3a8a';
+            ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.arc(pxA, pyL, 6.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+            ctx.restore();
+        }
+
+        /* ---------------------------------------------------------
+           4. MAPA ESTRATÉGICO DE LAS 7 INDETERMINACIONES Y FILTROS
+           --------------------------------------------------------- */
+        const strategyDescriptions = {
+            '0_0': {
+                title: 'Indeterminación 0/0 — Anulación simultánea de numerador y denominador',
+                body: '<strong>Receta algebraica:</strong> Si hay polinomios, factorizá (diferencia de cuadrados, factor común, resolvente o Ruffini) para explicitar y cancelar el factor $(x - a)$. Si hay raíces cuadradas, multiplicá y dividí por el <strong>binomio conjugado</strong>.'
+            },
+            'inf_inf': {
+                title: 'Indeterminación ∞/∞ — Competencia de órdenes de crecimiento',
+                body: '<strong>Receta algebraica:</strong> Dividí numerador y denominador (o sacá factor común forzado) por la <strong>mayor potencia de $x$</strong>. Si hay raíces pares con $x \\to -\\infty$, recordá siempre que $\\sqrt{x^2} = |x| = -x$.'
+            },
+            'inf_minus_inf': {
+                title: 'Indeterminación ∞ - ∞ — Resta de términos divergentes',
+                body: '<strong>Receta algebraica:</strong> Si es resta de raíces ($\\sqrt{A} - \\sqrt{B}$ o $\\sqrt{A} - B$), multiplicá y dividí por su <strong>conjugado</strong> para convertirla en $\\infty/\\infty$. Si es resta de fracciones racionales, unificá en <strong>común denominador</strong>.'
+            },
+            'zero_dot_inf': {
+                title: 'Indeterminación 0 · ∞ — Infinitésimo por infinito',
+                body: '<strong>Receta algebraica:</strong> Operá algebraicamente los factores (resolviendo paréntesis o reescribiendo $A \\cdot B = \\frac{A}{1/B}$) para transformarla directamente en un único cociente del tipo $\\frac{0}{0}$ o $\\frac{\\infty}{\\infty}$.'
+            },
+            'one_pow_inf': {
+                title: 'Indeterminación 1^∞ — Base tiende a 1 y exponente crece sin tope',
+                body: '<strong>Receta algebraica:</strong> Sumá y restá en el numerador para llevar la base a la forma $1 + \\frac{1}{u(x)}$ con $u(x) \\to \\infty$, y multiplicá/dividí en el exponente por $u(x)$ para armar el molde notable $\\left(1 + \\frac{1}{u}\\right)^u \\to e$.'
+            },
+            'inf_pow_0': {
+                title: 'Indeterminación ∞^0 — Base divergente elevada a exponente infinitésimo',
+                body: '<strong>Receta algebraica sin L\'Hôpital:</strong> Aplicá la identidad $A^B = e^{B \\cdot \\ln(A)}$ y dentro del logaritmo sacá <strong>factor común el término dominante</strong> (por ejemplo $e^{kx}$) usando $\\ln(M \\cdot N) = \\ln M + \\ln N$.'
+            },
+            'zero_pow_0': {
+                title: 'Indeterminación 0^0 — Base positiva infinitésima y exponente infinitésimo',
+                body: '<strong>Receta algebraica sin L\'Hôpital:</strong> Reescribí $A^B = e^{B \\cdot \\ln(A)}$ y destrabá el cociente resultante en el exponente sacando <strong>factor común $\\ln(x)$</strong> o mediante un cambio de escala algebraico.'
+            }
+        };
+
+        function selectIndetStrategy(key) {
+            const box = document.getElementById('strategy-detail-box');
+            const info = strategyDescriptions[key];
+            box.innerHTML = `<p class="font-bold text-blue-950 mb-1">${info.title}</p><p class="leading-relaxed">${info.body}</p>`;
+            renderMath(box);
+
+            Object.keys(strategyDescriptions).forEach((k) => {
+                const btn = document.getElementById(`map-btn-${k}`);
+                if (!btn) return;
+                if (k === key) {
+                    btn.className = 'p-3 rounded-xl border-2 border-blue-500 bg-blue-50 text-center transition shadow-xs ' + (k === 'zero_pow_0' ? 'col-span-2 sm:col-span-1' : '');
+                } else {
+                    btn.className = 'p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition ' + (k === 'zero_pow_0' ? 'col-span-2 sm:col-span-1' : '');
+                }
+            });
+
+            filterBlockA(key);
+        }
+
+        function toggleFalsasIndet() {
+            const panel = document.getElementById('falsas-indet-panel');
+            const icon = document.getElementById('icon-falsas');
+            const isHidden = panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', !isHidden);
+            icon.className = isHidden ? 'ph-bold ph-caret-up' : 'ph-bold ph-caret-down';
+            if (isHidden) renderMath(panel);
+        }
+
+        /* ---------------------------------------------------------
+           5. BASE DE DATOS DE TODOS LOS EJERCICIOS PASO A PASO
+              - Bloque A: a1 .. a9 (con selector 9A / 9B en Ejercicio 9)
+              - Bloque B: b1 .. b4
+              - Aplicaciones Económicas: econ1, econ2, econ3
+           --------------------------------------------------------- */
+        const allExercises = {
+            /* ==================== BLOQUE A ==================== */
+            a1: {
+                number: 'Ejercicio 1',
+                tags: ['0_0'],
+                tagLabel: 'Indeterminación 0/0 • Factorización de polinomios',
+                statement: '$$\\lim_{x \\to 2} \\frac{x^2 + x - 6}{x^2 - 4}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Evaluación directa',
+                        title: 'Verificar el comportamiento de numerador y denominador cuando $x \\to 2$',
+                        math: '$$\\frac{2^2 + 2 - 6}{2^2 - 4} = \\frac{4 + 2 - 6}{4 - 4} = \\left[\\frac{0}{0}\\right]$$',
+                        note: 'Que ambos polinomios valgan $0$ en $x = 2$ garantiza por el Teorema del Resto que ambos son divisibles exactamente por $(x - 2)$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Factorización',
+                        title: 'Factorear el trinomio superior y la diferencia de cuadrados inferior',
+                        math: '$$x^2 + x - 6 = (x - 2)(x + 3) \\qquad \\text{y} \\qquad x^2 - 4 = (x - 2)(x + 2)$$',
+                        note: 'Reemplazando en el límite nos queda $\\lim_{x \\to 2} \\frac{(x - 2)(x + 3)}{(x - 2)(x + 2)}$, dejando expuesto el factor causante de la indeterminación.'
+                    },
+                    {
+                        badge: 'Paso 3 • Simplificación y paso al límite',
+                        title: 'Cancelar $(x - 2)$ dado que $x \\neq 2$ y evaluar la expresión resultante',
+                        math: '$$\\lim_{x \\to 2} \\frac{\\cancel{(x - 2)}(x + 3)}{\\cancel{(x - 2)}(x + 2)} = \\lim_{x \\to 2} \\frac{x + 3}{x + 2} = \\frac{2 + 3}{2 + 2} = \\boxed{\\frac{5}{4}}$$',
+                        note: 'En el entorno reducido de $2$ se cumple $x - 2 \\neq 0$, por lo que la simplificación es rigurosa y levanta por completo la indeterminación.'
+                    }
+                ]
+            },
+            a2: {
+                number: 'Ejercicio 2',
+                tags: ['0_0'],
+                tagLabel: 'Indeterminación 0/0 • Raíces cuadradas por conjugado',
+                statement: '$$\\lim_{x \\to 4} \\frac{\\sqrt{x + 5} - 3}{x - 4}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Evaluación directa',
+                        title: 'Comprobar la indeterminación al aproximar $x \\to 4$',
+                        math: '$$\\frac{\\sqrt{4 + 5} - 3}{4 - 4} = \\frac{3 - 3}{0} = \\left[\\frac{0}{0}\\right]$$',
+                        note: 'Ante un binomio con raíz cuadrada $\\sqrt{A} - B$, multiplicamos y dividimos por su conjugado $\\sqrt{A} + B$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Multiplicación por el conjugado',
+                        title: 'Aplicar $(a - b)(a + b) = a^2 - b^2$ en el numerador sin distribuir abajo',
+                        math: '$$\\lim_{x \\to 4} \\frac{(\\sqrt{x + 5} - 3)(\\sqrt{x + 5} + 3)}{(x - 4)(\\sqrt{x + 5} + 3)} = \\lim_{x \\to 4} \\frac{(x + 5) - 9}{(x - 4)(\\sqrt{x + 5} + 3)} = \\lim_{x \\to 4} \\frac{x - 4}{(x - 4)(\\sqrt{x + 5} + 3)}$$',
+                        note: 'Conservar factorizado el denominador permite identificar de inmediato el factor $(x - 4)$ que se cancela.'
+                    },
+                    {
+                        badge: 'Paso 3 • Cancelación y resultado',
+                        title: 'Simplificar $(x - 4)$ para $x \\neq 4$ y evaluar',
+                        math: '$$\\lim_{x \\to 4} \\frac{1}{\\sqrt{x + 5} + 3} = \\frac{1}{\\sqrt{9} + 3} = \\boxed{\\frac{1}{6}}$$',
+                        note: 'El conjugado tiende a $3 + 3 = 6 \\neq 0$, salvando limpiamente la indeterminación.'
+                    }
+                ]
+            },
+            a3: {
+                number: 'Ejercicio 3',
+                tags: ['inf_inf'],
+                tagLabel: 'Indeterminación ∞/∞ • Cociente de polinomios',
+                statement: '$$\\lim_{x \\to +\\infty} \\frac{6x^3 - 4x + 1}{2x^3 + 5x^2 - 3}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Diagnóstico de grados',
+                        title: 'Identificar la indeterminación y la mayor potencia de $x$',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{6x^3 - 4x + 1}{2x^3 + 5x^2 - 3} = \\left[\\frac{\\infty}{\\infty}\\right] \\quad (\\text{mayor potencia: } x^3)$$',
+                        note: 'Tanto numerador como denominador son polinomios de grado $3$. Dividimos ambos íntegramente por $x^3$.'
+                    },
+                    {
+                        badge: 'Paso 2 • División por la mayor potencia',
+                        title: 'Dividir cada término arriba y abajo por $x^3$ y simplificar potencias',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{\\frac{6x^3}{x^3} - \\frac{4x}{x^3} + \\frac{1}{x^3}}{\\frac{2x^3}{x^3} + \\frac{5x^2}{x^3} - \\frac{3}{x^3}} = \\lim_{x \\to +\\infty} \\frac{6 - \\frac{4}{x^2} + \\frac{1}{x^3}}{2 + \\frac{5}{x} - \\frac{3}{x^3}}$$',
+                        note: 'Toda fracción de la forma $\\frac{k}{x^n}$ con $n > 0$ tiende a $0$ cuando $x \\to +\\infty$.'
+                    },
+                    {
+                        badge: 'Paso 3 • Paso al límite',
+                        title: 'Anular los infinitésimos y obtener la razón de coeficientes principales',
+                        math: '$$\\frac{6 - 0 + 0}{2 + 0 - 0} = \\frac{6}{2} = \\boxed{3}$$',
+                        note: 'A igual grado polinómico en el infinito, el límite coincide con el cociente de los coeficientes principales.'
+                    }
+                ]
+            },
+            a4: {
+                number: 'Ejercicio 4',
+                tags: ['inf_inf'],
+                tagLabel: 'Indeterminación ∞/∞ • Irracional usando √(x²) = |x|',
+                statement: '$$\\lim_{x \\to -\\infty} \\frac{\\sqrt{9x^2 + 5}}{2x - 1}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Factor común dentro de la raíz',
+                        title: 'Extraer $x^2$ dentro del radical frente a la indeterminación $\\frac{+\\infty}{-\\infty}$',
+                        math: '$$\\sqrt{9x^2 + 5} = \\sqrt{x^2\\left(9 + \\frac{5}{x^2}\\right)} = \\sqrt{x^2} \\cdot \\sqrt{9 + \\frac{5}{x^2}} = |x| \\cdot \\sqrt{9 + \\frac{5}{x^2}}$$',
+                        note: 'Propiedad esencial: $\\sqrt{x^2} = |x|$ para todo $x \\in \\mathbb{R}$. Omitir las barras de módulo es el error de signo más frecuente cuando $x \\to -\\infty$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Evaluar el valor absoluto para $x < 0$',
+                        title: 'Como $x \\to -\\infty$, $x$ toma valores negativos y por definición $|x| = -x$',
+                        math: '$$\\lim_{x \\to -\\infty} \\frac{-x \\cdot \\sqrt{9 + \\frac{5}{x^2}}}{x\\left(2 - \\frac{1}{x}\\right)}$$',
+                        note: 'También sacamos factor común $x$ en el denominador para cancelar potencia con potencia.'
+                    },
+                    {
+                        badge: 'Paso 3 • Simplificación y resultado final',
+                        title: 'Cancelar $x$ y evaluar cuando $x \\to -\\infty$',
+                        math: '$$\\lim_{x \\to -\\infty} \\frac{-\\sqrt{9 + \\frac{5}{x^2}}}{2 - \\frac{1}{x}} = \\frac{-\\sqrt{9 + 0}}{2 - 0} = \\boxed{-\\frac{3}{2}}$$',
+                        note: 'El signo negativo es totalmente coherente: el numerador $\\sqrt{9x^2+5}$ es positivo y el denominador $2x - 1$ es negativo para $x \\to -\\infty$.'
+                    }
+                ]
+            },
+            a5: {
+                number: 'Ejercicio 5',
+                tags: ['inf_minus_inf'],
+                tagLabel: 'Indeterminación ∞ - ∞ • Diferencia de raíces por conjugado',
+                statement: '$$\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + 6x} - x\\right)$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Conversión mediante el conjugado',
+                        title: 'Multiplicar y dividir la diferencia $[\\infty - \\infty]$ por $(\\sqrt{x^2 + 6x} + x)$',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{(\\sqrt{x^2 + 6x} - x)(\\sqrt{x^2 + 6x} + x)}{\\sqrt{x^2 + 6x} + x} = \\lim_{x \\to +\\infty} \\frac{(x^2 + 6x) - x^2}{\\sqrt{x^2 + 6x} + x}$$',
+                        note: 'Al cancelar $x^2 - x^2$ en el numerador, transformamos $\\infty - \\infty$ en un cociente $\\frac{6x}{\\sqrt{x^2+6x}+x}$ del tipo $\\frac{\\infty}{\\infty}$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Extracción de mayor potencia con $x > 0$',
+                        title: 'Sacar factor común $x$ (como $x \\to +\\infty$, $|x| = x$)',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{6x}{x\\sqrt{1 + \\frac{6}{x}} + x} = \\lim_{x \\to +\\infty} \\frac{6\\cancel{x}}{\\cancel{x}\\left(\\sqrt{1 + \\frac{6}{x}} + 1\\right)}$$',
+                        note: 'Aquí $x > 0$, por lo tanto $\\sqrt{x^2} = |x| = +x$.'
+                    },
+                    {
+                        badge: 'Paso 3 • Evaluación final',
+                        title: 'Tomar el límite cuando $\\frac{6}{x} \\to 0$',
+                        math: '$$\\frac{6}{\\sqrt{1 + 0} + 1} = \\frac{6}{1 + 1} = \\boxed{3}$$',
+                        note: 'Aunque ambos términos crecen sin cota, su diferencia se estabiliza exactamente en $3$.'
+                    }
+                ]
+            },
+            a6: {
+                number: 'Ejercicio 6',
+                tags: ['inf_minus_inf'],
+                tagLabel: 'Indeterminación ∞ - ∞ • Resta de fracciones racionales',
+                statement: '$$\\lim_{x \\to 1} \\left(\\frac{1}{x - 1} - \\frac{2}{x^2 - 1}\\right)$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Común denominador algebraico',
+                        title: 'Como $x^2 - 1 = (x - 1)(x + 1)$, unificamos la resta $[\\infty - \\infty]$ en una sola fracción',
+                        math: '$$\\frac{1}{x - 1} - \\frac{2}{(x - 1)(x + 1)} = \\frac{(x + 1) - 2}{(x - 1)(x + 1)} = \\frac{x - 1}{(x - 1)(x + 1)}$$',
+                        note: 'Unificar denominadores convierte automáticamente la resta $\\infty - \\infty$ en una indeterminación $\\frac{0}{0}$ lista para simplificar.'
+                    },
+                    {
+                        badge: 'Paso 2 • Cancelación y evaluación',
+                        title: 'Simplificar $(x - 1)$ para $x \\neq 1$ y calcular el límite',
+                        math: '$$\\lim_{x \\to 1} \\frac{\\cancel{x - 1}}{\\cancel{(x - 1)}(x + 1)} = \\lim_{x \\to 1} \\frac{1}{x + 1} = \\frac{1}{1 + 1} = \\boxed{\\frac{1}{2}}$$',
+                        note: 'Tanto por derecha como por izquierda de $x = 1$, la combinación de ambas fracciones converge finitamente a $0.5$.'
+                    }
+                ]
+            },
+            a7: {
+                number: 'Ejercicio 7',
+                tags: ['zero_dot_inf'],
+                tagLabel: 'Indeterminación 0 · ∞ • Transformación algebraica en cociente',
+                statement: '$$\\lim_{x \\to 0} \\frac{1}{x} \\cdot \\left(\\frac{1}{x + 2} - \\frac{1}{2}\\right)$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Diagnóstico del producto',
+                        title: 'Al tender $x \\to 0$, el primer factor tiende a $\\infty$ y el paréntesis tiende a $0$',
+                        math: '$$\\underbrace{\\frac{1}{x}}_{\\to \\infty} \\cdot \\underbrace{\\left(\\frac{1}{0 + 2} - \\frac{1}{2}\\right)}_{\\to 0} = [\\infty \\cdot 0]$$',
+                        note: 'Resolvemos primero la resta dentro del paréntesis para llevar toda la expresión a un único cociente.'
+                    },
+                    {
+                        badge: 'Paso 2 • Operación algebraica y pasaje a 0/0',
+                        title: 'Sacar común denominador $2(x + 2)$ dentro del paréntesis',
+                        math: '$$\\lim_{x \\to 0} \\frac{1}{x} \\cdot \\left(\\frac{2 - (x + 2)}{2(x + 2)}\\right) = \\lim_{x \\to 0} \\frac{-x}{2x(x + 2)} \\quad \\left[\\frac{0}{0}\\right]$$',
+                        note: 'Ahora el factor $x$ aparece multiplicando tanto en el numerador como en el denominador.'
+                    },
+                    {
+                        badge: 'Paso 3 • Simplificación y paso al límite',
+                        title: 'Cancelar $x$ ($x \\neq 0$) y evaluar en $x = 0$',
+                        math: '$$\\lim_{x \\to 0} \\frac{-\\cancel{x}}{2\\cancel{x}(x + 2)} = \\lim_{x \\to 0} \\frac{-1}{2(x + 2)} = \\frac{-1}{2(2)} = \\boxed{-\\frac{1}{4}}$$',
+                        note: 'Toda indeterminación $0 \\cdot \\infty$ se destraba reescribiéndola como un cociente $\\frac{0}{0}$ o $\\frac{\\infty}{\\infty}$.'
+                    }
+                ]
+            },
+            a8: {
+                number: 'Ejercicio 8',
+                tags: ['one_pow_inf'],
+                tagLabel: 'Indeterminación 1^∞ • Armado algebraico del molde del número e',
+                statement: '$$\\lim_{x \\to +\\infty} \\left(\\frac{x + 4}{x - 1}\\right)^{2x + 3}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Reescribir la base como 1 + 1/u(x)',
+                        title: 'Verificada la forma $[1^\\infty]$, sumamos y restamos $1$ en el numerador para reproducir $(x - 1)$',
+                        math: '$$\\frac{x + 4}{x - 1} = \\frac{(x - 1) + 5}{x - 1} = 1 + \\frac{5}{x - 1} = 1 + \\frac{1}{\\frac{x - 1}{5}}$$',
+                        note: 'Identificamos nuestra caja $u(x) = \\frac{x - 1}{5}$, la cual tiende a $+\\infty$ cuando $x \\to +\\infty$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Armar el bloque notable en el exponente',
+                        title: 'Multiplicar y dividir el exponente por $u(x) = \\frac{x - 1}{5}$',
+                        math: '$$\\lim_{x \\to +\\infty} \\left[\\left(1 + \\frac{1}{\\frac{x - 1}{5}}\\right)^{\\frac{x - 1}{5}}\\right]^{\\frac{5}{x - 1} \\cdot (2x + 3)}$$',
+                        note: 'El corchete interior tiene exactamente la estructura $\\left(1 + \\frac{1}{u}\\right)^u$, cuyo límite es el número $e$.'
+                    },
+                    {
+                        badge: 'Paso 3 • Límite del exponente exterior y conclusión',
+                        title: 'Resolver el límite $\\frac{\\infty}{\\infty}$ del exponente residual',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{10x + 15}{x - 1} = \\lim_{x \\to +\\infty} \\frac{10 + \\frac{15}{x}}{1 - \\frac{1}{x}} = 10 \\quad \\Longrightarrow \\quad \\text{Resultado} = \\boxed{e^{10}}$$',
+                        note: 'Por continuidad de la potenciación, la base tiende a $e$ y el exponente exterior tiende a $10$.'
+                    }
+                ]
+            },
+            a9: {
+                number: 'Ejercicio 9',
+                tags: ['inf_pow_0', 'zero_pow_0'],
+                tagLabel: 'Indeterminaciones ∞^0 y 0^0 • Identidad e^(B ln A) sin L\'Hôpital',
+                activeVariant: 'inf0',
+                variants: {
+                    inf0: {
+                        label: 'Caso 9A: Forma ∞⁰',
+                        statement: '$$\\lim_{x \\to +\\infty} \\left(e^{3x} + 4\\right)^{\\frac{1}{x}}$$',
+                        steps: [
+                            {
+                                badge: 'Paso 1 • Identidad exponencial-logarítmica',
+                                title: 'La base $e^{3x}+4 \\to +\\infty$ y el exponente $\\frac{1}{x} \\to 0$ ($[\\infty^0]$). Aplicamos $A^B = e^{B \\cdot \\ln(A)}$',
+                                math: '$$\\left(e^{3x} + 4\\right)^{\\frac{1}{x}} = e^{\\frac{1}{x} \\cdot \\ln(e^{3x} + 4)}$$',
+                                note: 'Trasladamos el problema al exponente $\\frac{\\ln(e^{3x} + 4)}{x}$ y lo resolvemos con álgebra de logaritmos, sin derivar.'
+                            },
+                            {
+                                badge: 'Paso 2 • Factor común dominante dentro del logaritmo',
+                                title: 'Extraer $e^{3x}$ dentro del argumento y separar el logaritmo del producto',
+                                math: '$$\\ln\\left(e^{3x}\\left(1 + \\frac{4}{e^{3x}}\\right)\\right) = \\ln(e^{3x}) + \\ln\\left(1 + \\frac{4}{e^{3x}}\\right) = 3x + \\ln\\left(1 + \\frac{4}{e^{3x}}\\right)$$',
+                                note: 'Usamos $\\ln(M \\cdot N) = \\ln M + \\ln N$ y $\\ln(e^{3x}) = 3x$.'
+                            },
+                            {
+                                badge: 'Paso 3 • División por x y resultado final',
+                                title: 'Sustituir en el exponente y evaluar cuando $x \\to +\\infty$',
+                                math: '$$\\lim_{x \\to +\\infty} \\frac{3x + \\ln\\left(1 + \\frac{4}{e^{3x}}\\right)}{x} = \\lim_{x \\to +\\infty} \\left[3 + \\frac{\\ln\\left(1 + \\frac{4}{e^{3x}}\\right)}{x}\\right] = 3 + \\frac{\\ln(1 + 0)}{+\\infty} = 3 + 0 = 3 \\implies \\boxed{e^3}$$',
+                                note: 'El segundo sumando es una falsa indeterminación $\\frac{0}{\\infty} = 0$. Queda levantado $100\\%$ por vía algebraica.'
+                            }
+                        ]
+                    },
+                    zero0: {
+                        label: 'Caso 9B: Forma 0⁰',
+                        statement: '$$\\lim_{x \\to 0^+} x^{\\frac{2}{3 - \\ln(x)}}$$',
+                        steps: [
+                            {
+                                badge: 'Paso 1 • Diagnóstico y aplicación de A^B = e^(B ln A)',
+                                title: 'Cuando $x \\to 0^+$, $\\ln(x) \\to -\\infty \\implies 3 - \\ln(x) \\to +\\infty$, luego el exponente tiende a $0$ ($[0^0]$)',
+                                math: '$$x^{\\frac{2}{3 - \\ln(x)}} = e^{\\frac{2}{3 - \\ln(x)} \\cdot \\ln(x)} = e^{\\frac{2\\ln(x)}{3 - \\ln(x)}}$$',
+                                note: 'En el exponente queda el cociente $\\frac{2\\ln(x)}{3 - \\ln(x)}$, que presenta una indeterminación $\\frac{-\\infty}{+\\infty}$ en la escala de $\\ln(x)$.'
+                            },
+                            {
+                                badge: 'Paso 2 • Factor común ln(x) sin usar L\'Hôpital',
+                                title: 'Extraer factor común $\\ln(x)$ en numerador y denominador',
+                                math: '$$\\lim_{x \\to 0^+} \\frac{2\\ln(x)}{\\ln(x)\\left(\\frac{3}{\\ln(x)} - 1\\right)} = \\lim_{x \\to 0^+} \\frac{2}{\\frac{3}{\\ln(x)} - 1}$$',
+                                note: 'Como $x$ está cerca de $0^+$ ($x \\neq 1$), $\\ln(x) \\neq 0$ y su cancelación algebraica es directa.'
+                            },
+                            {
+                                badge: 'Paso 3 • Evaluación de la exponencial',
+                                title: 'Como $\\ln(x) \\to -\\infty$, el cociente $\\frac{3}{\\ln(x)} \\to 0$',
+                                math: '$$\\lim_{x \\to 0^+} \\frac{2}{\\frac{3}{\\ln(x)} - 1} = \\frac{2}{0 - 1} = -2 \\quad \\Longrightarrow \\quad \\text{Resultado} = e^{-2} = \\boxed{\\frac{1}{e^2}}$$',
+                                note: 'Resuelto exclusivamente mediante propiedades de logaritmos y factor común.'
+                            }
+                        ]
+                    }
+                },
+                revealed: 0
+            },
+
+            /* ==================== BLOQUE B: NOTABLES ==================== */
+            b1: {
+                number: 'Notable 1',
+                tagLabel: 'Trigonométrico • Ajuste de constantes en sen(u)/u',
+                statement: '$$\\lim_{x \\to 0} \\frac{\\operatorname{sen}(5x)}{3x}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Identificar el argumento u(x)',
+                        title: 'Evaluando da $[0/0]$. El argumento dentro del seno es $u = 5x$, que tiende a $0$',
+                        math: '$$\\lim_{x \\to 0} \\frac{\\operatorname{sen}(5x)}{3x} = \\frac{1}{3} \\cdot \\lim_{x \\to 0} \\frac{\\operatorname{sen}(5x)}{x}$$',
+                        note: 'Extraemos la constante $\\frac{1}{3}$ y observamos que abajo necesitamos exactamente $5x$ para replicar el argumento.'
+                    },
+                    {
+                        badge: 'Paso 2 • Multiplicar y dividir por 5',
+                        title: 'Armar el bloque notable $\\frac{\\operatorname{sen}(5x)}{5x}$',
+                        math: '$$\\frac{1}{3} \\cdot \\lim_{x \\to 0} \\left(\\frac{5 \\cdot \\operatorname{sen}(5x)}{5x}\\right) = \\frac{5}{3} \\cdot \\lim_{x \\to 0} \\underbrace{\\frac{\\operatorname{sen}(5x)}{5x}}_{\\to 1} = \\frac{5}{3} \\cdot 1 = \\boxed{\\frac{5}{3}}$$',
+                        note: 'Nunca se "saca" el $5$ de adentro del seno: se construye el mismo $5x$ en el denominador.'
+                    }
+                ]
+            },
+            b2: {
+                number: 'Notable 2',
+                tagLabel: 'Trigonométrico • Cociente de dos senos',
+                statement: '$$\\lim_{x \\to 0} \\frac{\\operatorname{sen}(3x)}{\\operatorname{sen}(7x)}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Dividir numerador y denominador por x',
+                        title: 'Para $x \\neq 0$, separamos la indeterminación $[0/0]$ en dos bloques independientes',
+                        math: '$$\\lim_{x \\to 0} \\frac{\\frac{\\operatorname{sen}(3x)}{x}}{\\frac{\\operatorname{sen}(7x)}{x}} = \\lim_{x \\to 0} \\frac{3 \\cdot \\frac{\\operatorname{sen}(3x)}{3x}}{7 \\cdot \\frac{\\operatorname{sen}(7x)}{7x}}$$',
+                        note: 'Multiplicamos y dividimos arriba por $3$ y abajo por $7$ para completar cada molde.'
+                    },
+                    {
+                        badge: 'Paso 2 • Aplicar límite notable en ambos niveles',
+                        title: 'Cada cociente $\\frac{\\operatorname{sen}(kx)}{kx} \\to 1$ cuando $x \\to 0$',
+                        math: '$$\\frac{3 \\cdot 1}{7 \\cdot 1} = \\boxed{\\frac{3}{7}}$$',
+                        note: 'Ambos límites existen y el denominador tiende a $7 \\neq 0$.'
+                    }
+                ]
+            },
+            b3: {
+                number: 'Notable 3',
+                tagLabel: 'Número e • Ajuste de exponente en (1 + k/x)^(mx)',
+                statement: '$$\\lim_{x \\to \\infty} \\left(1 + \\frac{3}{x}\\right)^{2x}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Identificar la caja u(x) en la base',
+                        title: 'Es una indeterminación $[1^\\infty]$. Llevamos $\\frac{3}{x}$ a la forma $\\frac{1}{u(x)}$',
+                        math: '$$1 + \\frac{3}{x} = 1 + \\frac{1}{\\frac{x}{3}} \\quad \\Longrightarrow \\quad u(x) = \\frac{x}{3} \\to \\infty$$',
+                        note: 'Para formar el número $e$, necesitamos que en el exponente aparezca exactamente $\\frac{x}{3}$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Compensar el exponente y concluir',
+                        title: 'Multiplicar y dividir el exponente $2x$ por $\\frac{x}{3}$',
+                        math: '$$\\lim_{x \\to \\infty} \\left[\\underbrace{\\left(1 + \\frac{1}{\\frac{x}{3}}\\right)^{\\frac{x}{3}}}_{\\to e}\\right]^{\\frac{3}{x} \\cdot 2x} = e^{6} = \\boxed{e^6}$$',
+                        note: 'Verificación rápida: $e^{\\lim 2x \\cdot \\left(1 + \\frac{3}{x} - 1\\right)} = e^6$. En finanzas equivale a capitalizar continuamente una tasa $r=3$ durante $t=2$ períodos.'
+                    }
+                ]
+            },
+            b4: {
+                number: 'Notable 4',
+                tagLabel: 'Número e • Cociente de polinomios elevado a exponente variable',
+                statement: '$$\\lim_{x \\to \\infty} \\left(\\frac{x - 2}{x + 3}\\right)^{4x}$$',
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Llevar el cociente racional al formato 1 + 1/u',
+                        title: 'Sumar y restar $3$ en el numerador para hacer aparecer $(x + 3)$',
+                        math: '$$\\frac{x - 2}{x + 3} = \\frac{(x + 3) - 5}{x + 3} = 1 + \\frac{-5}{x + 3} = 1 + \\frac{1}{\\frac{x + 3}{-5}}$$',
+                        note: 'Nuestra caja es $u(x) = \\frac{x + 3}{-5}$, que tiende a $\\infty$ manteniendo intacto el signo negativo dentro del bloque.'
+                    },
+                    {
+                        badge: 'Paso 2 • Armar el exponente notable',
+                        title: 'Multiplicar y dividir el exponente por $\\frac{x + 3}{-5}$',
+                        math: '$$\\lim_{x \\to \\infty} \\left[\\left(1 + \\frac{1}{\\frac{x + 3}{-5}}\\right)^{\\frac{x + 3}{-5}}\\right]^{\\frac{-5}{x + 3} \\cdot 4x}$$',
+                        note: 'La base entre corchetes tiende a $e$; resta calcular el límite del exponente exterior.'
+                    },
+                    {
+                        badge: 'Paso 3 • Resolver el exponente exterior',
+                        title: 'Calcular $\\lim_{x \\to \\infty} \\frac{-20x}{x + 3}$',
+                        math: '$$\\lim_{x \\to \\infty} \\frac{-20x}{x + 3} = -20 \\quad \\Longrightarrow \\quad \\text{Resultado} = \\boxed{e^{-20}}$$',
+                        note: 'Recordá que $e^{-20} = \\frac{1}{e^{20}} > 0$: un exponente negativo produce un valor positivo muy próximo a cero.'
+                    }
+                ]
+            },
+
+            /* ==================== APLICACIONES ECONÓMICAS (ACTIVIDAD 8) ==================== */
+            econ1: {
+                revealed: 1,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Planteo del límite',
+                        title: 'Armar el costo promedio $\\overline{C}(x) = C(x)/x$ y hacer $x \\to +\\infty$',
+                        math: '$$\\lim_{x \\to +\\infty} \\overline{C}(x) = \\lim_{x \\to +\\infty} \\frac{300 + 5x}{x} \\quad \\left[\\frac{\\infty}{\\infty}\\right]$$'
+                    },
+                    {
+                        badge: 'Paso 2 • Resolución algebraica breve',
+                        title: 'Distribuir el denominador $x$ en ambos sumandos',
+                        math: '$$\\lim_{x \\to +\\infty} \\left(\\frac{300}{x} + 5\\right) = 0 + 5 = 5$$'
+                    },
+                    {
+                        badge: 'Paso 3 • Interpretación económica',
+                        title: 'Lectura del resultado sobre la estructura de costos',
+                        math: '$$\\boxed{\\text{El costo promedio tiende a USD } 5 \\text{ por unidad}}$$',
+                        note: 'Al producir a escala ilimitada, el costo fijo total (USD $300$) se diluye entre infinitas unidades ($\\frac{300}{x} \\to 0$) y sobrevive únicamente el costo variable unitario (USD $5$).'
+                    }
+                ]
+            },
+            econ2: {
+                revealed: 1,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Planteo del límite',
+                        title: 'Evaluar la tendencia de $U(x)$ cuando el gasto publicitario $x \\to +\\infty$',
+                        math: '$$\\lim_{x \\to +\\infty} U(x) = \\lim_{x \\to +\\infty} \\frac{23x + 15}{x + 4} \\quad \\left[\\frac{\\infty}{\\infty}\\right]$$'
+                    },
+                    {
+                        badge: 'Paso 2 • Resolución algebraica breve',
+                        title: 'Dividir numerador y denominador por la mayor potencia ($x$)',
+                        math: '$$\\lim_{x \\to +\\infty} \\frac{23 + \\frac{15}{x}}{1 + \\frac{4}{x}} = \\frac{23 + 0}{1 + 0} = 23$$'
+                    },
+                    {
+                        badge: 'Paso 3 • Interpretación económica',
+                        title: 'Techo de saturación publicitaria',
+                        math: '$$\\boxed{\\text{La utilidad se acercará al valor tope } 23}$$',
+                        note: 'Aunque el presupuesto publicitario crezca sin límite, el mercado presenta saturación (asíntota horizontal $U = 23$) y la utilidad nunca supera ese techo.'
+                    }
+                ]
+            },
+            econ3: {
+                revealed: 1,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Planteo del límite',
+                        title: 'Estudiar el comportamiento de la demanda $q(p)$ cuando $p \\to 1$',
+                        math: '$$\\lim_{p \\to 1} \\frac{20\\left(\\sqrt{p + 3} - 2\\right)}{p - 1} \\quad \\left[\\frac{0}{0}\\right]$$'
+                    },
+                    {
+                        badge: 'Paso 2 • Resolución algebraica por conjugado',
+                        title: 'Multiplicar y dividir por $(\\sqrt{p + 3} + 2)$ y cancelar $(p - 1)$ ya que $p \\neq 1$',
+                        math: '$$\\lim_{p \\to 1} \\frac{20\\left[(p + 3) - 4\\right]}{(p - 1)\\left(\\sqrt{p + 3} + 2\\right)} = \\lim_{p \\to 1} \\frac{20\\cancel{(p - 1)}}{\\cancel{(p - 1)}\\left(\\sqrt{p + 3} + 2\\right)}$$'
+                    },
+                    {
+                        badge: 'Paso 3 • Evaluación e interpretación económica',
+                        title: 'Evaluar la expresión simplificada en $p = 1$',
+                        math: '$$\\lim_{p \\to 1} \\frac{20}{\\sqrt{p + 3} + 2} = \\frac{20}{2 + 2} = \\boxed{5 \\text{ m}^3}$$',
+                        note: 'Cuando el precio del medicamento se aproxime a $1$ mil dólares (USD $1.000$), la cantidad demandada se acercará a $5\\text{ m}^3$.'
+                    }
+                ]
+            },
+
+            /* ==================== PRÁCTICA DE CONTINUIDAD EN [-1, 5] ==================== */
+            cont1: {
+                revealed: 0,
+                steps: [
+                    {
+                        badge: 'Paso 1 • Análisis de los tramos en [-1, 5]',
+                        title: 'Estudiar la continuidad dentro de cada subtramo y detectar puntos conflictivos',
+                        math: '$$\\text{En } [-1, 2): \\; \\frac{x^2 - 4}{x - 2} \\text{ es racional con denominador } x - 2 \\neq 0 \\quad | \\quad \\text{En } (2, 5]: \\; 3x - 2 \\text{ es polinómica}$$',
+                        note: 'En $[-1, 2)$ el denominador solo se anula en $x = 2$ (que no pertenece a ese subtramo), por lo que es continua allí. En $(2, 5]$ es una función lineal, continua en todos los reales. El único punto crítico a verificar dentro de $[-1, 5]$ es el empalme $x = 2$.'
+                    },
+                    {
+                        badge: 'Paso 2 • Condición 1: ¿Existe f(2)?',
+                        title: 'Evaluar la función exactamente en el punto $x = 2$',
+                        math: '$$f(2) = 4 \\quad \\Longrightarrow \\quad \\exists \\, f(2) \\; (2 \\in \\operatorname{Dom} f)$$',
+                        note: 'Miramos el renglón de la función por tramos que incluye el signo igual ($x = 2$). La imagen existe y vale $4$: cumple la primera condición.'
+                    },
+                    {
+                        badge: 'Paso 3 • Condición 2: ¿Existe el límite cuando x → 2?',
+                        title: 'Como la fórmula cambia a izquierda y derecha de $x = 2$, calculamos límites laterales',
+                        math: '$$L^- = \\lim_{x \\to 2^-} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2^-} \\frac{\\cancel{(x - 2)}(x + 2)}{\\cancel{x - 2}} = 4 \\qquad \\text{y} \\qquad L^+ = \\lim_{x \\to 2^+} (3x - 2) = 3(2) - 2 = 4$$',
+                        note: 'Como ambos límites laterales son finitos e iguales ($L^- = L^+ = 4$), existe el límite ordinario y vale $\\lim_{x \\to 2} f(x) = 4$. Cumple la segunda condición.'
+                    },
+                    {
+                        badge: 'Paso 4 • Condición 3 y conclusión en todo el intervalo [-1, 5]',
+                        title: 'Comparar el límite con la imagen en el punto y concluir sobre el intervalo cerrado',
+                        math: '$$\\lim_{x \\to 2} f(x) = 4 = f(2) \\quad \\Longrightarrow \\quad \\boxed{f(x) \\text{ es continua en todo el intervalo } [-1, 5]}$$',
+                        note: 'Al coincidir límite e imagen, $f$ es continua en $x = 2$. Sumado a la continuidad en $[-1, 2)$ y $(2, 5]$ (incluyendo continuidad lateral en los bordes $\\lim_{x \\to -1^+} f(x) = 1 = f(-1)$ y $\\lim_{x \\to 5^-} f(x) = 13 = f(5)$), la gráfica no se corta en ningún punto de $[-1, 5]$.'
+                    }
+                ]
+            }
+        };
+
+        /* ---------------------------------------------------------
+           6. CONSTRUCCIÓN Y CONTROL INTERACTIVO DE TARJETAS DE PASOS
+           --------------------------------------------------------- */
+        function getStepsForExercise(exKey) {
+            const ex = allExercises[exKey];
+            if (ex.variants) {
+                return ex.variants[ex.activeVariant].steps;
+            }
+            return ex.steps;
+        }
+
+        function renderPracticeLists() {
+            // Renderizar las 9 tarjetas del Bloque A
+            const containerA = document.getElementById('block-a-exercises-list');
+            const keysA = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9'];
+            containerA.innerHTML = keysA.map((key) => buildExerciseShellHTML(key, 'blue')).join('');
+
+            // Renderizar las 4 tarjetas del Bloque B
+            const containerB = document.getElementById('block-b-exercises-list');
+            const keysB = ['b1', 'b2', 'b3', 'b4'];
+            containerB.innerHTML = keysB.map((key) => buildExerciseShellHTML(key, 'indigo')).join('');
+
+            // Inicializar contenido interno de cada ejercicio (incluyendo Continuidad)
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3'].forEach((k) => updateStepsView(k));
+        }
+
+        function buildExerciseShellHTML(exKey, colorTheme) {
+            const ex = allExercises[exKey];
+            const statement = ex.variants ? ex.variants[ex.activeVariant].statement : ex.statement;
+            const stepsLen = getStepsForExercise(exKey).length;
+            const badgeBg = colorTheme === 'blue' ? 'bg-blue-600' : 'bg-indigo-600';
+            const btnBg = colorTheme === 'blue' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-indigo-600 hover:bg-indigo-700';
+            const progStyle = colorTheme === 'blue' ? 'text-blue-700 bg-blue-50' : 'text-indigo-700 bg-indigo-50';
+            const tagsAttr = ex.tags ? ex.tags.join(',') : '';
+
+            const variantSelector = ex.variants ? `
+                <div class="px-6 pt-4 bg-white flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-500">Seleccionar sub-caso:</span>
+                    <button type="button" id="var-btn-inf0" onclick="switchEx9Variant('inf0')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition">
+                        Caso 9A: Indeterminación $\\infty^0$
+                    </button>
+                    <button type="button" id="var-btn-zero0" onclick="switchEx9Variant('zero0')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Caso 9B: Indeterminación $0^0$
+                    </button>
+                </div>
+            ` : '';
+
+            return `
+                <article id="card-${exKey}" data-tags="${tagsAttr}" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${badgeBg} text-white">${ex.number}</span>
+                                <span class="text-xs font-semibold text-slate-500">${ex.tagLabel}</span>
+                            </div>
+                            <h5 class="text-base sm:text-lg font-bold text-slate-900">Resolución algebraica paso a paso</h5>
+                        </div>
+                        <div id="${exKey}-statement-box" class="bg-white px-5 py-2.5 rounded-xl border border-slate-200 shadow-xs text-center self-start lg:self-auto">
+                            ${statement}
+                        </div>
+                    </div>
+                    ${variantSelector}
+                    <div class="px-5 sm:px-6 py-3.5 bg-white border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                        <span id="${exKey}-progress-text" class="text-xs font-bold ${progStyle} px-2.5 py-1 rounded-full">0 de ${stepsLen} pasos revelados</span>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button id="${exKey}-btn-next" type="button" onclick="nextStep('${exKey}')"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl ${btnBg} text-white text-xs font-semibold shadow-xs transition">
+                                <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                            </button>
+                            <button type="button" onclick="showAllSteps('${exKey}')"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                <i class="ph ph-list-checks"></i> <span>Ver todo</span>
+                            </button>
+                            <button type="button" onclick="resetSteps('${exKey}', 0)"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="${exKey}-steps-container" class="p-5 sm:p-6 space-y-3.5"></div>
+                </article>
+            `;
+        }
+
+        function switchEx9Variant(variantKey) {
+            const ex = allExercises.a9;
+            ex.activeVariant = variantKey;
+            ex.revealed = 0;
+
+            const stmtBox = document.getElementById('a9-statement-box');
+            stmtBox.innerHTML = ex.variants[variantKey].statement;
+            renderMath(stmtBox);
+
+            const btnInf = document.getElementById('var-btn-inf0');
+            const btnZero = document.getElementById('var-btn-zero0');
+            if (variantKey === 'inf0') {
+                btnInf.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition';
+                btnZero.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            } else {
+                btnZero.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition';
+                btnInf.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            }
+
+            updateStepsView('a9');
+        }
+
+        function updateStepsView(exKey) {
+            const ex = allExercises[exKey];
+            const steps = getStepsForExercise(exKey);
+            const container = document.getElementById(`${exKey}-steps-container`);
+            const progressText = document.getElementById(`${exKey}-progress-text`);
+            const btnNext = document.getElementById(`${exKey}-btn-next`);
+            if (!container) return;
+
+            const isEcon = exKey.startsWith('econ');
+            if (progressText) {
+                progressText.textContent = isEcon
+                    ? `${ex.revealed} de ${steps.length} pasos visibles`
+                    : `${ex.revealed} de ${steps.length} pasos revelados`;
+            }
+
+            if (ex.revealed === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 px-4 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/60">
+                        <p class="text-xs sm:text-sm font-semibold text-slate-700">Hacé clic en <strong>"Paso siguiente"</strong> para recorrer la resolución paso a paso o en <strong>"Ver todo"</strong>.</p>
+                    </div>
+                `;
+                if (btnNext) {
+                    btnNext.disabled = false;
+                    btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+                return;
+            }
+
+            let html = '';
+            for (let i = 0; i < ex.revealed; i++) {
+                const st = steps[i];
+                html += `
+                    <div class="step-card rounded-xl border border-slate-200 bg-white p-4 shadow-2xs space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800">${st.badge}</span>
+                            <span class="text-[11px] text-slate-400 font-medium">${i + 1} / ${steps.length}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm font-bold text-slate-900">${st.title}</p>
+                        <div class="bg-slate-50 border border-slate-200/80 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm overflow-x-auto">
+                            ${st.math}
+                        </div>
+                        ${st.note ? `<p class="text-xs text-slate-600 bg-slate-50/80 border-l-2 border-blue-500 pl-3 py-1 leading-relaxed">${st.note}</p>` : ''}
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+
+            if (btnNext) {
+                const done = ex.revealed >= steps.length;
+                btnNext.disabled = done;
+                btnNext.classList.toggle('opacity-50', done);
+                btnNext.classList.toggle('cursor-not-allowed', done);
+            }
+
+            renderMath(container);
+        }
+
+        function nextStep(exKey) {
+            const ex = allExercises[exKey];
+            const steps = getStepsForExercise(exKey);
+            if (ex.revealed < steps.length) {
+                ex.revealed += 1;
+                updateStepsView(exKey);
+            }
+        }
+
+        function showAllSteps(exKey) {
+            const ex = allExercises[exKey];
+            ex.revealed = getStepsForExercise(exKey).length;
+            updateStepsView(exKey);
+        }
+
+        function resetSteps(exKey, initialCount = 0) {
+            allExercises[exKey].revealed = initialCount;
+            updateStepsView(exKey);
+        }
+
+        function filterBlockA(filterKey) {
+            const filterIds = ['all', '0_0', 'inf_inf', 'inf_minus_inf', 'zero_dot_inf', 'one_pow_inf', 'inf_pow_0', 'zero_pow_0'];
+            filterIds.forEach((fid) => {
+                const btn = document.getElementById(`filter-${fid}`);
+                if (!btn) return;
+                if (fid === filterKey) {
+                    btn.className = 'px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-400 transition';
+                }
+            });
+
+            const cards = document.querySelectorAll('#block-a-exercises-list > article');
+            cards.forEach((card) => {
+                const tags = (card.getAttribute('data-tags') || '').split(',');
+                const show = filterKey === 'all' || tags.includes(filterKey);
+                card.classList.toggle('hidden', !show);
+            });
+
+            // Si filtran por inf_pow_0 o zero_pow_0, sincronizar automáticamente el sub-caso del Ejercicio 9
+            if (filterKey === 'inf_pow_0') switchEx9Variant('inf0');
+            if (filterKey === 'zero_pow_0') switchEx9Variant('zero0');
+        }
+
+        /* ---------------------------------------------------------
+           7. MINI-VISUALIZACIONES INTERACTIVAS DE APLICACIONES ECONÓMICAS
+           --------------------------------------------------------- */
+        const econState = {
+            x1: 100,
+            x2: 20,
+            p3: 0.85
+        };
+
+        function setupHiDPICanvas(canvasId, wrapId) {
+            const canvas = document.getElementById(canvasId);
+            const wrap = document.getElementById(wrapId);
+            if (!canvas || !wrap) return null;
+            const rect = wrap.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return null;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            return { ctx, W: rect.width, H: rect.height };
+        }
+
+        // Problema 8.1: C_medio(x) = 300/x + 5
+        function updateEcon1(val) {
+            const x = parseFloat(val);
+            econState.x1 = x;
+            const slider = document.getElementById('econ1-slider');
+            if (x <= 1000) slider.value = x;
+            else slider.value = 1000;
+
+            const cfUnit = 300 / x;
+            const cMed = cfUnit + 5;
+            document.getElementById('econ1-lbl-x').textContent = `x = ${x.toLocaleString('es-AR')} u.`;
+            document.getElementById('econ1-cf-unit').textContent = `USD ${cfUnit.toFixed(3)}`;
+            document.getElementById('econ1-cmed').textContent = `USD ${cMed.toFixed(3)}`;
+            drawEcon1Canvas();
+        }
+
+        function drawEcon1Canvas() {
+            const setup = setupHiDPICanvas('econ1-canvas', 'econ1-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 38, right: 16, top: 16, bottom: 28 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 10, xMax = 500;
+            const yMin = 0, yMax = 36;
+            const toX = (x) => pad.left + ((Math.min(x, xMax) - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // Ejes
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + pH); ctx.lineTo(pad.left + pW, pad.top + pH);
+            ctx.stroke();
+
+            // Asíntota horizontal y = 5
+            const pyAsym = toY(5);
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#059669';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath(); ctx.moveTo(pad.left, pyAsym); ctx.lineTo(pad.left + pW, pyAsym); ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#047857';
+            ctx.font = 'bold 10.5px Inter, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText('Asíntota y = 5', pad.left + pW - 4, pyAsym - 5);
+            ctx.fillText('5', pad.left - 5, pyAsym + 3);
+
+            // Curva C_medio(x) = 300/x + 5
+            ctx.strokeStyle = '#0f766e';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            for (let i = 0; i <= 120; i++) {
+                const xv = xMin + (i / 120) * (xMax - xMin);
+                const yv = 300 / xv + 5;
+                if (i === 0) ctx.moveTo(toX(xv), toY(yv));
+                else ctx.lineTo(toX(xv), toY(yv));
+            }
+            ctx.stroke();
+
+            // Punto actual (acotado al borde derecho del gráfico si x > 500)
+            const drawX = Math.min(econState.x1, xMax);
+            const drawY = 300 / drawX + 5;
+            ctx.fillStyle = '#059669';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(toX(drawX), toY(drawY), 5.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+
+        // Problema 8.2: U(x) = (23x + 15)/(x + 4)
+        function updateEcon2(val) {
+            const x = parseFloat(val);
+            econState.x2 = x;
+            const slider = document.getElementById('econ2-slider');
+            if (x <= 120) slider.value = x;
+            else slider.value = 120;
+
+            const u = (23 * x + 15) / (x + 4);
+            document.getElementById('econ2-lbl-x').textContent = `x = ${x.toLocaleString('es-AR')}`;
+            document.getElementById('econ2-uval').textContent = u.toFixed(3);
+            document.getElementById('econ2-gap').textContent = (23 - u).toFixed(3);
+            drawEcon2Canvas();
+        }
+
+        function drawEcon2Canvas() {
+            const setup = setupHiDPICanvas('econ2-canvas', 'econ2-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 38, right: 16, top: 16, bottom: 28 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 120;
+            const yMin = 0, yMax = 26;
+            const toX = (x) => pad.left + ((Math.min(x, xMax) - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + pH); ctx.lineTo(pad.left + pW, pad.top + pH);
+            ctx.stroke();
+
+            // Techo U = 23
+            const pyTop = toY(23);
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#4f46e5';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath(); ctx.moveTo(pad.left, pyTop); ctx.lineTo(pad.left + pW, pyTop); ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#4338ca';
+            ctx.font = 'bold 10.5px Inter, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText('Techo U = 23', pad.left + pW - 4, pyTop + 13);
+            ctx.fillText('23', pad.left - 5, pyTop + 3);
+
+            // Curva U(x)
+            ctx.strokeStyle = '#4338ca';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            for (let i = 0; i <= 120; i++) {
+                const xv = xMin + (i / 120) * (xMax - xMin);
+                const yv = (23 * xv + 15) / (xv + 4);
+                if (i === 0) ctx.moveTo(toX(xv), toY(yv));
+                else ctx.lineTo(toX(xv), toY(yv));
+            }
+            ctx.stroke();
+
+            const drawX = Math.min(econState.x2, xMax);
+            const drawY = (23 * drawX + 15) / (drawX + 4);
+            ctx.fillStyle = '#4f46e5';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(toX(drawX), toY(drawY), 5.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+
+        // Problema 8.3: q(p) = 20(sqrt(p+3)-2)/(p-1) = 20/(sqrt(p+3)+2) para p != 1
+        function updateEcon3(val) {
+            const p = parseFloat(val);
+            econState.p3 = p;
+            document.getElementById('econ3-slider').value = p;
+            document.getElementById('econ3-lbl-p').textContent = `p = ${p.toFixed(2)} mil USD`;
+            document.getElementById('econ3-pval').textContent = `USD ${Math.round(p * 1000).toLocaleString('es-AR')}`;
+
+            if (Math.abs(p - 1.0) < 0.004) {
+                document.getElementById('econ3-qval').textContent = 'Hueco → tiende a 5 m³';
+            } else {
+                const q = 20 / (Math.sqrt(p + 3) + 2);
+                document.getElementById('econ3-qval').textContent = `${q.toFixed(3)} m³`;
+            }
+            drawEcon3Canvas();
+        }
+
+        function drawEcon3Canvas() {
+            const setup = setupHiDPICanvas('econ3-canvas', 'econ3-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 38, right: 16, top: 16, bottom: 28 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const pMin = 0, pMax = 2.4;
+            const qMin = 3.8, qMax = 5.8;
+            const toX = (p) => pad.left + ((p - pMin) / (pMax - pMin)) * pW;
+            const toY = (q) => pad.top + pH - ((q - qMin) / (qMax - qMin)) * pH;
+
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + pH); ctx.lineTo(pad.left + pW, pad.top + pH);
+            ctx.stroke();
+
+            // Guías de p = 1, q = 5
+            const px1 = toX(1);
+            const py5 = toY(5);
+            ctx.setLineDash([4, 3]);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(px1, pad.top + pH); ctx.lineTo(px1, py5); ctx.lineTo(pad.left, py5);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 10.5px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('p = 1', px1, pad.top + pH + 15);
+            ctx.textAlign = 'right';
+            ctx.fillText('5', pad.left - 6, py5 + 3);
+
+            // Curva de demanda q(p)
+            ctx.strokeStyle = '#1d4ed8';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for (let i = 0; i <= 100; i++) {
+                const pv = pMin + (i / 100) * (pMax - pMin);
+                const qv = 20 / (Math.sqrt(pv + 3) + 2);
+                if (i === 0) ctx.moveTo(toX(pv), toY(qv));
+                else ctx.lineTo(toX(pv), toY(qv));
+            }
+            ctx.stroke();
+
+            // Punto móvil si p != 1
+            if (Math.abs(econState.p3 - 1.0) >= 0.004) {
+                const qNow = 20 / (Math.sqrt(econState.p3 + 3) + 2);
+                ctx.fillStyle = '#2563eb';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(toX(econState.p3), toY(qNow), 5.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            }
+
+            // Hueco abierto en (1, 5)
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#1d4ed8';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath(); ctx.arc(px1, py5, 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+
+        function drawAllEconCanvases() {
+            updateEcon1(econState.x1);
+            updateEcon2(econState.x2);
+            updateEcon3(econState.p3);
+        }
+
+        /* ---------------------------------------------------------
+           8. VISUALIZADORES INTERACTIVOS DE CONTINUIDAD (TEORÍA Y PRÁCTICA)
+           --------------------------------------------------------- */
+        let contTheoryMode = 'ok';
+        let contPracX = 2.0;
+
+        const contTheoryMeta = {
+            ok: {
+                checks: [
+                    { ok: true, label: '1) Existe $f(a) = L$' },
+                    { ok: true, label: '2) Existe $\\lim_{x\\to a} f(x) = L$' },
+                    { ok: true, label: '3) $\\lim_{x\\to a} f(x) = f(a)$' }
+                ],
+                caption: '<strong>Continua en $x = a$:</strong> el punto relleno $(a, f(a))$ sella exactamente el lugar hacia donde tienden ambas ramas. Podés trazar la curva sin levantar el lápiz.'
+            },
+            nofa: {
+                checks: [
+                    { ok: false, label: '1) No existe $f(a)$' },
+                    { ok: true, label: '2) Existe $\\lim_{x\\to a} f(x) = L$' },
+                    { ok: false, label: '3) No pueden igualarse' }
+                ],
+                caption: '<strong>Discontinuidad evitable (hueco vacío):</strong> el límite existe porque ambas ramas apuntan a $L$, pero $a \\notin \\operatorname{Dom}(f)$. Al llegar a $x = a$ hay que levantar el lápiz.'
+            },
+            nolim: {
+                checks: [
+                    { ok: true, label: '1) Existe $f(a)$' },
+                    { ok: false, label: '2) No existe $\\lim_{x\\to a} f(x)$' },
+                    { ok: false, label: '3) Falla al no haber límite' }
+                ],
+                caption: '<strong>Discontinuidad esencial de salto:</strong> los límites laterales son distintos ($L^- \\neq L^+$), por lo que no existe el límite ordinario y la gráfica pega un salto vertical.'
+            },
+            noeq: {
+                checks: [
+                    { ok: true, label: '1) Existe $f(a)$' },
+                    { ok: true, label: '2) Existe $\\lim_{x\\to a} f(x) = L$' },
+                    { ok: false, label: '3) $\\lim_{x\\to a} f(x) \\neq f(a)$' }
+                ],
+                caption: '<strong>Discontinuidad evitable (punto desplazado):</strong> existen tanto $f(a)$ como el límite $L$, pero valen distinto ($f(a) \\neq L$). El punto lleno está corrido respecto del hueco.'
+            }
+        };
+
+        function setContTheoryMode(mode) {
+            contTheoryMode = mode;
+            const modes = ['ok', 'nofa', 'nolim', 'noeq'];
+            modes.forEach((m) => {
+                const btn = document.getElementById(`btn-cont-mode-${m}`);
+                if (!btn) return;
+                if (m === mode) {
+                    btn.className = 'text-left px-3.5 py-2.5 rounded-xl border-2 border-teal-500 bg-teal-50 text-teal-950 text-xs sm:text-sm font-semibold transition flex items-center justify-between shadow-2xs';
+                } else {
+                    btn.className = 'text-left px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 text-xs sm:text-sm font-medium transition flex items-center justify-between';
+                }
+            });
+
+            const meta = contTheoryMeta[mode];
+            const checksEl = document.getElementById('cont-theory-checks');
+            const capEl = document.getElementById('cont-theory-caption');
+
+            if (checksEl) {
+                checksEl.innerHTML = meta.checks.map((c) => `
+                    <div class="rounded-xl px-3 py-2 border flex items-center gap-2 font-semibold ${c.ok ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
+                        <i class="ph-fill ${c.ok ? 'ph-check-circle text-emerald-600' : 'ph-x-circle text-rose-600'} text-base shrink-0"></i>
+                        <span>${c.label}</span>
+                    </div>
+                `).join('');
+                renderMath(checksEl);
+            }
+            if (capEl) {
+                capEl.innerHTML = meta.caption;
+                renderMath(capEl);
+            }
+
+            drawContTheoryCanvas();
+        }
+
+        function drawContTheoryCanvas() {
+            const setup = setupHiDPICanvas('cont-theory-canvas', 'cont-theory-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 44, right: 20, top: 18, bottom: 32 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 4;
+            const yMin = 0, yMax = 5;
+            const toX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // Cuadrícula suave
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let gx = 1; gx <= 3; gx++) {
+                ctx.beginPath(); ctx.moveTo(toX(gx), pad.top); ctx.lineTo(toX(gx), pad.top + pH); ctx.stroke();
+            }
+            for (let gy = 1; gy <= 4; gy++) {
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(gy)); ctx.lineTo(pad.left + pW, toY(gy)); ctx.stroke();
+            }
+
+            // Ejes
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + pH); ctx.lineTo(pad.left + pW, pad.top + pH);
+            ctx.stroke();
+
+            const a = 2.0;
+            const curveLeft = (x) => 1.2 + 0.75 * x + 0.12 * Math.sin(x * 1.5); // en a=2 vale ~2.81
+            const L = curveLeft(a);
+
+            // Guía punteada en x = a
+            ctx.setLineDash([4, 3]);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(toX(a), pad.top + pH);
+            ctx.lineTo(toX(a), pad.top + 8);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('x = a', toX(a), pad.top + pH + 18);
+
+            // Rama izquierda x in [0.2, a)
+            ctx.strokeStyle = '#0d9488';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath();
+            for (let i = 0; i <= 60; i++) {
+                const xv = 0.2 + (i / 60) * (a - 0.2);
+                const yv = curveLeft(xv);
+                if (i === 0) ctx.moveTo(toX(xv), toY(yv));
+                else ctx.lineTo(toX(xv), toY(yv));
+            }
+            ctx.stroke();
+
+            // Rama derecha x in (a, 3.8]
+            const offsetJump = contTheoryMode === 'nolim' ? 1.25 : 0;
+            ctx.strokeStyle = '#0d9488';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath();
+            for (let i = 0; i <= 60; i++) {
+                const xv = a + (i / 60) * (3.8 - a);
+                const yv = curveLeft(xv) + offsetJump;
+                if (i === 0) ctx.moveTo(toX(xv), toY(yv));
+                else ctx.lineTo(toX(xv), toY(yv));
+            }
+            ctx.stroke();
+
+            // Dibujar puntos llenos / huecos según el modo
+            if (contTheoryMode === 'ok') {
+                ctx.setLineDash([3, 3]);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(L)); ctx.lineTo(toX(a), toY(L)); ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = '#0d9488';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.arc(toX(a), toY(L), 6.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#0f766e';
+                ctx.textAlign = 'right';
+                ctx.fillText('f(a) = L', pad.left - 6, toY(L) + 4);
+            } else if (contTheoryMode === 'nofa') {
+                ctx.setLineDash([3, 3]);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(L)); ctx.lineTo(toX(a), toY(L)); ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = '#e11d48';
+                ctx.lineWidth = 2.8;
+                ctx.beginPath(); ctx.arc(toX(a), toY(L), 6.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#be123c';
+                ctx.textAlign = 'right';
+                ctx.fillText('L', pad.left - 6, toY(L) + 4);
+            } else if (contTheoryMode === 'nolim') {
+                const Lplus = L + offsetJump;
+                // f(a) lleno en la rama inferior, hueco en la rama superior
+                ctx.fillStyle = '#0d9488';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.2;
+                ctx.beginPath(); ctx.arc(toX(a), toY(L), 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = '#e11d48';
+                ctx.lineWidth = 2.6;
+                ctx.beginPath(); ctx.arc(toX(a), toY(Lplus), 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#0f172a';
+                ctx.textAlign = 'right';
+                ctx.fillText('L⁻', pad.left - 6, toY(L) + 4);
+                ctx.fillStyle = '#be123c';
+                ctx.fillText('L⁺', pad.left - 6, toY(Lplus) + 4);
+            } else if (contTheoryMode === 'noeq') {
+                const faDisplaced = 1.15;
+                ctx.setLineDash([3, 3]);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(L)); ctx.lineTo(toX(a), toY(L)); ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Hueco en (a, L)
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = '#0d9488';
+                ctx.lineWidth = 2.8;
+                ctx.beginPath(); ctx.arc(toX(a), toY(L), 6.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                // Punto lleno desplazado en (a, faDisplaced)
+                ctx.fillStyle = '#d97706';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.2;
+                ctx.beginPath(); ctx.arc(toX(a), toY(faDisplaced), 6.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = '#0f766e';
+                ctx.textAlign = 'right';
+                ctx.fillText('L', pad.left - 6, toY(L) + 4);
+                ctx.fillStyle = '#b45309';
+                ctx.fillText('f(a)', pad.left - 6, toY(faDisplaced) + 4);
+            }
+        }
+
+        // Práctica de Continuidad: f(x) en [-1, 5]
+        function evalContPrac(x) {
+            if (x < 2) return x + 2; // (x^2 - 4)/(x - 2) para x != 2
+            if (Math.abs(x - 2) < 1e-6) return 4;
+            return 3 * x - 2;
+        }
+
+        function updateContPracPoint(val) {
+            const x = parseFloat(val);
+            contPracX = x;
+            const y = evalContPrac(x);
+
+            const lblX = document.getElementById('cont-prac-lbl-x');
+            const lblPiece = document.getElementById('cont-prac-piece');
+            const lblVal = document.getElementById('cont-prac-val');
+
+            if (Math.abs(x - 2) < 0.02) {
+                lblX.textContent = 'x = 2.00 (Empalme)';
+                lblPiece.textContent = 'Puntual (x = 2): f(2) = 4';
+            } else if (x < 2) {
+                lblX.textContent = `x = ${x.toFixed(2)}`;
+                lblPiece.textContent = 'x < 2: (x² - 4)/(x - 2)';
+            } else {
+                lblX.textContent = `x = ${x.toFixed(2)}`;
+                lblPiece.textContent = 'x > 2: 3x - 2';
+            }
+            lblVal.textContent = y.toFixed(2);
+            drawContPracCanvas();
+        }
+
+        function drawContPracCanvas() {
+            const setup = setupHiDPICanvas('cont-prac-canvas', 'cont-prac-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 40, right: 18, top: 18, bottom: 30 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = -1.5, xMax = 5.5;
+            const yMin = -1, yMax = 14.5;
+            const toX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // Cuadrícula
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let gx = -1; gx <= 5; gx++) {
+                ctx.beginPath(); ctx.moveTo(toX(gx), pad.top); ctx.lineTo(toX(gx), pad.top + pH); ctx.stroke();
+            }
+            for (let gy = 0; gy <= 14; gy += 2) {
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(gy)); ctx.lineTo(pad.left + pW, toY(gy)); ctx.stroke();
+            }
+
+            // Ejes X = 0 e Y = 0
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(toX(0), pad.top); ctx.lineTo(toX(0), pad.top + pH);
+            ctx.moveTo(pad.left, toY(0)); ctx.lineTo(pad.left + pW, toY(0));
+            ctx.stroke();
+
+            // Guías del punto de empalme (2, 4)
+            ctx.setLineDash([4, 3]);
+            ctx.strokeStyle = '#0d9488';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(toX(2), toY(0)); ctx.lineTo(toX(2), toY(4)); ctx.lineTo(toX(0), toY(4));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Tramo 1: [-1, 2) -> y = x + 2
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath();
+            ctx.moveTo(toX(-1), toY(1));
+            ctx.lineTo(toX(2), toY(4));
+            ctx.stroke();
+
+            // Tramo 2: (2, 5] -> y = 3x - 2
+            ctx.strokeStyle = '#0d9488';
+            ctx.lineWidth = 2.8;
+            ctx.beginPath();
+            ctx.moveTo(toX(2), toY(4));
+            ctx.lineTo(toX(5), toY(13));
+            ctx.stroke();
+
+            // Extremos cerrados (-1, 1) y (5, 13) + Empalme continuo lleno (2, 4)
+            const pts = [
+                { x: -1, y: 1, color: '#2563eb', label: '(-1, 1)' },
+                { x: 2, y: 4, color: '#0f766e', label: '(2, 4)' },
+                { x: 5, y: 13, color: '#0d9488', label: '(5, 13)' }
+            ];
+            pts.forEach((pt) => {
+                ctx.fillStyle = pt.color;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(toX(pt.x), toY(pt.y), 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            });
+
+            // Punto explorador del usuario
+            const uy = evalContPrac(contPracX);
+            ctx.fillStyle = '#f59e0b';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath(); ctx.arc(toX(contPracX), toY(uy), 6.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+            // Etiquetas en ejes
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 10.5px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('-1', toX(-1), toY(0) + 14);
+            ctx.fillText('2', toX(2), toY(0) + 14);
+            ctx.fillText('5', toX(5), toY(0) + 14);
+            ctx.textAlign = 'right';
+            ctx.fillText('4', toX(0) - 5, toY(4) + 3);
+            ctx.fillText('13', toX(0) - 5, toY(13) + 3);
+        }
+
+        /* ---------------------------------------------------------
+           9. INICIALIZACIÓN AL CARGAR LA VENTANA
+           --------------------------------------------------------- */
+        window.onload = function () {
+            renderPracticeLists();
+            selectIndetStrategy('0_0');
+            filterBlockA('all');
+            setContTheoryMode('ok');
+            renderMath(document.body);
+            onLabChange();
+            resizeAndDrawLabCanvas();
+            drawContTheoryCanvas();
+
+            window.addEventListener('resize', () => {
+                if (currentMainTab === 'teoria') {
+                    resizeAndDrawLabCanvas();
+                    drawContTheoryCanvas();
+                } else if (currentMainTab === 'practica') {
+                    drawContPracCanvas();
+                } else if (currentMainTab === 'economicas') {
+                    drawAllEconCanvases();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
