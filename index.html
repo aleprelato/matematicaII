@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis Matemático I — Facultad de Ciencias Económicas | Unidad 1: Límites y continuidad</title>
+    <title>Elementos de Calculo Diferencial e Integral — Facultad de Ciencias Económicas | Unidad 1: Límites y continuidad</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -115,10 +115,9 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">Unidad 1</span>
                                 <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Ciencias Económicas</span>
                             </div>
-                            <h1 class="text-base sm:text-xl font-bold text-slate-900 tracking-tight mt-0.5">Análisis Matemático I</h1>
+                            <h1 class="text-base sm:text-xl font-bold text-slate-900 tracking-tight mt-0.5">Elementos de Calculo Diferencial e Integral</h1>
                         </div>
                     </div>
 
@@ -158,11 +157,9 @@
                 <button type="button" onclick="switchUnit('u2')" id="nav-u2" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
                     <i class="ph-bold ph-book-open"></i> Unidad 2: Derivadas
                 </button>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-medium shrink-0 cursor-not-allowed">
-                    <i class="ph ph-lock-simple"></i>
-                    <span>Unidad 3: Teoremas del Cálculo Diferencial. Formas indeterminadas</span>
-                    <span class="text-[10px] font-bold uppercase tracking-wide bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-full">Próximamente</span>
-                </span>
+                <button type="button" onclick="switchUnit('u3')" id="nav-u3" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 3: Teoremas del Cálculo
+                </button>
             </div>
         </div>
     </header>
@@ -204,6 +201,24 @@
                 </h2>
                 <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
                     Explorá la interpretación geométrica de la derivada (recta secante a tangente), su relación con la continuidad, el cálculo con reglas de derivación como la cadena, y su impacto en funciones marginales y elasticidad económica.
+                </p>
+            </div>
+        </div>
+
+        <!-- HERO DE LA UNIDAD 3 -->
+        <div id="u3-hero" class="hidden bg-gradient-to-r from-slate-900 via-rose-950 to-orange-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\exists c$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-rose-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 3: Teoremas del Cálculo Diferencial
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Explorá los cimientos del cálculo: Teoremas de Rolle, Lagrange y Cauchy, junto a la potente Regla de L'Hôpital para el cálculo avanzado de límites y sus aplicaciones en el análisis económico.
                 </p>
             </div>
         </div>
@@ -722,6 +737,167 @@
                     </article>
                 </div>
             </div> <!-- FIN TEORIA U2 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 3 -->
+            <div id="u3-teoria" class="hidden space-y-10">
+                <!-- 1. TEOREMA DE ROLLE -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-rose-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Teorema de Rolle</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Garantía de tangente horizontal</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border-l-4 border-rose-500 rounded-r-xl p-4">
+                        <p class="text-sm font-bold text-slate-900 mb-2">Enunciado</p>
+                        <p class="text-sm text-slate-700">Sea $f$ una función tal que:</p>
+                        <ul class="text-sm text-slate-700 list-disc pl-5 mt-1 space-y-1">
+                            <li>Es <strong>continua</strong> en el intervalo cerrado $[a, b]$.</li>
+                            <li>Es <strong>derivable</strong> en el intervalo abierto $(a, b)$.</li>
+                            <li>Toma el mismo valor en los extremos: $f(a) = f(b)$.</li>
+                        </ul>
+                        <p class="text-sm text-slate-700 mt-2">Entonces, existe al menos un punto $c \in (a, b)$ tal que $f'(c) = 0$.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 1:</strong> Por el Teorema de Weierstrass, como $f$ es continua en el cerrado $[a,b]$, alcanza allí un valor máximo absoluto $M$ y un mínimo absoluto $m$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 2:</strong> Analizamos dos casos. Si $M = m$, entonces la función es constante ($f(x) = k$) en todo el intervalo. Por lo tanto, $f'(x) = 0$ para todo $x \in (a,b)$, y cualquier $c$ cumple el teorema.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 3:</strong> Si $M \neq m$, como $f(a) = f(b)$, la función no puede alcanzar ambos extremos absolutos en $a$ y $b$. Debe alcanzar al menos uno (por ejemplo, el máximo $M$) en un punto interior $c \in (a, b)$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 4:</strong> Como $c$ es un extremo relativo interior y $f$ es derivable en $c$, por el Teorema de Fermat, la derivada debe anularse necesariamente: $f'(c) = 0$. Queda demostrado.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. TEOREMA DE LAGRANGE -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-orange-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Teorema de Lagrange (Valor Medio)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Paralelismo entre secante y tangente</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border-l-4 border-orange-500 rounded-r-xl p-4">
+                                <p class="text-sm font-bold text-slate-900 mb-2">Enunciado</p>
+                                <p class="text-sm text-slate-700">Sea $f$ continua en $[a, b]$ y derivable en $(a, b)$. Entonces existe al menos un $c \in (a, b)$ tal que:</p>
+                                <div class="mt-2 text-center text-sm bg-white rounded-lg py-2 px-2 border border-slate-200">
+                                    $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 text-sm text-orange-950">
+                                <p class="font-bold mb-1">Interpretación en Tasas de Cambio</p>
+                                <p>La <strong>tasa de cambio promedio</strong> de la función en todo el intervalo $[a,b]$ (el lado derecho de la ecuación) debe ser igualada por la <strong>tasa de cambio instantánea</strong> (la derivada) en al menos un instante $c$ del recorrido.</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Interpretación Geométrica</h4>
+                            <div id="u3-lagrange-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u3-lagrange-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <p class="text-xs text-slate-600 text-center">La recta tangente en $c$ es paralela a la cuerda que une los extremos $A$ y $B$.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-100">
+                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 1:</strong> Definimos la ecuación de la recta secante que pasa por $A(a, f(a))$ y $B(b, f(b))$: $S(x) = f(a) + \frac{f(b)-f(a)}{b-a}(x - a)$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 2:</strong> Construimos una función auxiliar $H(x)$ que representa la distancia vertical entre la curva y la secante: $H(x) = f(x) - S(x)$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 3:</strong> La función $H(x)$ cumple las hipótesis de Rolle: es continua, derivable y $H(a) = H(b) = 0$ (ya que en los extremos la curva y la secante se cortan).
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 4:</strong> Por Rolle, $\exists c \in (a,b)$ tal que $H'(c) = 0$. Derivando $H$: $H'(x) = f'(x) - \frac{f(b)-f(a)}{b-a}$. Evaluando en $c$ e igualando a cero se obtiene directamente $f'(c) = \frac{f(b)-f(a)}{b-a}$.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. TEOREMA DE CAUCHY -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Teorema de Cauchy (Valor Medio Generalizado)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Relación de incrementos entre dos funciones</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border-l-4 border-purple-500 rounded-r-xl p-4">
+                        <p class="text-sm font-bold text-slate-900 mb-2">Enunciado</p>
+                        <p class="text-sm text-slate-700">Sean $f$ y $g$ continuas en $[a, b]$ y derivables en $(a, b)$, con $g'(x) \neq 0$. Entonces existe $c \in (a, b)$ tal que:</p>
+                        <div class="mt-2 text-center text-sm bg-white rounded-lg py-2 px-2 border border-slate-200">
+                            $$\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}$$
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 1:</strong> Notar que $g(b) \neq g(a)$, porque si fuesen iguales, por Rolle habría un punto donde $g'(x)=0$, contradiciendo la hipótesis.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 2:</strong> Considerar la función auxiliar $F(x) = f(x) - k \cdot g(x)$, donde la constante $k$ se elige forzando $F(a) = F(b)$. Despejando, $k = \frac{f(b)-f(a)}{g(b)-g(a)}$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 3:</strong> La función $F(x)$ satisface Rolle en $[a,b]$. Existe entonces $c \in (a,b)$ tal que $F'(c) = 0$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 4:</strong> Como $F'(x) = f'(x) - k \cdot g'(x)$, al evaluar en $c$ resulta $f'(c) - k \cdot g'(c) = 0 \implies \frac{f'(c)}{g'(c)} = k$, lo que completa la demostración.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. REGLA DE L'HÔPITAL -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">4</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Regla de L'Hôpital</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Resolución de indeterminaciones mediante derivadas</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border-l-4 border-blue-500 rounded-r-xl p-4">
+                        <p class="text-sm font-bold text-slate-900 mb-2">Enunciado</p>
+                        <p class="text-sm text-slate-700">Si $\lim_{x \to a} \frac{f(x)}{g(x)}$ produce una indeterminación del tipo $\frac{0}{0}$ o $\frac{\infty}{\infty}$, y existe el límite del cociente de sus derivadas, entonces:</p>
+                        <div class="mt-2 text-center text-sm bg-white rounded-lg py-2 px-2 border border-slate-200">
+                            $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso (Caso $0/0$ con $x \to a^+$)</p>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 1:</strong> Asumimos $f(a)=g(a)=0$ (o las extendemos por continuidad si no están definidas allí).
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 2:</strong> Para un punto $x$ cercano a $a$ ($x > a$), aplicamos el Teorema de Cauchy en el intervalo $[a, x]$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 3:</strong> Existe un $c \in (a, x)$ tal que $\frac{f'(c)}{g'(c)} = \frac{f(x)-f(a)}{g(x)-g(a)}$. Como $f(a)=g(a)=0$, nos queda $\frac{f'(c)}{g'(c)} = \frac{f(x)}{g(x)}$.
+                            </div>
+                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
+                                <strong>Paso 4:</strong> Cuando hacemos tender $x \to a$, el punto intermedio $c$ (atrapado entre $a$ y $x$) también está obligado a tender a $a$. Tomando el límite en ambos miembros se obtiene la regla.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN TEORIA U3 -->
         </section>
 
         <!-- ========================================================= -->
@@ -801,12 +977,11 @@
 
                 <!-- Contenedor donde se renderizan las 9 tarjetas de ejercicios del Bloque A -->
                 <div id="block-a-exercises-list" class="space-y-6"></div>
-            </div>
 
             <!-- ===================================================== -->
             <!-- SUB-BLOQUE B: LÍMITES NOTABLES (CIENCIAS ECONÓMICAS)  -->
             <!-- ===================================================== -->
-            <div id="practica-bloque-b" class="hidden space-y-8">
+            <div id="practica-bloque-b" class="pt-6 border-t-2 border-slate-200 space-y-8">
 
                 <!-- Panel de Moldes Clave ("Idea del bloque u") -->
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
@@ -1005,36 +1180,52 @@
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
-                            <p class="text-xs text-slate-500 mb-1">Constante</p>
-                            $$y = k \implies y' = 0$$
+                            <p class="text-xs text-slate-500 mb-1">Potencial</p>
+                            $$x^n \implies n x^{n-1}$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
-                            <p class="text-xs text-slate-500 mb-1">Potencial</p>
-                            $$y = x^n \implies y' = n x^{n-1}$$
+                            <p class="text-xs text-slate-500 mb-1">Raíz Cuadrada</p>
+                            $$\sqrt{x} \implies \frac{1}{2\sqrt{x}}$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Exponencial Natural</p>
-                            $$y = e^x \implies y' = e^x$$
+                            $$e^x \implies e^x$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Logaritmo Natural</p>
-                            $$y = \ln(x) \implies y' = \frac{1}{x}$$
+                            $$\ln(x) \implies \frac{1}{x}$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Seno</p>
-                            $$y = \sin(x) \implies y' = \cos(x)$$
+                            $$\sin(x) \implies \cos(x)$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Coseno</p>
-                            $$y = \cos(x) \implies y' = -\sin(x)$$
+                            $$\cos(x) \implies -\sin(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Tangente</p>
+                            $$\tan(x) \implies \sec^2(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Cotangente</p>
+                            $$\cot(x) \implies -\csc^2(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Secante</p>
+                            $$\sec(x) \implies \sec(x)\tan(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Cosecante</p>
+                            $$\csc(x) \implies -\csc(x)\cot(x)$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Producto</p>
-                            $$(u \cdot v)' = u'v + uv'$$
+                            $$u \cdot v \implies u'v + uv'$$
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
                             <p class="text-xs text-slate-500 mb-1">Cociente</p>
-                            $$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$
+                            $$\frac{u}{v} \implies \frac{u'v - uv'}{v^2}$$
                         </div>
                     </div>
                 </div>
@@ -1042,6 +1233,16 @@
                 <!-- Lista de Ejercicios U2 (Cadena y Logarítmica) -->
                 <div id="u2-practica-list" class="space-y-6"></div>
             </div> <!-- FIN PRACTICA U2 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 3 -->
+            <div id="u3-practica" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Aplicación Práctica</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Transformación de Indeterminaciones para L'Hôpital</h3>
+                    <p class="text-sm text-slate-600 mt-2">La Regla de L'Hôpital solo se aplica a cocientes puros ($0/0$ o $\infty/\infty$). Aquí vemos cómo llevar otras formas a estos casos base para poder derivar.</p>
+                </div>
+                <div id="u3-practica-list" class="space-y-6"></div>
+            </div> <!-- FIN PRACTICA U3 -->
 
         </section>
 
@@ -1381,6 +1582,16 @@
                 </article>
             </div> <!-- FIN ECONOMICAS U2 -->
 
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 3 -->
+            <div id="u3-economicas" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Aplicaciones Teóricas</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Impacto Económico de los Teoremas del Cálculo</h3>
+                    <p class="text-sm text-slate-600 mt-2">Los teoremas fuertes del cálculo diferencial garantizan la existencia de escenarios económicos críticos (máximos beneficios, puntos de igualación marginal y valoración asintótica).</p>
+                </div>
+                <div id="u3-econ-list" class="space-y-8"></div>
+            </div> <!-- FIN ECONOMICAS U3 -->
+
         </section>
 
     </main>
@@ -1389,7 +1600,7 @@
     <div id="modal-temario" class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-xs items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900">Unidades — Análisis Matemático I</h3>
+                <h3 class="font-bold text-slate-900">Unidades — Elementos de Calculo Diferencial e Integral</h3>
                 <button type="button" onclick="toggleTemarioModal(false)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500">
                     <i class="ph-bold ph-x"></i>
                 </button>
@@ -1401,11 +1612,11 @@
                 </li>
                 <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u2')">
                     <span>Unidad 2: Derivadas</span>
-                    <span class="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                    <span class="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 flex items-center justify-between gap-2">
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u3')">
                     <span>Unidad 3: Teoremas del Cálculo. Indeterminaciones</span>
-                    <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full shrink-0">Próximamente</span>
+                    <span class="text-xs bg-rose-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
                 </li>
             </ul>
             <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
@@ -1417,7 +1628,7 @@
     <!-- PIE DE PÁGINA -->
     <footer class="bg-white border-t border-slate-200 mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-            <p><strong>Análisis Matemático I</strong> — Facultad de Ciencias Económicas • Unidad 1: Límites y continuidad.</p>
+            <p><strong>Elementos de Calculo Diferencial e Integral</strong> — Facultad de Ciencias Económicas • Unidad 1: Límites y continuidad.</p>
             <p>Plataforma de exploración interactiva • Teoría, Práctica Algebraica y Aplicaciones Económicas.</p>
         </div>
     </footer>
@@ -1457,26 +1668,43 @@
             // Botones del header
             const navU1 = document.getElementById('nav-u1');
             const navU2 = document.getElementById('nav-u2');
+            const navU3 = document.getElementById('nav-u3');
             
             if (unit === 'u1') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else {
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else if (unit === 'u2') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
             }
             
             // Heros
             document.getElementById('u1-hero').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-hero').classList.toggle('hidden', unit !== 'u2');
+            const hero3 = document.getElementById('u3-hero');
+            if(hero3) hero3.classList.toggle('hidden', unit !== 'u3');
             
             // Secciones internas
             document.getElementById('u1-teoria').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-teoria').classList.toggle('hidden', unit !== 'u2');
+            const t3 = document.getElementById('u3-teoria');
+            if(t3) t3.classList.toggle('hidden', unit !== 'u3');
+            
             document.getElementById('u1-practica').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-practica').classList.toggle('hidden', unit !== 'u2');
+            const p3 = document.getElementById('u3-practica');
+            if(p3) p3.classList.toggle('hidden', unit !== 'u3');
+            
             document.getElementById('u1-economicas').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-economicas').classList.toggle('hidden', unit !== 'u2');
+            const e3 = document.getElementById('u3-economicas');
+            if(e3) e3.classList.toggle('hidden', unit !== 'u3');
 
             const modal = document.getElementById('modal-temario');
             if(modal && !modal.classList.contains('hidden')) {
@@ -1521,8 +1749,10 @@
                     if (currentUnit === 'u1') {
                         resizeAndDrawLabCanvas();
                         drawContTheoryCanvas();
-                    } else {
+                    } else if (currentUnit === 'u2') {
                         drawU2GeoCanvas();
+                    } else if (currentUnit === 'u3') {
+                        drawU3LagrangeCanvas();
                     }
                 });
             } else if (tab === 'practica') {
@@ -1532,7 +1762,7 @@
             } else if (tab === 'economicas') {
                 requestAnimationFrame(() => {
                     if (currentUnit === 'u1') drawAllEconCanvases();
-                    else drawAllU2EconCanvases();
+                    else if (currentUnit === 'u2') drawAllU2EconCanvases();
                 });
             }
 
@@ -2416,6 +2646,56 @@
                     { badge: 'Paso 2 • Evaluar en p = 10', title: 'Zona inelástica', math: '$$\\varepsilon(10) = \\frac{50}{200-50} = \\frac{50}{150} = \\frac{1}{3} < 1 \\implies \\text{Inelástica}$$' },
                     { badge: 'Paso 3 • Evaluar en p = 30', title: 'Zona elástica', math: '$$\\varepsilon(30) = \\frac{150}{200-150} = \\frac{150}{50} = 3 > 1 \\implies \\text{Elástica}$$', note: 'En $p=10$ la demanda es rígida (conviene subir el precio para maximizar ingreso). En $p=30$ es muy sensible (conviene bajarlo).' }
                 ]
+            },
+
+            /* ==================== UNIDAD 3: PRÁCTICA Y ECONÓMICAS ==================== */
+            u3_p1: {
+                number: 'Ejemplo 1', tags: [], tagLabel: 'L\'Hôpital • Producto 0 · ∞', statement: '$$\\lim_{x \\to 0^+} x \\cdot \\ln(x)$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Transformar a cociente', math: '$$x \\ln(x) \\to 0 \\cdot (-\\infty) \\implies \\frac{\\ln(x)}{1/x} \\quad \\left[\\frac{-\\infty}{\\infty}\\right]$$', note: 'Bajamos la $x$ invirtiendo su exponente para habilitar la derivación de L\'Hôpital.' },
+                    { badge: 'Paso 2', title: 'Derivar arriba y abajo', math: '$$\\lim_{x \\to 0^+} \\frac{(\\ln(x))\'}{(1/x)\'} = \\lim_{x \\to 0^+} \\frac{1/x}{-1/x^2}$$' },
+                    { badge: 'Paso 3', title: 'Simplificar y calcular', math: '$$\\lim_{x \\to 0^+} (-x) = \\boxed{0}$$' }
+                ]
+            },
+            u3_p2: {
+                number: 'Ejemplo 2', tags: [], tagLabel: 'L\'Hôpital • Resta ∞ - ∞', statement: '$$\\lim_{x \\to 0} \\left(\\frac{1}{x} - \\frac{1}{\\operatorname{sen} x}\\right)$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Unificar en una fracción', math: '$$\\lim_{x \\to 0} \\frac{\\operatorname{sen} x - x}{x \\operatorname{sen} x} \\quad \\left[\\frac{0}{0}\\right]$$' },
+                    { badge: 'Paso 2', title: 'Aplicar L\'Hôpital (1ra vez)', math: '$$\\lim_{x \\to 0} \\frac{\\cos x - 1}{\\operatorname{sen} x + x \\cos x} \\quad \\left[\\frac{0}{0}\\right]$$' },
+                    { badge: 'Paso 3', title: 'Aplicar L\'Hôpital (2da vez)', math: '$$\\lim_{x \\to 0} \\frac{-\\operatorname{sen} x}{\\cos x + (\\cos x - x \\operatorname{sen} x)} = \\frac{0}{2} = \\boxed{0}$$', note: 'Como el nuevo cociente ya no presenta indeterminación, el límite puede evaluarse directamente.' }
+                ]
+            },
+            u3_econ1: {
+                number: 'Rolle', tags: [], tagLabel: 'Máximos o Mínimos Estacionales', statement: 'La función de beneficio estacional es $B(t) = -t^2 + 10t$. En $t=0$ y $t=10$ el beneficio es cero. ¿En qué momento ocurre el pico donde el beneficio marginal se anula?', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Verificar hipótesis de Rolle', math: '$$B(0) = 0 \\quad B(10) = 0 \\implies B(0)=B(10)$$' },
+                    { badge: 'Paso 2', title: 'Aplicar el Teorema', math: '$$\\exists c \\in (0,10) \\text{ tal que } B\'(c) = 0$$' },
+                    { badge: 'Paso 3', title: 'Despejar el valor c', math: '$$B\'(t) = -2t + 10 = 0 \\implies 2t = 10 \\implies \\boxed{t = 5}$$', note: 'En el quinto mes se alcanza el beneficio marginal nulo (pico máximo).' }
+                ]
+            },
+            u3_econ2: {
+                number: 'Lagrange', tags: [], tagLabel: 'Productividad Media vs Marginal', statement: 'Una fábrica produce $Q(L) = \\sqrt{L}$ miles de unidades con $L$ horas laborales. En el rango de 100 a 400 horas, hallar dónde la productividad marginal iguala a la media.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Calcular Productividad Media del intervalo', math: '$$\\frac{Q(400) - Q(100)}{400 - 100} = \\frac{20 - 10}{300} = \\frac{1}{30}$$' },
+                    { badge: 'Paso 2', title: 'Aplicar Lagrange', math: '$$\\exists c \\in (100, 400) \\text{ tal que } Q\'(c) = \\frac{1}{30}$$' },
+                    { badge: 'Paso 3', title: 'Igualar y resolver', math: '$$\\frac{1}{2\\sqrt{c}} = \\frac{1}{30} \\implies \\sqrt{c} = 15 \\implies \\boxed{c = 225}$$', note: 'En $L = 225$ horas, el aporte del último trabajador es idéntico al promedio de todo el turno.' }
+                ]
+            },
+            u3_econ3: {
+                number: 'Cauchy', tags: [], tagLabel: 'Relación Ingreso / Costo Marginal', statement: 'Con Ingreso $I(x) = x^2 + 5x$ y Costo $C(x) = x^2 + x$, en $[1, 3]$ hallar el nivel donde el cociente marginal iguala al cociente de los incrementos totales.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Ratio de incrementos (Cauchy)', math: '$$\\frac{I(3)-I(1)}{C(3)-C(1)} = \\frac{24 - 6}{12 - 2} = \\frac{18}{10} = 1.8$$' },
+                    { badge: 'Paso 2', title: 'Ratio de funciones marginales', math: '$$\\frac{I\'(c)}{C\'(c)} = \\frac{2c + 5}{2c + 1}$$' },
+                    { badge: 'Paso 3', title: 'Resolver la igualdad', math: '$$\\frac{2c + 5}{2c + 1} = 1.8 \\implies 2c + 5 = 3.6c + 1.8 \\implies \\boxed{c = 2}$$' }
+                ]
+            },
+            u3_econ4: {
+                number: 'L\'Hôpital', tags: [], tagLabel: 'Valor Presente a Tasa Cero', statement: 'El Valor Presente de un flujo continuo es $VP(r) = \\frac{1 - e^{-rt}}{r}$. ¿Cuál es el límite del valor presente cuando la tasa $r \\to 0$?', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Evaluación inicial', math: '$$\\lim_{r \\to 0} \\frac{1 - e^{-rt}}{r} = \\frac{1-1}{0} = \\left[\\frac{0}{0}\\right]$$' },
+                    { badge: 'Paso 2', title: 'Derivar respecto a r', math: '$$\\lim_{r \\to 0} \\frac{\\frac{d}{dr}(1 - e^{-rt})}{\\frac{d}{dr}(r)} = \\lim_{r \\to 0} \\frac{-(-t)e^{-rt}}{1}$$' },
+                    { badge: 'Paso 3', title: 'Evaluar en r=0', math: '$$t \\cdot e^0 = \\boxed{t}$$', note: 'Económicamente, a tasa de interés cero no hay descuento temporal, por lo que el VP es simplemente la suma nominal del tiempo total $t$.' }
+                ]
             }
         };
 
@@ -2448,17 +2728,29 @@
                 containerU2P.innerHTML = keysU2P.map((key) => buildExerciseShellHTML(key, 'indigo')).join('');
             }
 
+            // Renderizar Práctica y Econ de Unidad 3
+            const containerU3P = document.getElementById('u3-practica-list');
+            if (containerU3P) {
+                const keysU3P = ['u3_p1', 'u3_p2'];
+                containerU3P.innerHTML = keysU3P.map((key) => buildExerciseShellHTML(key, 'rose')).join('');
+            }
+            const containerU3E = document.getElementById('u3-econ-list');
+            if (containerU3E) {
+                const keysU3E = ['u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4'];
+                containerU3E.innerHTML = keysU3E.map((key) => buildExerciseShellHTML(key, 'rose')).join('');
+            }
+
             // Inicializar contenido interno de cada ejercicio
-            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2'].forEach((k) => updateStepsView(k));
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4'].forEach((k) => updateStepsView(k));
         }
 
         function buildExerciseShellHTML(exKey, colorTheme) {
             const ex = allExercises[exKey];
             const statement = ex.variants ? ex.variants[ex.activeVariant].statement : ex.statement;
             const stepsLen = getStepsForExercise(exKey).length;
-            const badgeBg = colorTheme === 'blue' ? 'bg-blue-600' : 'bg-indigo-600';
-            const btnBg = colorTheme === 'blue' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-indigo-600 hover:bg-indigo-700';
-            const progStyle = colorTheme === 'blue' ? 'text-blue-700 bg-blue-50' : 'text-indigo-700 bg-indigo-50';
+            const badgeBg = colorTheme === 'blue' ? 'bg-blue-600' : (colorTheme === 'rose' ? 'bg-rose-600' : 'bg-indigo-600');
+            const btnBg = colorTheme === 'blue' ? 'bg-blue-600 hover:bg-blue-700' : (colorTheme === 'rose' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-indigo-600 hover:bg-indigo-700');
+            const progStyle = colorTheme === 'blue' ? 'text-blue-700 bg-blue-50' : (colorTheme === 'rose' ? 'text-rose-700 bg-rose-50' : 'text-indigo-700 bg-indigo-50');
             const tagsAttr = ex.tags ? ex.tags.join(',') : '';
 
             const variantSelector = ex.variants ? `
@@ -3004,6 +3296,73 @@
             }
         }
 
+        // ---------- NUEVO CANVAS DE UNIDAD 3 (LAGRANGE) ---------- //
+        function drawU3LagrangeCanvas() {
+            const setup = setupHiDPICanvas('u3-lagrange-canvas', 'u3-lagrange-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 30, right: 20, top: 20, bottom: 30 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 5;
+            const yMin = 0, yMax = 5;
+            const toX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // Grilla
+            ctx.strokeStyle = '#f1f5f9'; ctx.lineWidth = 1;
+            for(let i=1; i<=4; i++) {
+                ctx.beginPath(); ctx.moveTo(toX(i), pad.top); ctx.lineTo(toX(i), pad.top+pH); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(i)); ctx.lineTo(pad.left+pW, toY(i)); ctx.stroke();
+            }
+            ctx.strokeStyle = '#475569'; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top+pH); ctx.lineTo(pad.left+pW, pad.top+pH); ctx.stroke();
+
+            // Parabola f(x) = -(x-2.5)^2 + 4.5
+            const f = (x) => -0.8 * (x - 2.5)*(x - 2.5) + 4.5;
+            const a = 1, b = 4.5;
+            const fa = f(a), fb = f(b);
+
+            // Curva
+            ctx.strokeStyle = '#1d4ed8'; ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for(let i=0; i<=50; i++){
+                let xv = xMin + (i/50)*(xMax - xMin);
+                if(i===0) ctx.moveTo(toX(xv), toY(f(xv)));
+                else ctx.lineTo(toX(xv), toY(f(xv)));
+            }
+            ctx.stroke();
+
+            // Secante A-B
+            ctx.strokeStyle = '#e11d48'; ctx.lineWidth = 1.8;
+            ctx.beginPath(); ctx.moveTo(toX(a-0.5), toY(fa - (fb-fa)/(b-a)*0.5)); ctx.lineTo(toX(b+0.5), toY(fb + (fb-fa)/(b-a)*0.5)); ctx.stroke();
+            
+            // Puntos A y B
+            ctx.fillStyle = '#be123c'; ctx.beginPath(); ctx.arc(toX(a), toY(fa), 5, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(toX(b), toY(fb), 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillText('A', toX(a)-15, toY(fa)+5); ctx.fillText('B', toX(b)+8, toY(fb)-5);
+
+            // Tangente en c = 2.75
+            const c = (a+b)/2; // Para parabola, c está en el punto medio
+            const fc = f(c);
+            const m = (fb-fa)/(b-a);
+            ctx.strokeStyle = '#059669'; ctx.lineWidth = 1.8;
+            ctx.beginPath(); ctx.moveTo(toX(c-1.5), toY(fc - m*1.5)); ctx.lineTo(toX(c+1.5), toY(fc + m*1.5)); ctx.stroke();
+            ctx.fillStyle = '#047857'; ctx.beginPath(); ctx.arc(toX(c), toY(fc), 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillText('C (Tangente)', toX(c)-35, toY(fc)-10);
+            
+            // Eje X guias
+            ctx.setLineDash([4,3]); ctx.strokeStyle='#94a3b8';
+            ctx.beginPath(); ctx.moveTo(toX(c), toY(fc)); ctx.lineTo(toX(c), pad.top+pH); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#334155'; ctx.fillText('c', toX(c), pad.top+pH+15);
+        }
+
         /* ---------------------------------------------------------
            8. VISUALIZADORES INTERACTIVOS DE CONTINUIDAD (TEORÍA Y PRÁCTICA)
            --------------------------------------------------------- */
@@ -3372,14 +3731,16 @@
                     if (currentUnit === 'u1') {
                         resizeAndDrawLabCanvas();
                         drawContTheoryCanvas();
-                    } else {
+                    } else if (currentUnit === 'u2') {
                         drawU2GeoCanvas();
+                    } else if (currentUnit === 'u3') {
+                        drawU3LagrangeCanvas();
                     }
                 } else if (currentMainTab === 'practica') {
                     if (currentUnit === 'u1') drawContPracCanvas();
                 } else if (currentMainTab === 'economicas') {
                     if (currentUnit === 'u1') drawAllEconCanvases();
-                    else drawAllU2EconCanvases();
+                    else if (currentUnit === 'u2') drawAllU2EconCanvases();
                 }
             });
         };
