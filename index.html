@@ -759,22 +759,22 @@
                         </ul>
                         <p class="text-sm text-slate-700 mt-2">Entonces, existe al menos un punto $c \in (a, b)$ tal que $f'(c) = 0$.</p>
                     </div>
-                    <div class="space-y-3">
-                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
-                        <div class="space-y-2">
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 1:</strong> Por el Teorema de Weierstrass, como $f$ es continua en el cerrado $[a,b]$, alcanza allí un valor máximo absoluto $M$ y un mínimo absoluto $m$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 2:</strong> Analizamos dos casos. Si $M = m$, entonces la función es constante ($f(x) = k$) en todo el intervalo. Por lo tanto, $f'(x) = 0$ para todo $x \in (a,b)$, y cualquier $c$ cumple el teorema.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 3:</strong> Si $M \neq m$, como $f(a) = f(b)$, la función no puede alcanzar ambos extremos absolutos en $a$ y $b$. Debe alcanzar al menos uno (por ejemplo, el máximo $M$) en un punto interior $c \in (a, b)$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 4:</strong> Como $c$ es un extremo relativo interior y $f$ es derivable en $c$, por el Teorema de Fermat, la derivada debe anularse necesariamente: $f'(c) = 0$. Queda demostrado.
+                    <div class="space-y-3 pt-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-2">
+                            <span id="u3_proof_rolle-progress-text" class="text-xs font-bold text-rose-800 bg-rose-50 px-2.5 py-1 rounded-full">0 de 4 pasos visibles</span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button id="u3_proof_rolle-btn-next" type="button" onclick="nextStep('u3_proof_rolle')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-xs transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('u3_proof_rolle')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <i class="ph ph-list-checks"></i> <span>Ver demostración</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('u3_proof_rolle', 0)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                                </button>
                             </div>
                         </div>
+                        <div id="u3_proof_rolle-steps-container" class="space-y-3.5"></div>
                     </div>
                 </article>
 
@@ -810,21 +810,21 @@
                         </div>
                     </div>
                     <div class="space-y-3 pt-4 border-t border-slate-100">
-                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
-                        <div class="space-y-2">
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 1:</strong> Definimos la ecuación de la recta secante que pasa por $A(a, f(a))$ y $B(b, f(b))$: $S(x) = f(a) + \frac{f(b)-f(a)}{b-a}(x - a)$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 2:</strong> Construimos una función auxiliar $H(x)$ que representa la distancia vertical entre la curva y la secante: $H(x) = f(x) - S(x)$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 3:</strong> La función $H(x)$ cumple las hipótesis de Rolle: es continua, derivable y $H(a) = H(b) = 0$ (ya que en los extremos la curva y la secante se cortan).
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 4:</strong> Por Rolle, $\exists c \in (a,b)$ tal que $H'(c) = 0$. Derivando $H$: $H'(x) = f'(x) - \frac{f(b)-f(a)}{b-a}$. Evaluando en $c$ e igualando a cero se obtiene directamente $f'(c) = \frac{f(b)-f(a)}{b-a}$.
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-2">
+                            <span id="u3_proof_lagrange-progress-text" class="text-xs font-bold text-orange-800 bg-orange-50 px-2.5 py-1 rounded-full">0 de 4 pasos visibles</span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button id="u3_proof_lagrange-btn-next" type="button" onclick="nextStep('u3_proof_lagrange')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold shadow-xs transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('u3_proof_lagrange')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <i class="ph ph-list-checks"></i> <span>Ver demostración</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('u3_proof_lagrange', 0)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                                </button>
                             </div>
                         </div>
+                        <div id="u3_proof_lagrange-steps-container" class="space-y-3.5"></div>
                     </div>
                 </article>
 
@@ -844,22 +844,22 @@
                             $$\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}$$
                         </div>
                     </div>
-                    <div class="space-y-3">
-                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso</p>
-                        <div class="space-y-2">
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 1:</strong> Notar que $g(b) \neq g(a)$, porque si fuesen iguales, por Rolle habría un punto donde $g'(x)=0$, contradiciendo la hipótesis.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 2:</strong> Considerar la función auxiliar $F(x) = f(x) - k \cdot g(x)$, donde la constante $k$ se elige forzando $F(a) = F(b)$. Despejando, $k = \frac{f(b)-f(a)}{g(b)-g(a)}$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 3:</strong> La función $F(x)$ satisface Rolle en $[a,b]$. Existe entonces $c \in (a,b)$ tal que $F'(c) = 0$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 4:</strong> Como $F'(x) = f'(x) - k \cdot g'(x)$, al evaluar en $c$ resulta $f'(c) - k \cdot g'(c) = 0 \implies \frac{f'(c)}{g'(c)} = k$, lo que completa la demostración.
+                    <div class="space-y-3 pt-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-2">
+                            <span id="u3_proof_cauchy-progress-text" class="text-xs font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-full">0 de 4 pasos visibles</span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button id="u3_proof_cauchy-btn-next" type="button" onclick="nextStep('u3_proof_cauchy')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-xs transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('u3_proof_cauchy')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <i class="ph ph-list-checks"></i> <span>Ver demostración</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('u3_proof_cauchy', 0)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                                </button>
                             </div>
                         </div>
+                        <div id="u3_proof_cauchy-steps-container" class="space-y-3.5"></div>
                     </div>
                 </article>
 
@@ -879,22 +879,22 @@
                             $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
                         </div>
                     </div>
-                    <div class="space-y-3">
-                        <p class="text-sm font-bold text-slate-900">Demostración paso a paso (Caso $0/0$ con $x \to a^+$)</p>
-                        <div class="space-y-2">
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 1:</strong> Asumimos $f(a)=g(a)=0$ (o las extendemos por continuidad si no están definidas allí).
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 2:</strong> Para un punto $x$ cercano a $a$ ($x > a$), aplicamos el Teorema de Cauchy en el intervalo $[a, x]$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 3:</strong> Existe un $c \in (a, x)$ tal que $\frac{f'(c)}{g'(c)} = \frac{f(x)-f(a)}{g(x)-g(a)}$. Como $f(a)=g(a)=0$, nos queda $\frac{f'(c)}{g'(c)} = \frac{f(x)}{g(x)}$.
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm text-slate-700">
-                                <strong>Paso 4:</strong> Cuando hacemos tender $x \to a$, el punto intermedio $c$ (atrapado entre $a$ y $x$) también está obligado a tender a $a$. Tomando el límite en ambos miembros se obtiene la regla.
+                    <div class="space-y-3 pt-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-2">
+                            <span id="u3_proof_lhopital-progress-text" class="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full">0 de 4 pasos visibles</span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button id="u3_proof_lhopital-btn-next" type="button" onclick="nextStep('u3_proof_lhopital')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs transition">
+                                    <i class="ph-bold ph-play"></i> <span>Paso siguiente</span>
+                                </button>
+                                <button type="button" onclick="showAllSteps('u3_proof_lhopital')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition">
+                                    <i class="ph ph-list-checks"></i> <span>Ver demostración</span>
+                                </button>
+                                <button type="button" onclick="resetSteps('u3_proof_lhopital', 0)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                                    <i class="ph ph-arrow-counter-clockwise"></i> <span>Reiniciar</span>
+                                </button>
                             </div>
                         </div>
+                        <div id="u3_proof_lhopital-steps-container" class="space-y-3.5"></div>
                     </div>
                 </article>
             </div> <!-- FIN TEORIA U3 -->
@@ -2696,6 +2696,44 @@
                     { badge: 'Paso 2', title: 'Derivar respecto a r', math: '$$\\lim_{r \\to 0} \\frac{\\frac{d}{dr}(1 - e^{-rt})}{\\frac{d}{dr}(r)} = \\lim_{r \\to 0} \\frac{-(-t)e^{-rt}}{1}$$' },
                     { badge: 'Paso 3', title: 'Evaluar en r=0', math: '$$t \\cdot e^0 = \\boxed{t}$$', note: 'Económicamente, a tasa de interés cero no hay descuento temporal, por lo que el VP es simplemente la suma nominal del tiempo total $t$.' }
                 ]
+            },
+
+            /* ==================== DEMOSTRACIONES TEÓRICAS UNIDAD 3 ==================== */
+            u3_proof_rolle: {
+                revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Acotación', title: 'Por el Teorema de Weierstrass, como $f$ es continua en $[a,b]$, alcanza un máximo absoluto $M$ y un mínimo absoluto $m$.', math: '$$m \\le f(x) \\le M \\quad \\forall x \\in [a,b]$$' },
+                    { badge: 'Paso 2 • Caso constante', title: 'Analizamos dos casos. Si $M = m$, la función es constante ($f(x) = k$) en todo el intervalo.', math: '$$f\'(x) = 0 \\quad \\forall x \\in (a,b)$$', note: 'Cualquier $c \\in (a,b)$ cumple el teorema.' },
+                    { badge: 'Paso 3 • Caso variable', title: 'Si $M \\neq m$, como $f(a) = f(b)$, al menos uno de los extremos absolutos se alcanza en un punto interior $c$.', math: '$$\\exists c \\in (a,b) \\text{ tal que } f(c) = M \\; \\text{ (o } m)$$' },
+                    { badge: 'Paso 4 • Conclusión', title: 'Como $c$ es extremo relativo interior y $f$ es derivable allí, por el Teorema de Fermat, su derivada es nula.', math: '$$f\'(c) = 0 \\quad \\blacksquare$$' }
+                ]
+            },
+            u3_proof_lagrange: {
+                revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Recta secante', title: 'Definimos la ecuación de la recta secante $S(x)$ que une los extremos $A(a, f(a))$ y $B(b, f(b))$.', math: '$$S(x) = f(a) + \\frac{f(b)-f(a)}{b-a}(x - a)$$' },
+                    { badge: 'Paso 2 • Función auxiliar', title: 'Construimos $H(x)$ como la diferencia vertical entre la curva original y la recta secante.', math: '$$H(x) = f(x) - S(x)$$' },
+                    { badge: 'Paso 3 • Aplicar Rolle', title: '$H(x)$ cumple las hipótesis de Rolle en $[a,b]$, ya que $H(a) = H(b) = 0$. Existe $c \\in (a,b)$ con $H\'(c) = 0$.', math: '$$H\'(x) = f\'(x) - \\frac{f(b)-f(a)}{b-a} \\implies H\'(c) = f\'(c) - \\frac{f(b)-f(a)}{b-a} = 0$$' },
+                    { badge: 'Paso 4 • Despeje final', title: 'Despejamos la derivada en $c$ para obtener la igualdad del teorema.', math: '$$f\'(c) = \\frac{f(b)-f(a)}{b-a} \\quad \\blacksquare$$' }
+                ]
+            },
+            u3_proof_cauchy: {
+                revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Condición previa', title: 'Notar que $g(b) \\neq g(a)$. Si fuesen iguales, por Rolle habría un punto con $g\'(x)=0$, contradiciendo la hipótesis.', math: '$$g(b) - g(a) \\neq 0$$' },
+                    { badge: 'Paso 2 • Función auxiliar', title: 'Armar $F(x) = f(x) - k \\cdot g(x)$, y forzar que los extremos sean iguales: $F(a) = F(b)$.', math: '$$F(a) = F(b) \\implies f(a) - k g(a) = f(b) - k g(b) \\implies k = \\frac{f(b)-f(a)}{g(b)-g(a)}$$' },
+                    { badge: 'Paso 3 • Aplicar Rolle', title: '$F(x)$ satisface Rolle en $[a,b]$. Existe entonces $c \\in (a,b)$ tal que $F\'(c) = 0$.', math: '$$F\'(x) = f\'(x) - k \\cdot g\'(x) \\implies F\'(c) = f\'(c) - k \\cdot g\'(c) = 0$$' },
+                    { badge: 'Paso 4 • Conclusión', title: 'Igualando a $k$ obtenemos el cociente de derivadas.', math: '$$\\frac{f\'(c)}{g\'(c)} = k \\implies \\frac{f\'(c)}{g\'(c)} = \\frac{f(b)-f(a)}{g(b)-g(a)} \\quad \\blacksquare$$' }
+                ]
+            },
+            u3_proof_lhopital: {
+                revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Extensión continua', title: 'Asumimos el caso $0/0$. Si no valen cero o no existen en $a$, extendemos $f$ y $g$ por continuidad.', math: '$$f(a) = 0 \\quad \\text{y} \\quad g(a) = 0$$' },
+                    { badge: 'Paso 2 • Aplicar Cauchy', title: 'Para un punto $x$ cercano a $a$ ($x > a$), aplicamos el Teorema de Cauchy en el intervalo $[a, x]$.', math: '$$\\exists c \\in (a,x) \\text{ tal que } \\frac{f\'(c)}{g\'(c)} = \\frac{f(x)-f(a)}{g(x)-g(a)}$$' },
+                    { badge: 'Paso 3 • Reducción', title: 'Como $f(a)=g(a)=0$, la expresión de la derecha se reduce al cociente original.', math: '$$\\frac{f\'(c)}{g\'(c)} = \\frac{f(x)}{g(x)}$$' },
+                    { badge: 'Paso 4 • Límite final', title: 'Al tender $x \\to a$, el punto intermedio $c$ (atrapado entre $a$ y $x$) también está obligado a tender a $a$.', math: '$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{c \\to a} \\frac{f\'(c)}{g\'(c)} \\quad \\blacksquare$$' }
+                ]
             }
         };
 
@@ -2740,8 +2778,8 @@
                 containerU3E.innerHTML = keysU3E.map((key) => buildExerciseShellHTML(key, 'rose')).join('');
             }
 
-            // Inicializar contenido interno de cada ejercicio
-            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4'].forEach((k) => updateStepsView(k));
+            // Inicializar contenido interno de cada ejercicio y demostraciones
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4', 'u3_proof_rolle', 'u3_proof_lagrange', 'u3_proof_cauchy', 'u3_proof_lhopital'].forEach((k) => updateStepsView(k));
         }
 
         function buildExerciseShellHTML(exKey, colorTheme) {
@@ -2834,11 +2872,8 @@
             const btnNext = document.getElementById(`${exKey}-btn-next`);
             if (!container) return;
 
-            const isEcon = exKey.startsWith('econ');
             if (progressText) {
-                progressText.textContent = isEcon
-                    ? `${ex.revealed} de ${steps.length} pasos visibles`
-                    : `${ex.revealed} de ${steps.length} pasos revelados`;
+                progressText.textContent = `${ex.revealed} de ${steps.length} pasos visibles`;
             }
 
             if (ex.revealed === 0) {
