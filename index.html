@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elementos de Calculo Diferencial e Integral — Facultad de Ciencias Económicas | Unidad 1: Límites y continuidad</title>
+    <title>Elementos de Calculo Diferencial e Integral — Facultad de Ciencias Económicas | Unidades 1 a 7</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -169,6 +169,9 @@
                 <button type="button" onclick="switchUnit('u6')" id="nav-u6" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
                     <i class="ph-bold ph-book-open"></i> Unidad 6: Func. 2 Variables (I)
                 </button>
+                <button type="button" onclick="switchUnit('u7')" id="nav-u7" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 7: Sucesiones y Series
+                </button>
             </div>
         </div>
     </header>
@@ -282,6 +285,24 @@
                 </h2>
                 <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
                     Introducción al cálculo multivariable: topología en el plano, límites dobles, derivadas parciales, diferenciabilidad, regla de la cadena y optimización (extremos libres y condicionados).
+                </p>
+            </div>
+        </div>
+
+        <!-- HERO DE LA UNIDAD 7 -->
+        <div id="u7-hero" class="hidden bg-gradient-to-r from-slate-900 via-violet-950 to-purple-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\sum$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-violet-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 7: Sucesiones y Series
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Estudiá el comportamiento y la convergencia de sucesiones y series numéricas, los criterios de comparación, D’Alembert, Raabe y Leibniz, y el desarrollo de funciones mediante series de potencias, Taylor y Maclaurin.
                 </p>
             </div>
         </div>
@@ -1416,6 +1437,277 @@
                     </div>
                 </article>
             </div> <!-- FIN TEORIA U6 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 7 -->
+            <div id="u7-teoria" class="hidden space-y-10">
+                <!-- 1. SUCESIONES NUMÉRICAS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-violet-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Sucesiones numéricas</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Definición, naturaleza, monotonía, acotación y propiedades</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p>Una <strong>sucesión numérica</strong> es una función de los números naturales en los números reales. Se denomina <strong>elemento general</strong> o <strong>término general</strong> a la expresión que permite obtener cada término a partir de su índice.</p>
+                        <div class="bg-violet-50 border border-violet-200 rounded-xl p-4 text-center">
+                            $$a:\mathbb{N}\longrightarrow\mathbb{R},\qquad n\longmapsto a_n$$
+                            <p class="text-xs text-violet-900 mt-1">En algunos casos resulta conveniente comenzar desde $n=0$.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 space-y-2">
+                            <p class="font-bold text-emerald-900">Convergente</p>
+                            <p class="text-xs text-emerald-900/90">Los términos se aproximan a una constante finita $L$.</p>
+                            <div class="bg-white rounded-lg p-2 text-center">$$\lim_{n\to\infty}a_n=L$$</div>
+                        </div>
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 space-y-2">
+                            <p class="font-bold text-rose-900">Divergente</p>
+                            <p class="text-xs text-rose-900/90">Los términos se alejan al infinito, positivo o negativo.</p>
+                            <div class="bg-white rounded-lg p-2 text-center">$$a_n\to +\infty\quad\text{o}\quad -\infty$$</div>
+                        </div>
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 space-y-2">
+                            <p class="font-bold text-amber-900">Oscilante</p>
+                            <p class="text-xs text-amber-900/90">Los términos fluctúan entre valores sin aproximarse a un único límite ni alejarse hacia un infinito.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Sucesiones monótonas</h4>
+                            <p class="text-sm text-slate-700">Una sucesión es monótona cuando sus términos se mueven en una sola dirección: es creciente si no disminuye y decreciente si no aumenta.</p>
+                            <div class="bg-white rounded-lg border border-slate-200 p-3 text-center text-sm">
+                                $$a_{n+1}\geq a_n\qquad\text{o}\qquad a_{n+1}\leq a_n$$
+                            </div>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Sucesiones acotadas</h4>
+                            <p class="text-sm text-slate-700">Está acotada superiormente si todos sus términos son menores o iguales que una cota $M$, e inferiormente si son mayores o iguales que una cota $m$.</p>
+                            <div class="bg-white rounded-lg border border-slate-200 p-3 text-center text-sm">
+                                $$m\leq a_n\leq M$$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Sucesiones aritméticas</h4>
+                            <p class="text-sm text-slate-700">Cada término se obtiene sumando al anterior una constante llamada razón o diferencia. La presentación utiliza la expresión:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$a_n=b+r\cdot n$$</div>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Sucesiones geométricas</h4>
+                            <p class="text-sm text-slate-700">Cada término se obtiene multiplicando al anterior por una constante llamada razón o cociente. La presentación utiliza:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$a_n=a\cdot q^n$$</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl p-4 space-y-2">
+                        <h4 class="font-bold text-indigo-950">Relación entre monotonía, acotación y convergencia</h4>
+                        <ul class="list-disc pl-5 text-sm text-indigo-950/90 space-y-1">
+                            <li>Si una sucesión es monótona y acotada, entonces es convergente.</li>
+                            <li>Si una sucesión monótona es convergente, entonces está acotada.</li>
+                            <li>Si una sucesión monótona no está acotada, entonces es divergente.</li>
+                        </ul>
+                        <p class="text-xs text-indigo-900">Las sucesiones monótonas tienen límite finito si están acotadas o límite infinito si no lo están.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                        <h4 class="font-bold text-slate-900">Propiedades de los límites de sucesiones</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                            <p class="bg-slate-50 rounded-lg p-3">La suma o resta de sucesiones convergentes converge a la suma o resta de sus límites.</p>
+                            <p class="bg-slate-50 rounded-lg p-3">El producto de sucesiones convergentes converge al producto de sus límites.</p>
+                            <p class="bg-slate-50 rounded-lg p-3">Una constante multiplicada por una sucesión converge al producto de la constante por el límite.</p>
+                            <p class="bg-slate-50 rounded-lg p-3">El cociente converge al cociente de los límites, siempre que el límite del denominador sea distinto de cero.</p>
+                            <p class="bg-slate-50 rounded-lg p-3 sm:col-span-2">Si una sucesión converge, la sucesión de los valores absolutos también converge y su límite es el valor absoluto del límite original.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. SERIES NUMÉRICAS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Series numéricas</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Sumas parciales, naturaleza y condición necesaria de convergencia</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">Dada una sucesión $(a_n)$, se construyen sus <strong>sumas parciales</strong>. La suma de los primeros $n$ términos se denomina suma parcial de orden $n$:</p>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center space-y-2">
+                        $$S_1=a_1,\qquad S_2=a_1+a_2$$
+                        $$S_n=a_1+a_2+\cdots+a_n=\sum_{k=1}^{n}a_k$$
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">Una <strong>serie</strong> es la sucesión de sumas parciales de una sucesión dada. Su naturaleza se determina estudiando el límite de $S_n$:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><p class="font-bold text-emerald-900">Convergente</p><p class="text-xs text-emerald-900/90 mt-1">Las sumas parciales tienen un límite finito $S$.</p>$$\lim_{n\to\infty}S_n=S$$</div>
+                        <div class="bg-rose-50 border border-rose-200 rounded-xl p-4"><p class="font-bold text-rose-900">Divergente</p><p class="text-xs text-rose-900/90 mt-1">Las sumas parciales tienden a infinito.</p>$$S_n\to\infty$$</div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><p class="font-bold text-amber-900">Oscilante</p><p class="text-xs text-amber-900/90 mt-1">La sucesión de sumas parciales no tiene límite.</p></div>
+                    </div>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 space-y-2">
+                        <h4 class="font-bold text-amber-950">Condición necesaria pero no suficiente de convergencia</h4>
+                        <p class="text-sm text-amber-950/90">Si una serie converge, su término general necesariamente tiende a cero:</p>
+                        <div class="bg-white rounded-lg p-3 text-center">$$\sum_{n=1}^{\infty}a_n\text{ converge}\quad\Longrightarrow\quad\lim_{n\to\infty}a_n=0$$</div>
+                        <p class="text-sm text-amber-950/90">Si el término general no tiende a cero, la serie no converge. Sin embargo, que el término general tienda a cero no garantiza que la serie converja.</p>
+                        <p class="text-xs text-amber-950/90"><strong>Contraejemplo:</strong> la serie armónica $\sum_{n=1}^{\infty}\frac{1}{n}$ tiene términos que tienden a cero, pero la serie es divergente.</p>
+                    </div>
+                </article>
+
+                <!-- 3. SERIE GEOMÉTRICA -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-sky-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Serie geométrica</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Definición, suma parcial y estudio de la convergencia</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-700">Una serie geométrica es aquella donde cada término se obtiene multiplicando al anterior por una constante fija llamada <strong>razón</strong> $q$.</p>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+                        $$a+aq+aq^2+\cdots+aq^{n-1}+\cdots$$
+                        $$S_n=a\frac{1-q^n}{1-q},\qquad q\neq1$$
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 space-y-1"><p class="font-bold text-emerald-900">$|q|<1$</p><p class="text-sm text-emerald-900/90">La serie converge y su suma es:</p><div class="bg-white rounded-lg p-2 text-center">$$S=\frac{a}{1-q}$$</div></div>
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 space-y-1"><p class="font-bold text-rose-900">$|q|>1$</p><p class="text-sm text-rose-900/90">La serie es divergente: las sumas parciales no tienen límite finito.</p></div>
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 space-y-1"><p class="font-bold text-rose-900">$q=1$</p><p class="text-sm text-rose-900/90">La suma parcial es $S_n=na$ y la serie es divergente (salvo el caso trivial $a=0$).</p></div>
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 space-y-1"><p class="font-bold text-amber-900">$q=-1$</p><p class="text-sm text-amber-900/90">Las sumas parciales alternan entre $a$ y $0$; la serie es oscilante.</p></div>
+                    </div>
+                </article>
+
+                <!-- 4. CLASIFICACIÓN Y CRITERIOS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">4</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Criterios de convergencia de series</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Series positivas y alternadas</p>
+                        </div>
+                    </div>
+                    <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+                        <h4 class="font-bold text-slate-900 mb-2">Clasificación según el signo de los términos</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                            <div class="bg-white border border-slate-200 rounded-lg p-3">Series de términos positivos</div>
+                            <div class="bg-white border border-slate-200 rounded-lg p-3">Series de términos negativos</div>
+                            <div class="bg-white border border-slate-200 rounded-lg p-3">Series de términos alternados</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="font-bold text-slate-900">Criterio de comparación</h4>
+                            <p class="text-sm text-slate-700">Para series de términos no negativos, si a partir de cierto índice $0\leq a_n\leq b_n$:</p>
+                            <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1">
+                                <li>Si $\sum b_n$ converge, entonces $\sum a_n$ también converge.</li>
+                                <li>Si $\sum a_n$ diverge, entonces $\sum b_n$ también diverge.</li>
+                            </ul>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="font-bold text-slate-900">Criterio de D’Alembert</h4>
+                            <p class="text-sm text-slate-700">Se calcula el límite del cociente entre términos consecutivos positivos:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$$</div>
+                            <p class="text-xs text-slate-700"><strong>$L<1$:</strong> converge. <strong>$L>1$:</strong> diverge. <strong>$L=1$:</strong> el criterio no permite decidir.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="font-bold text-slate-900">Criterio de Raabe</h4>
+                            <p class="text-sm text-slate-700">Para series de términos positivos, se estudia:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=\lim_{n\to\infty}n\left(1-\frac{a_{n+1}}{a_n}\right)$$</div>
+                            <p class="text-xs text-slate-700"><strong>$L>1$:</strong> converge. <strong>$L<1$:</strong> diverge. <strong>$L=1$:</strong> el criterio no permite decidir.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="font-bold text-slate-900">Criterio de Leibniz</h4>
+                            <p class="text-sm text-slate-700">Para una serie alternada $\sum(-1)^{n-1}a_n$, con $a_n>0$, se requiere que los valores absolutos sean monótonos no crecientes y tiendan a cero:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$a_{n+1}\leq a_n,\qquad\lim_{n\to\infty}a_n=0$$</div>
+                            <p class="text-xs text-slate-700">Si se cumplen ambas condiciones, la serie alternada converge.</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl p-4 space-y-2">
+                        <h4 class="font-bold text-indigo-950">Convergencia absoluta y condicional</h4>
+                        <p class="text-sm text-indigo-950/90">Se estudia la serie de valores absolutos $\sum |a_n|$:</p>
+                        <ul class="list-disc pl-5 text-sm text-indigo-950/90 space-y-1">
+                            <li>Si $\sum |a_n|$ converge, la serie original es <strong>absolutamente convergente</strong>.</li>
+                            <li>Si la serie alternada converge, pero $\sum |a_n|$ diverge, es <strong>condicionalmente convergente</strong>.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 5. SERIES FUNCIONALES Y DE POTENCIAS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-cyan-600 text-white font-bold flex items-center justify-center shrink-0">5</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Series funcionales y series de potencias</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Convergencia según el valor de la variable</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">En una <strong>serie funcional</strong>, los términos son funciones reales de variable real. Al reemplazar $x$ por un valor real, se obtiene una serie numérica cuya convergencia depende de ese valor.</p>
+                    <div class="bg-cyan-50 border border-cyan-200 rounded-xl p-4 space-y-2">
+                        <h4 class="font-bold text-cyan-950">Serie de potencias centrada en $c$</h4>
+                        <div class="bg-white rounded-lg p-3 text-center">$$\sum_{n=0}^{\infty}a_n(x-c)^n=a_0+a_1(x-c)+a_2(x-c)^2+\cdots$$</div>
+                        <p class="text-xs text-cyan-950/90">Los coeficientes $a_n$ y el centro $c$ son constantes; $x$ es la variable.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-slate-200 rounded-xl p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Radio de convergencia</h4>
+                            <p class="text-sm text-slate-700">La semiamplitud del intervalo de convergencia se denomina radio de convergencia y se simboliza $r$.</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$|x-c|<r$$</div>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Intervalo de convergencia</h4>
+                            <p class="text-sm text-slate-700">Es el conjunto de valores de $x$ para los que converge la serie. Cuando el radio es finito, los extremos deben analizarse por separado.</p>
+                        </div>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 p-4 space-y-3">
+                        <h4 class="font-bold text-slate-900">Tres situaciones posibles</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                            <div class="bg-slate-50 rounded-lg p-3"><strong>$r=0$</strong><p class="text-xs text-slate-600 mt-1">La serie converge únicamente en el centro $x=c$.</p></div>
+                            <div class="bg-slate-50 rounded-lg p-3"><strong>$0<r<\infty$</strong><p class="text-xs text-slate-600 mt-1">Converge en el interior del intervalo; se estudian por separado los extremos.</p></div>
+                            <div class="bg-slate-50 rounded-lg p-3"><strong>$r=\infty$</strong><p class="text-xs text-slate-600 mt-1">Converge para todo número real $x$.</p></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6. TAYLOR Y MACLAURIN -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-rose-600 text-white font-bold flex items-center justify-center shrink-0">6</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Desarrollo de funciones: Taylor y Maclaurin</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Representación de funciones mediante series de potencias</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">El teorema presentado permite obtener los coeficientes de una serie de potencias que representa a una función a partir de sus derivadas sucesivas evaluadas en el centro $c$:</p>
+                    <div class="bg-slate-900 text-white rounded-xl p-4 text-center">
+                        $$a_n=\frac{f^{(n)}(c)}{n!}$$
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-slate-200 rounded-xl p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Serie de Taylor</h4>
+                            <p class="text-sm text-slate-700">Desarrollo de la función alrededor de un centro $c$:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$\sum_{n=0}^{\infty}\frac{f^{(n)}(c)}{n!}(x-c)^n$$</div>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900">Serie de Maclaurin</h4>
+                            <p class="text-sm text-slate-700">Es el caso particular de Taylor centrado en $c=0$:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$\sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n$$</div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-slate-600">Pasá al Apartado Práctico para recorrer los ejemplos de los criterios de convergencia y los desarrollos en series de potencias.</p>
+                    <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+                        <button type="button" onclick="switchMainTab('practica')" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                            <span>Apartado Práctico</span><i class="ph-bold ph-arrow-right"></i>
+                        </button>
+                        <button type="button" onclick="switchMainTab('economicas')" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                            <span>Aplicaciones Económicas</span><i class="ph-bold ph-trend-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- FIN TEORIA U7 -->
         </section>
 
         <!-- ========================================================= -->
@@ -1791,6 +2083,134 @@
                 </div>
                 <div id="u6-practica-list" class="space-y-6"></div>
             </div> <!-- FIN PRACTICA U6 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 7 -->
+            <div id="u7-practica" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-violet-700 bg-violet-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Sucesiones y Series</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Ejemplos de criterios de convergencia y series de potencias</h3>
+                    <p class="text-sm text-slate-600 mt-2">Recorrido de los ejemplos de la presentación: aplicación de D’Alembert, Raabe y Leibniz; determinación de radios e intervalos de convergencia; y desarrollos de funciones mediante Taylor y Maclaurin.</p>
+                </div>
+
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <h3 class="text-lg font-bold text-slate-900">1. Criterio de D’Alembert</h3>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositiva 22</p>
+                            <div class="text-center">$$\sum_{n=0}^{\infty}\frac{4^n}{n!}$$</div>
+                            <p class="text-sm text-slate-700">El límite del cociente es $L=0<1$.</p>
+                            <p class="text-sm font-bold text-emerald-700">Conclusión: converge.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 23</p>
+                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{4^n}{n^4}$$</div>
+                            <p class="text-sm text-slate-700">El límite del cociente es $L=4>1$.</p>
+                            <p class="text-sm font-bold text-rose-700">Conclusión: diverge.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 24</p>
+                            <p class="text-sm text-slate-700">La presentación obtiene $L=1$ luego de resolver una indeterminación con la regla de L’Hôpital.</p>
+                            <p class="text-sm font-bold text-amber-700">Conclusión: el criterio no permite decidir.</p>
+                            <p class="text-xs text-slate-500">La expresión completa del enunciado no se reproduce aquí porque no se distingue con suficiente nitidez en la transcripción.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <h3 class="text-lg font-bold text-slate-900">2. Criterio de Raabe</h3>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">2 ejemplos</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 26–27</p>
+                            <p class="text-sm text-slate-700">Se retoma la serie del ejemplo 3 de D’Alembert y se aplica Raabe. Luego de resolver una indeterminación mediante L’Hôpital, se obtiene:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=2>1$$</div>
+                            <p class="text-sm font-bold text-emerald-700">Conclusión: converge.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositivas 28–30</p>
+                            <p class="text-sm text-slate-700">Se desarrolla el cociente, se simplifican los factores y se calcula el límite:</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=\frac12<1$$</div>
+                            <p class="text-sm font-bold text-rose-700">Conclusión: diverge.</p>
+                            <p class="text-xs text-slate-500">La expresión inicial de la serie aparece como imagen y no se recuperó con suficiente nitidez.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <h3 class="text-lg font-bold text-slate-900">3. Criterio de Leibniz</h3>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 33–34</p>
+                            <p class="text-sm text-slate-700">La serie alternada converge por Leibniz. La serie de valores absolutos diverge.</p>
+                            <p class="text-sm font-bold text-emerald-700">Conclusión: convergencia condicional.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 35</p>
+                            <p class="text-sm text-slate-700">Se analiza una serie alternada de tipo armónico. Converge por Leibniz, pero la serie de valores absolutos es armónica y diverge.</p>
+                            <p class="text-sm font-bold text-emerald-700">Conclusión: convergencia condicional.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 36</p>
+                            <p class="text-sm text-slate-700">El término en valor absoluto tiende a cero, pero no se cumple la condición de monotonía indicada por Leibniz.</p>
+                            <p class="text-sm font-bold text-amber-700">Conclusión: el criterio no permite asegurar la convergencia.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <h3 class="text-lg font-bold text-slate-900">4. Radio e intervalo de convergencia</h3>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">2 ejemplos</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 42–45</p>
+                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{2^n}{n+1}x^n$$</div>
+                            <p class="text-sm text-slate-700">Aplicando D’Alembert se obtiene la condición $2|x|<1$.</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$r=\frac12,\qquad I=\left(-\frac12,\frac12\right)$$</div>
+                            <p class="text-xs text-slate-500">Los extremos se consideran por separado.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 46</p>
+                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{x^n}{n!}$$</div>
+                            <p class="text-sm text-slate-700">El criterio de D’Alembert conduce a un radio infinito.</p>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$r=\infty,\qquad I=(-\infty,+\infty)$$</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <h3 class="text-lg font-bold text-slate-900">5. Desarrollos de Taylor y Maclaurin</h3>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Maclaurin · $e^x$ · Diapositivas 49–50</p>
+                            <div class="text-center">$$e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}$$</div>
+                            <p class="text-xs text-slate-600">Radio infinito; converge para todo $x\in\mathbb{R}$.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Maclaurin · $\sen(x)$ · Diapositivas 51–53</p>
+                            <div class="text-center">$$\sen(x)=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots$$</div>
+                            <p class="text-xs text-slate-600">Radio infinito; converge para todo $x\in\mathbb{R}$.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Taylor · $1/x$ en $c=1$ · Diapositivas 54–55</p>
+                            <div class="text-center">$$\frac1x=\sum_{n=0}^{\infty}(-1)^n(x-1)^n$$</div>
+                            <p class="text-xs text-slate-600">Radio $r=1$ e intervalo de convergencia $(0,2)$.</p>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN PRACTICA U7 -->
 
         </section>
 
@@ -2265,6 +2685,19 @@
                 </div>
             </div> <!-- FIN ECONOMICAS U6 -->
 
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 7 -->
+            <div id="u7-economicas" class="hidden space-y-8">
+                <div class="bg-violet-50 rounded-2xl border-2 border-dashed border-violet-200 p-8 shadow-sm text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-violet-100 text-violet-600 mb-4">
+                        <i class="ph-bold ph-info text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-violet-950 mb-2">Información de la Cátedra</h3>
+                    <p class="text-sm text-violet-800/80 max-w-lg mx-auto leading-relaxed">
+                        Esta unidad no tiene ejercicios de aplicación económica directa en esta plataforma.<br><br>La presentación aborda sucesiones, series numéricas y desarrollos en series de potencias como herramientas de análisis matemático general, sin incorporar ejercicios económicos específicos.
+                    </p>
+                </div>
+            </div> <!-- FIN ECONOMICAS U7 -->
+
         </section>
 
     </main>
@@ -2303,6 +2736,10 @@
                     <span>Unidad 6: Func. 2 Variables (I)</span>
                     <span class="text-xs bg-fuchsia-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
                 </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u7')">
+                    <span>Unidad 7: Sucesiones y Series</span>
+                    <span class="text-xs bg-violet-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                </li>
             </ul>
             <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
                 Cerrar
@@ -2313,7 +2750,7 @@
     <!-- PIE DE PÁGINA -->
     <footer class="bg-white border-t border-slate-200 mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-            <p><strong>Elementos de Calculo Diferencial e Integral</strong> — Facultad de Ciencias Económicas • Unidad 1: Límites y continuidad.</p>
+            <p><strong>Elementos de Calculo Diferencial e Integral</strong> — Facultad de Ciencias Económicas • Unidades 1 a 7.</p>
             <p>Plataforma de exploración interactiva • Teoría, Práctica Algebraica y Aplicaciones Económicas.</p>
         </div>
     </footer>
@@ -2350,57 +2787,24 @@
         function switchUnit(unit) {
             currentUnit = unit;
             
-            // Botones del header
-            const navU1 = document.getElementById('nav-u1');
-            const navU2 = document.getElementById('nav-u2');
-            const navU3 = document.getElementById('nav-u3');
-            const navU4 = document.getElementById('nav-u4');
-            const navU5 = document.getElementById('nav-u5');
-            const navU6 = document.getElementById('nav-u6');
-            
-            if (unit === 'u1') {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else if (unit === 'u2') {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else if (unit === 'u3') {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else if (unit === 'u4') {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else if (unit === 'u5') {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else {
-                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fuchsia-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
-            }
+            // Botones del header: una única configuración para las siete unidades.
+            const navConfig = {
+                u1: { id: 'nav-u1', active: 'bg-blue-600 text-white' },
+                u2: { id: 'nav-u2', active: 'bg-purple-600 text-white' },
+                u3: { id: 'nav-u3', active: 'bg-rose-600 text-white' },
+                u4: { id: 'nav-u4', active: 'bg-amber-600 text-white' },
+                u5: { id: 'nav-u5', active: 'bg-cyan-600 text-white' },
+                u6: { id: 'nav-u6', active: 'bg-fuchsia-600 text-white' },
+                u7: { id: 'nav-u7', active: 'bg-violet-600 text-white' }
+            };
+            const inactiveNavClass = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            Object.entries(navConfig).forEach(([key, config]) => {
+                const button = document.getElementById(config.id);
+                if (!button) return;
+                button.className = key === unit
+                    ? `inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${config.active} font-semibold shrink-0 shadow-xs cursor-pointer transition`
+                    : inactiveNavClass;
+            });
             
             // Heros
             document.getElementById('u1-hero').classList.toggle('hidden', unit !== 'u1');
@@ -2413,6 +2817,8 @@
             if(hero5) hero5.classList.toggle('hidden', unit !== 'u5');
             const hero6 = document.getElementById('u6-hero');
             if(hero6) hero6.classList.toggle('hidden', unit !== 'u6');
+            const hero7 = document.getElementById('u7-hero');
+            if(hero7) hero7.classList.toggle('hidden', unit !== 'u7');
             
             // Secciones internas
             document.getElementById('u1-teoria').classList.toggle('hidden', unit !== 'u1');
@@ -2425,6 +2831,8 @@
             if(t5) t5.classList.toggle('hidden', unit !== 'u5');
             const t6 = document.getElementById('u6-teoria');
             if(t6) t6.classList.toggle('hidden', unit !== 'u6');
+            const t7 = document.getElementById('u7-teoria');
+            if(t7) t7.classList.toggle('hidden', unit !== 'u7');
             
             document.getElementById('u1-practica').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-practica').classList.toggle('hidden', unit !== 'u2');
@@ -2436,6 +2844,8 @@
             if(p5) p5.classList.toggle('hidden', unit !== 'u5');
             const p6 = document.getElementById('u6-practica');
             if(p6) p6.classList.toggle('hidden', unit !== 'u6');
+            const p7 = document.getElementById('u7-practica');
+            if(p7) p7.classList.toggle('hidden', unit !== 'u7');
             
             document.getElementById('u1-economicas').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-economicas').classList.toggle('hidden', unit !== 'u2');
@@ -2447,6 +2857,8 @@
             if(e5) e5.classList.toggle('hidden', unit !== 'u5');
             const e6 = document.getElementById('u6-economicas');
             if(e6) e6.classList.toggle('hidden', unit !== 'u6');
+            const e7 = document.getElementById('u7-economicas');
+            if(e7) e7.classList.toggle('hidden', unit !== 'u7');
 
             const modal = document.getElementById('modal-temario');
             if(modal && !modal.classList.contains('hidden')) {
