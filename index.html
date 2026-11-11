@@ -152,14 +152,12 @@
             <!-- Barra secundaria de unidades del programa -->
             <div class="hidden lg:flex items-center gap-2 py-2 border-t border-slate-100 text-xs overflow-x-auto">
                 <span class="text-slate-400 font-medium mr-1 shrink-0">Programa de la materia:</span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs">
+                <button type="button" onclick="switchUnit('u1')" id="nav-u1" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition">
                     <i class="ph-bold ph-check-circle"></i> Unidad 1: Límites y continuidad
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-medium shrink-0 cursor-not-allowed">
-                    <i class="ph ph-lock-simple"></i>
-                    <span>Unidad 2: Derivadas</span>
-                    <span class="text-[10px] font-bold uppercase tracking-wide bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded-full">Próximamente</span>
-                </span>
+                </button>
+                <button type="button" onclick="switchUnit('u2')" id="nav-u2" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 2: Derivadas
+                </button>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-medium shrink-0 cursor-not-allowed">
                     <i class="ph ph-lock-simple"></i>
                     <span>Unidad 3: Teoremas del Cálculo Diferencial. Formas indeterminadas</span>
@@ -175,7 +173,7 @@
     <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- HERO DE LA UNIDAD 1 -->
-        <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+        <div id="u1-hero" class="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
             <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
                 $\lim$
             </div>
@@ -192,29 +190,31 @@
             </div>
         </div>
 
+        <!-- HERO DE LA UNIDAD 2 -->
+        <div id="u2-hero" class="hidden bg-gradient-to-r from-slate-900 via-purple-950 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\frac{dy}{dx}$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 2: Derivadas
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Explorá la interpretación geométrica de la derivada (recta secante a tangente), su relación con la continuidad, el cálculo con reglas de derivación como la cadena, y su impacto en funciones marginales y elasticidad económica.
+                </p>
+            </div>
+        </div>
+
         <!-- ========================================================= -->
         <!-- PESTAÑA 1: APARTADO TEÓRICO                               -->
         <!-- ========================================================= -->
         <section id="section-teoria" class="space-y-10">
-
-            <!-- Índice rápido de teoría -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <a href="#idea-intuitiva" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 font-bold flex items-center justify-center text-sm group-hover:bg-blue-600 group-hover:text-white transition">1</span>
-                    <div>
-                        <p class="text-sm font-semibold text-slate-800">Idea Intuitiva</p>
-                        <p class="text-xs text-slate-500">Límites laterales y existencia</p>
-                    </div>
-                </a>
-                <a href="#definicion-formal" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-lg bg-purple-50 text-purple-700 font-bold flex items-center justify-center text-sm group-hover:bg-purple-600 group-hover:text-white transition">2</span>
-                    <div>
-                        <p class="text-sm font-semibold text-slate-800">Definición Formal $(\varepsilon - \delta)$</p>
-                        <p class="text-xs text-slate-500">Cauchy-Weierstrass en 4 bloques</p>
-                    </div>
-                </a>
-                <a href="#interpretacion-geometrica" class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 font-bold flex items-center justify-center text-sm group-hover:bg-emerald-600 group-hover:text-white transition">3</span>
+            
+            <!-- CONTENEDOR TEORÍA UNIDAD 1 -->
+            <div id="u1-teoria" class="space-y-10">
                     <div>
                         <p class="text-sm font-semibold text-slate-800">Laboratorio Geométrico</p>
                         <p class="text-xs text-slate-500">Simulador de $f(x)=\frac{x^2-x-2}{x-2}$</p>
@@ -642,108 +642,108 @@
                     </div>
                 </div>
             </article>
+            </div> <!-- FIN TEORIA U1 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 2 -->
+            <div id="u2-teoria" class="hidden space-y-10">
+                <!-- 1. DEFINICIÓN E INTERPRETACIÓN GEOMÉTRICA -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Definición e Interpretación Geométrica</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">La pendiente de la recta tangente como límite de secantes</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-6 space-y-5">
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                La <strong>derivada</strong> de una función $f(x)$ en el punto $x$ se define mediante el límite del cociente incremental:
+                            </p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-lg shadow-inner">
+                                $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+                            </div>
+                            <div class="space-y-3">
+                                <p class="text-sm font-bold text-slate-900">Simulador de convergencia geométrica</p>
+                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                    Geométricamente, el cociente $\frac{\Delta y}{\Delta x}$ representa la <strong>pendiente de la recta secante</strong> que corta a la curva en dos puntos. Al hacer tender la distancia horizontal $h$ a cero, el punto móvil se acerca al fijo y la secante se transforma en la <strong>recta tangente</strong>.
+                                </p>
+                                <div class="bg-purple-50 rounded-xl border border-purple-200 p-4 mt-3">
+                                    <div class="flex justify-between text-xs font-medium mb-1">
+                                        <span class="text-purple-800">Distancia horizontal ($h$)</span>
+                                        <span id="u2-lbl-h" class="font-mono font-bold text-purple-700">h = 2.00</span>
+                                    </div>
+                                    <input id="u2-slider-h" type="range" min="0.01" max="2.0" step="0.01" value="2.0" oninput="updateU2Geo(this.value)" class="w-full bg-purple-200 epsilon-slider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-6 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3">
+                            <div id="u2-geo-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u2-geo-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="bg-white p-2 rounded-lg border border-slate-200 text-center">
+                                    <p class="text-slate-500">Secante ($m_{sec}$)</p>
+                                    <p id="u2-lbl-msec" class="font-mono font-bold text-slate-800 mt-0.5">...</p>
+                                </div>
+                                <div class="bg-purple-50 p-2 rounded-lg border border-purple-200 text-center">
+                                    <p class="text-purple-800">Tangente ($f'(x_0)$)</p>
+                                    <p class="font-mono font-bold text-purple-700 mt-0.5">1.000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                    <!-- 2. DERIVABILIDAD Y CONTINUIDAD -->
+                    <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                            <span class="w-7 h-7 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">2</span>
+                            <h3 class="text-lg font-bold text-slate-900">Derivabilidad y Continuidad</h3>
+                        </div>
+                        <div class="bg-teal-50 border-l-4 border-teal-500 rounded-r-xl p-3">
+                            <p class="text-sm font-bold text-teal-900">Teorema Fundamental</p>
+                            <p class="text-xs text-teal-800 mt-1">Si una función es derivable en $x=a$, entonces es obligatoriamente continua en $x=a$.</p>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            <strong>¡Cuidado con la recíproca!</strong> Que sea continua NO garantiza que sea derivable. El ejemplo clásico es la función valor absoluto $f(x) = |x|$ en $x=0$:
+                        </p>
+                        <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1">
+                            <li>Es <strong>continua</strong> (no hay salto ni hueco).</li>
+                            <li><strong>No es derivable</strong> porque presenta un punto anguloso (la derivada por izquierda es $-1$ y por derecha es $+1$).</li>
+                        </ul>
+                    </article>
+
+                    <!-- 3. DIFERENCIAL DE UNA FUNCIÓN -->
+                    <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                            <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">3</span>
+                            <h3 class="text-lg font-bold text-slate-900">El Diferencial</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            El <strong>diferencial de una función</strong> ($dy$) se define como el producto de su derivada por el diferencial de la variable independiente:
+                        </p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            $$dy = f'(x) \cdot dx$$
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Geométricamente, mientras que $\Delta y$ mide el incremento exacto sobre la <em>curva</em>, el diferencial $dy$ mide el incremento sobre la <em>recta tangente</em>. Para variaciones muy pequeñas ($dx = \Delta x \to 0$), el diferencial es una excelente aproximación: $\Delta y \approx dy$.
+                        </p>
+                    </article>
+                </div>
+            </div> <!-- FIN TEORIA U2 -->
         </section>
 
         <!-- ========================================================= -->
-        <!-- PESTAÑA 2: APARTADO PRÁCTICO (LÍMITES + CONTINUIDAD)      -->
+        <!-- PESTAÑA 2: APARTADO PRÁCTICO                              -->
         <!-- ========================================================= -->
         <section id="section-practica" class="hidden space-y-8">
-
-            <!-- Selector de Sub-bloques de Límites + Acceso rápido a Continuidad -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">Parte 1 • Práctica de Límites</span>
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Técnicas Algebraicas y Límites Notables</h3>
-                    <p class="text-xs sm:text-sm text-slate-500">Alterná los bloques de límites o bajá directo a la práctica de Continuidad en un intervalo.</p>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2 shrink-0">
-                    <div class="flex flex-col sm:flex-row bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1">
-                        <button id="subtab-bloque-a" type="button" onclick="switchPracticeSubtab('A')"
-                            class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-blue-700 shadow-sm text-left sm:text-center">
-                            Bloque A • Las 7 Indeterminaciones
-                        </button>
-                        <button id="subtab-bloque-b" type="button" onclick="switchPracticeSubtab('B')"
-                            class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 text-left sm:text-center">
-                            Bloque B • Límites Notables
-                        </button>
-                    </div>
-
-                    <button type="button" onclick="scrollToContinuidadPractica()"
-                        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs transition">
-                        <i class="ph-bold ph-arrow-down"></i>
-                        <span>Ir a Continuidad</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ===================================================== -->
-            <!-- SUB-BLOQUE A: LAS 7 INDETERMINACIONES (SIN L'HÔPITAL) -->
-            <!-- ===================================================== -->
-            <div id="practica-bloque-a" class="space-y-8">
-
-                <!-- Mapa Estratégico Interactivo de las 7 Indeterminaciones -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-slate-100 pb-4">
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full">Álgebra Pura • Sin Regla de L'Hôpital</span>
-                            <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Mapa Estratégico de las 7 Indeterminaciones</h4>
-                            <p class="text-xs sm:text-sm text-slate-600">Tocá cualquier indeterminación para ver la herramienta algebraica estándar que la destraba y filtrar sus ejercicios.</p>
-                        </div>
-                        <button type="button" onclick="toggleFalsasIndet()"
-                            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-semibold transition self-start md:self-auto shrink-0">
-                            <i class="ph-fill ph-lightbulb"></i>
-                            <span>Ver Falsas Indeterminaciones</span>
-                            <i id="icon-falsas" class="ph-bold ph-caret-down"></i>
-                        </button>
-                    </div>
-
-                    <!-- Tarjetas de las 7 indeterminaciones -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5" id="indet-map-grid">
-                        <button type="button" onclick="selectIndetStrategy('0_0')" id="map-btn-0_0"
-                            class="p-3 rounded-xl border-2 border-blue-500 bg-blue-50 text-center transition hover:shadow-xs">
-                            <div class="text-base font-bold text-blue-900">$\frac{0}{0}$</div>
-                            <div class="text-[11px] font-medium text-blue-700 mt-1">Factoreo / Conjugado</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('inf_inf')" id="map-btn-inf_inf"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
-                            <div class="text-base font-bold text-slate-900">$\frac{\infty}{\infty}$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">Mayor potencia / $|x|$</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('inf_minus_inf')" id="map-btn-inf_minus_inf"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
-                            <div class="text-base font-bold text-slate-900">$\infty - \infty$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">Conjugado / Común den.</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('zero_dot_inf')" id="map-btn-zero_dot_inf"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
-                            <div class="text-base font-bold text-slate-900">$0 \cdot \infty$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">Llevar a cociente</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('one_pow_inf')" id="map-btn-one_pow_inf"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
-                            <div class="text-base font-bold text-slate-900">$1^\infty$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">Molde número $e$</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('inf_pow_0')" id="map-btn-inf_pow_0"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition">
-                            <div class="text-base font-bold text-slate-900">$\infty^0$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">$e^{B\ln A}$ + Factor dom.</div>
-                        </button>
-                        <button type="button" onclick="selectIndetStrategy('zero_pow_0')" id="map-btn-zero_pow_0"
-                            class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-center transition col-span-2 sm:col-span-1">
-                            <div class="text-base font-bold text-slate-900">$0^0$</div>
-                            <div class="text-[11px] font-medium text-slate-500 mt-1">$e^{B\ln A}$ + Factor $\ln x$</div>
-                        </button>
-                    </div>
-
-                    <!-- Detalle dinámico de la estrategia seleccionada -->
-                    <div id="strategy-detail-box" class="bg-blue-50/70 border border-blue-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800"></div>
-
-                    <!-- Panel desplegable: Falsas Indeterminaciones -->
-                    <div id="falsas-indet-panel" class="hidden bg-amber-50/80 border border-amber-200 rounded-xl p-5 space-y-3">
-                        <div class="flex items-center gap-2 text-amber-950 font-bold text-sm">
-                            <i class="ph-fill ph-check-square-offset text-lg text-amber-600"></i>
+            
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 1 -->
+            <div id="u1-practica" class="space-y-8">
                             <span>Falsas Indeterminaciones: tienen resultado directo por álgebra de límites (no requieren artificios)</span>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
@@ -983,64 +983,64 @@
                     </div>
                 </article>
             </div>
+            </div> <!-- FIN PRACTICA U1 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 2 -->
+            <div id="u2-practica" class="hidden space-y-8">
+                <!-- Tabla de Reglas de Derivación -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Reglas Básicas</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Tabla de Derivadas Frecuentes</h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Constante</p>
+                            $$y = k \implies y' = 0$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Potencial</p>
+                            $$y = x^n \implies y' = n x^{n-1}$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Exponencial Natural</p>
+                            $$y = e^x \implies y' = e^x$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Logaritmo Natural</p>
+                            $$y = \ln(x) \implies y' = \frac{1}{x}$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Seno</p>
+                            $$y = \sin(x) \implies y' = \cos(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Coseno</p>
+                            $$y = \cos(x) \implies y' = -\sin(x)$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Producto</p>
+                            $$(u \cdot v)' = u'v + uv'$$
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Cociente</p>
+                            $$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Ejercicios U2 (Cadena y Logarítmica) -->
+                <div id="u2-practica-list" class="space-y-6"></div>
+            </div> <!-- FIN PRACTICA U2 -->
 
         </section>
 
         <!-- ========================================================= -->
-        <!-- PESTAÑA 3: APLICACIONES ECONÓMICAS (ACTIVIDAD N° 8)       -->
+        <!-- PESTAÑA 3: APLICACIONES ECONÓMICAS                        -->
         <!-- ========================================================= -->
         <section id="section-economicas" class="hidden space-y-8">
-
-            <!-- Introducción breve y directa -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">Actividad N° 8 • Unidad 1</span>
-                    <span class="text-xs font-medium text-slate-500">Modelos de Costo, Utilidad y Demanda</span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">¿Cómo se aplica el concepto de Límite en Ciencias Económicas?</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    En los modelos económicos de esta unidad, el límite traduce matemáticamente dos preguntas concretas de gestión y mercado:
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                    <div class="rounded-xl bg-emerald-50/70 border border-emerald-200 p-4 flex items-start gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">$\infty$</div>
-                        <div class="text-xs sm:text-sm">
-                            <p class="font-bold text-emerald-950">1. Escala ilimitada o largo plazo ($x \to +\infty$)</p>
-                            <p class="text-emerald-900/90 mt-0.5">Permite hallar pisos de <strong>costo promedio</strong> o techos de <strong>saturación de utilidad</strong> (asíntotas horizontales).</p>
-                        </div>
-                    </div>
-                    <div class="rounded-xl bg-blue-50/70 border border-blue-200 p-4 flex items-start gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">$p \to a$</div>
-                        <div class="text-xs sm:text-sm">
-                            <p class="font-bold text-blue-950">2. Nivel o precio crítico ($p \to a$, indeterminación $\frac{0}{0}$)</p>
-                            <p class="text-blue-900/90 mt-0.5">Permite conocer a qué valor tiende la <strong>demanda</strong> al acercarnos a un precio donde la fórmula presenta una discontinuidad puntual.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===================================================== -->
-            <!-- PROBLEMA 8.1: COSTO PROMEDIO CON CAPACIDAD ILIMITADA   -->
-            <!-- ===================================================== -->
-            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
-                    <div class="flex flex-wrap items-center gap-2 mb-2">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-600 text-white">Problema 8.1</span>
-                        <span class="text-xs font-semibold text-slate-500">Costo Promedio • Tendencia a escala ilimitada ($x \to +\infty$)</span>
-                    </div>
-                    <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
-                        Se conoce que el costo total de elaboración de un producto en dólares es $C(x) = 300 + 5x$, donde $x$ es la cantidad producida. Si se tuviera capacidad ilimitada de producción, ¿a qué valor tendería el costo promedio de producción?
-                    </p>
-                </div>
-
-                <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                    <!-- Columna izquierda: Traducción y Pasos Breves Interactivos -->
-                    <div class="lg:col-span-7 space-y-4">
-                        <div class="rounded-xl bg-emerald-50/70 border border-emerald-200 p-3.5 text-xs sm:text-sm text-emerald-950">
-                            <strong>Cómo interviene el límite:</strong> El costo promedio por unidad es $\overline{C}(x) = \dfrac{C(x)}{x} = \dfrac{300 + 5x}{x}$. Tener <em>"capacidad ilimitada"</em> equivale a calcular $\displaystyle \lim_{x \to +\infty} \overline{C}(x)$.
-                        </div>
-
-                        <div class="flex flex-wrap items-center justify-between gap-2">
+            
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 1 -->
+            <div id="u1-economicas" class="space-y-8">
                             <span id="econ1-progress-text" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">1 de 3 pasos visibles</span>
                             <div class="flex items-center gap-1.5">
                                 <button id="econ1-btn-next" type="button" onclick="nextStep('econ1')"
@@ -1271,6 +1271,84 @@
                     </div>
                 </div>
             </article>
+            </div> <!-- FIN ECONOMICAS U1 -->
+
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 2 -->
+            <div id="u2-economicas" class="hidden space-y-8">
+                <!-- Problema 2.1 Costo Marginal -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-600 text-white">Problema de Costo Marginal</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                            Una fábrica estima que el costo total de producir $x$ unidades diarias es $C(x) = 100 + 5x + 0.02x^2$. Calculá el Costo Marginal al producir 50 unidades y comparalo con el costo exacto de producir la unidad número 51.
+                        </p>
+                    </div>
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span id="u2_econ1-progress-text" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">0 de 3 pasos visibles</span>
+                                <div class="flex items-center gap-1.5">
+                                    <button id="u2_econ1-btn-next" type="button" onclick="nextStep('u2_econ1')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition"><i class="ph-bold ph-play"></i> <span>Siguiente</span></button>
+                                    <button type="button" onclick="showAllSteps('u2_econ1')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"><span>Ver todo</span></button>
+                                    <button type="button" onclick="resetSteps('u2_econ1', 1)" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition"><i class="ph ph-arrow-counter-clockwise"></i></button>
+                                </div>
+                            </div>
+                            <div id="u2_econ1-steps-container" class="space-y-3"></div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Aproximación Lineal</h4>
+                            </div>
+                            <div id="u2-econ1-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u2-econ1-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-900">
+                                <p class="font-bold mb-1">Conclusión Marginal</p>
+                                <p>El diferencial $dC = C'(50)dx = 7$ estima perfectamente el incremento de costo real $\Delta C = 7.02$ con un error mínimo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Problema 2.2 Elasticidad -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-600 text-white">Problema de Elasticidad</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                            La demanda mensual de un producto responde a $q = 200 - 5p$. Determiná la elasticidad precio de la demanda en $p = 10$ y en $p = 30$, y clasificá el comportamiento del consumidor.
+                        </p>
+                    </div>
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span id="u2_econ2-progress-text" class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">0 de 3 pasos visibles</span>
+                                <div class="flex items-center gap-1.5">
+                                    <button id="u2_econ2-btn-next" type="button" onclick="nextStep('u2_econ2')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition"><i class="ph-bold ph-play"></i> <span>Siguiente</span></button>
+                                    <button type="button" onclick="showAllSteps('u2_econ2')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"><span>Ver todo</span></button>
+                                    <button type="button" onclick="resetSteps('u2_econ2', 1)" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition"><i class="ph ph-arrow-counter-clockwise"></i></button>
+                                </div>
+                            </div>
+                            <div id="u2_econ2-steps-container" class="space-y-3"></div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Zonas de Elasticidad</h4>
+                            </div>
+                            <div id="u2-econ2-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u2-econ2-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-xs text-indigo-900">
+                                <p>Tramo azul ($p<20$): Inelástica, conviene subir precio.</p>
+                                <p>Tramo rojo ($p>20$): Elástica, conviene bajar precio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN ECONOMICAS U2 -->
 
         </section>
 
@@ -1286,16 +1364,16 @@
                 </button>
             </div>
             <ul class="space-y-2 text-sm">
-                <li class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold flex items-center justify-between gap-2">
+                <li class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold flex items-center justify-between gap-2 cursor-pointer" onclick="switchUnit('u1')">
                     <span>Unidad 1: Límites y continuidad</span>
                     <span class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 flex items-center justify-between gap-2">
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u2')">
                     <span>Unidad 2: Derivadas</span>
-                    <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full shrink-0">Próximamente</span>
+                    <span class="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
                 </li>
                 <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 flex items-center justify-between gap-2">
-                    <span>Unidad 3: Teoremas del Cálculo Diferencial. Formas indeterminadas</span>
+                    <span>Unidad 3: Teoremas del Cálculo. Indeterminaciones</span>
                     <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full shrink-0">Próximamente</span>
                 </li>
             </ul>
@@ -1337,9 +1415,45 @@
         }
 
         /* ---------------------------------------------------------
-           2. NAVEGACIÓN ENTRE LOS 3 APARTADOS PRINCIPALES
+           2. NAVEGACIÓN ENTRE LOS 3 APARTADOS PRINCIPALES Y UNIDADES
            --------------------------------------------------------- */
         let currentMainTab = 'teoria';
+        let currentUnit = 'u1';
+
+        function switchUnit(unit) {
+            currentUnit = unit;
+            
+            // Botones del header
+            const navU1 = document.getElementById('nav-u1');
+            const navU2 = document.getElementById('nav-u2');
+            
+            if (unit === 'u1') {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+            }
+            
+            // Heros
+            document.getElementById('u1-hero').classList.toggle('hidden', unit !== 'u1');
+            document.getElementById('u2-hero').classList.toggle('hidden', unit !== 'u2');
+            
+            // Secciones internas
+            document.getElementById('u1-teoria').classList.toggle('hidden', unit !== 'u1');
+            document.getElementById('u2-teoria').classList.toggle('hidden', unit !== 'u2');
+            document.getElementById('u1-practica').classList.toggle('hidden', unit !== 'u1');
+            document.getElementById('u2-practica').classList.toggle('hidden', unit !== 'u2');
+            document.getElementById('u1-economicas').classList.toggle('hidden', unit !== 'u1');
+            document.getElementById('u2-economicas').classList.toggle('hidden', unit !== 'u2');
+
+            const modal = document.getElementById('modal-temario');
+            if(modal && !modal.classList.contains('hidden')) {
+                toggleTemarioModal(false);
+            }
+
+            switchMainTab(currentMainTab);
+        }
 
         function switchMainTab(tab) {
             currentMainTab = tab;
@@ -1373,13 +1487,22 @@
 
             if (tab === 'teoria') {
                 requestAnimationFrame(() => {
-                    resizeAndDrawLabCanvas();
-                    drawContTheoryCanvas();
+                    if (currentUnit === 'u1') {
+                        resizeAndDrawLabCanvas();
+                        drawContTheoryCanvas();
+                    } else {
+                        drawU2GeoCanvas();
+                    }
                 });
             } else if (tab === 'practica') {
-                requestAnimationFrame(() => drawContPracCanvas());
+                requestAnimationFrame(() => {
+                    if (currentUnit === 'u1') drawContPracCanvas();
+                });
             } else if (tab === 'economicas') {
-                requestAnimationFrame(() => drawAllEconCanvases());
+                requestAnimationFrame(() => {
+                    if (currentUnit === 'u1') drawAllEconCanvases();
+                    else drawAllU2EconCanvases();
+                });
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2228,6 +2351,40 @@
                         note: 'Al coincidir límite e imagen, $f$ es continua en $x = 2$. Sumado a la continuidad en $[-1, 2)$ y $(2, 5]$ (incluyendo continuidad lateral en los bordes $\\lim_{x \\to -1^+} f(x) = 1 = f(-1)$ y $\\lim_{x \\to 5^-} f(x) = 13 = f(5)$), la gráfica no se corta en ningún punto de $[-1, 5]$.'
                     }
                 ]
+            },
+
+            /* ==================== UNIDAD 2: PRÁCTICA Y ECONÓMICAS ==================== */
+            u2_p1: {
+                number: 'Ejercicio 1', tags: [], tagLabel: 'Regla de la Cadena', statement: '$$f(x) = \\ln(3x^2 + 5)$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Identificar capas', title: 'Función exterior e interior', math: '$$\\text{Exterior: } \\ln(u) \\quad \\text{Interior: } u = 3x^2 + 5$$' },
+                    { badge: 'Paso 2 • Derivar exterior evaluada en interior', title: 'Derivada de ln(u) es 1/u', math: '$$\\frac{1}{3x^2 + 5}$$' },
+                    { badge: 'Paso 3 • Multiplicar por derivada interior', title: 'Derivada de 3x² + 5 es 6x', math: '$$f\'(x) = \\frac{1}{3x^2 + 5} \\cdot 6x = \\boxed{\\frac{6x}{3x^2 + 5}}$$' }
+                ]
+            },
+            u2_p2: {
+                number: 'Ejercicio 2', tags: [], tagLabel: 'Derivación Logarítmica', statement: '$$y = x^{\\sin x}$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1 • Aplicar logaritmo natural', title: 'Bajar el exponente variable', math: '$$\\ln(y) = \\ln(x^{\\sin x}) \\implies \\ln(y) = \\sin(x) \\cdot \\ln(x)$$', note: 'Usamos la propiedad $\\ln(a^b) = b \\ln(a)$ para destrabar variables simultáneas en base y exponente.' },
+                    { badge: 'Paso 2 • Derivar implícitamente', title: 'Regla de la cadena en izquierda, producto en derecha', math: '$$\\frac{1}{y} \\cdot y\' = \\cos(x)\\ln(x) + \\sin(x)\\frac{1}{x}$$' },
+                    { badge: 'Paso 3 • Despejar y\' y reemplazar y', title: 'Pasar y multiplicando', math: '$$y\' = y \\left[\\cos(x)\\ln(x) + \\frac{\\sin(x)}{x}\\right] \\implies \\boxed{y\' = x^{\\sin x} \\left[\\cos(x)\\ln(x) + \\frac{\\sin(x)}{x}\\right]}$$' }
+                ]
+            },
+            u2_econ1: {
+                revealed: 1,
+                steps: [
+                    { badge: 'Paso 1 • Hallar Costo Marginal', title: 'Derivar la función de costo total', math: '$$C\'(x) = \\frac{d}{dx}(100 + 5x + 0.02x^2) = 5 + 0.04x$$' },
+                    { badge: 'Paso 2 • Evaluar en x = 50', title: 'Estimar el costo de la unidad 51', math: '$$C\'(50) = 5 + 0.04(50) = 5 + 2 = \\boxed{7}$$' },
+                    { badge: 'Paso 3 • Comparar con costo exacto', title: 'Calcular C(51) - C(50)', math: '$$C(51) - C(50) = 407.02 - 400 = 7.02 \\approx 7$$', note: 'El Costo Marginal $C\'(x)$ da una aproximación excelente y rápida del verdadero costo de producir una unidad adicional.' }
+                ]
+            },
+            u2_econ2: {
+                revealed: 1,
+                steps: [
+                    { badge: 'Paso 1 • Fórmula de Elasticidad', title: 'Calcular la derivada de la demanda y plantear', math: '$$q\'(p) = -5 \\implies \\varepsilon_p = \\left| \\frac{p}{q} \\cdot q\'(p) \\right| = \\left| \\frac{p}{200-5p} \\cdot (-5) \\right| = \\frac{5p}{200-5p}$$' },
+                    { badge: 'Paso 2 • Evaluar en p = 10', title: 'Zona inelástica', math: '$$\\varepsilon(10) = \\frac{50}{200-50} = \\frac{50}{150} = \\frac{1}{3} < 1 \\implies \\text{Inelástica}$$' },
+                    { badge: 'Paso 3 • Evaluar en p = 30', title: 'Zona elástica', math: '$$\\varepsilon(30) = \\frac{150}{200-150} = \\frac{150}{50} = 3 > 1 \\implies \\text{Elástica}$$', note: 'En $p=10$ la demanda es rígida (conviene subir el precio para maximizar ingreso). En $p=30$ es muy sensible (conviene bajarlo).' }
+                ]
             }
         };
 
@@ -2253,8 +2410,15 @@
             const keysB = ['b1', 'b2', 'b3', 'b4'];
             containerB.innerHTML = keysB.map((key) => buildExerciseShellHTML(key, 'indigo')).join('');
 
-            // Inicializar contenido interno de cada ejercicio (incluyendo Continuidad)
-            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3'].forEach((k) => updateStepsView(k));
+            // Renderizar Práctica de Unidad 2
+            const containerU2P = document.getElementById('u2-practica-list');
+            if (containerU2P) {
+                const keysU2P = ['u2_p1', 'u2_p2'];
+                containerU2P.innerHTML = keysU2P.map((key) => buildExerciseShellHTML(key, 'indigo')).join('');
+            }
+
+            // Inicializar contenido interno de cada ejercicio
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2'].forEach((k) => updateStepsView(k));
         }
 
         function buildExerciseShellHTML(exKey, colorTheme) {
@@ -2441,7 +2605,7 @@
         }
 
         /* ---------------------------------------------------------
-           7. MINI-VISUALIZACIONES INTERACTIVAS DE APLICACIONES ECONÓMICAS
+           7. MINI-VISUALIZACIONES INTERACTIVAS DE APLICACIONES ECONÓMICAS Y U2
            --------------------------------------------------------- */
         const econState = {
             x1: 100,
@@ -2700,6 +2864,113 @@
             updateEcon1(econState.x1);
             updateEcon2(econState.x2);
             updateEcon3(econState.p3);
+        }
+
+        // ---------- NUEVOS CANVASES DE UNIDAD 2 ---------- //
+
+        let u2GeoH = 2.0;
+        function updateU2Geo(val) {
+            u2GeoH = parseFloat(val);
+            document.getElementById('u2-lbl-h').textContent = `h = ${u2GeoH.toFixed(2)}`;
+            drawU2GeoCanvas();
+        }
+
+        function drawU2GeoCanvas() {
+            const setup = setupHiDPICanvas('u2-geo-canvas', 'u2-geo-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 30, right: 20, top: 20, bottom: 30 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 4;
+            const yMin = 0, yMax = 4;
+            const toX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // F(x) = -0.5*x^2 + 2x + 1. P(1, 2.5). f'(1) = 1.
+            const f = (x) => -0.5 * x * x + 2 * x + 1;
+            
+            // Grilla y Ejes
+            ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1;
+            for(let i=1; i<=3; i++) {
+                ctx.beginPath(); ctx.moveTo(toX(i), pad.top); ctx.lineTo(toX(i), pad.top+pH); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(i)); ctx.lineTo(pad.left+pW, toY(i)); ctx.stroke();
+            }
+            ctx.strokeStyle = '#475569'; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top+pH); ctx.lineTo(pad.left+pW, pad.top+pH); ctx.stroke();
+
+            // Curva f(x)
+            ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for(let i=0; i<=50; i++){
+                let xv = xMin + (i/50)*(xMax - xMin);
+                if(i===0) ctx.moveTo(toX(xv), toY(f(xv)));
+                else ctx.lineTo(toX(xv), toY(f(xv)));
+            }
+            ctx.stroke();
+
+            // Puntos y Secante
+            const x0 = 1;
+            const y0 = f(x0);
+            const x1 = x0 + u2GeoH;
+            const y1 = f(x1);
+            
+            const mSec = (y1 - y0) / u2GeoH;
+            document.getElementById('u2-lbl-msec').textContent = mSec.toFixed(3);
+
+            // Dibujar secante
+            ctx.strokeStyle = '#a855f7'; ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(toX(x0 - 1), toY(y0 - mSec));
+            ctx.lineTo(toX(x1 + 1), toY(y1 + mSec));
+            ctx.stroke();
+
+            // Dibujar P y Q
+            ctx.fillStyle = '#1e40af'; ctx.beginPath(); ctx.arc(toX(x0), toY(y0), 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#a855f7'; ctx.beginPath(); ctx.arc(toX(x1), toY(y1), 5, 0, Math.PI*2); ctx.fill();
+
+            // Triángulo incremental
+            if(u2GeoH > 0.05) {
+                ctx.setLineDash([4,4]);
+                ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.2;
+                ctx.beginPath(); ctx.moveTo(toX(x0), toY(y0)); ctx.lineTo(toX(x1), toY(y0)); ctx.lineTo(toX(x1), toY(y1)); ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = '#64748b'; ctx.font='10px sans-serif'; ctx.fillText('h', toX(x0+u2GeoH/2), toY(y0)+12);
+            }
+        }
+
+        function drawAllU2EconCanvases() {
+            // Marginal Cost Canvas
+            const setup1 = setupHiDPICanvas('u2-econ1-canvas', 'u2-econ1-canvas-wrap');
+            if(setup1) {
+                const { ctx, W, H } = setup1;
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,W,H);
+                ctx.fillStyle = '#059669'; ctx.font='12px sans-serif'; 
+                ctx.fillText('Gráfica de C(x)', 10, 20);
+                // Dibujo simbólico simplificado para mantener el tamaño
+                ctx.strokeStyle = '#059669'; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(10, H-10); ctx.quadraticCurveTo(W/2, H-30, W-10, 20); ctx.stroke();
+            }
+
+            // Elasticity Canvas
+            const setup2 = setupHiDPICanvas('u2-econ2-canvas', 'u2-econ2-canvas-wrap');
+            if(setup2) {
+                const { ctx, W, H } = setup2;
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,W,H);
+                ctx.fillStyle = '#4f46e5'; ctx.font='12px sans-serif'; 
+                ctx.fillText('Curva de Demanda y Elasticidad', 10, 20);
+                // Recta con gradiente
+                let grad = ctx.createLinearGradient(10, 10, W-10, H-10);
+                grad.addColorStop(0, '#e11d48'); // elástica
+                grad.addColorStop(1, '#2563eb'); // inelástica
+                ctx.strokeStyle = grad; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.moveTo(20, 30); ctx.lineTo(W-20, H-20); ctx.stroke();
+            }
         }
 
         /* ---------------------------------------------------------
@@ -3061,17 +3332,23 @@
             setContTheoryMode('ok');
             renderMath(document.body);
             onLabChange();
+            updateU2Geo(2.0); // Init U2 canvas
             resizeAndDrawLabCanvas();
             drawContTheoryCanvas();
 
             window.addEventListener('resize', () => {
                 if (currentMainTab === 'teoria') {
-                    resizeAndDrawLabCanvas();
-                    drawContTheoryCanvas();
+                    if (currentUnit === 'u1') {
+                        resizeAndDrawLabCanvas();
+                        drawContTheoryCanvas();
+                    } else {
+                        drawU2GeoCanvas();
+                    }
                 } else if (currentMainTab === 'practica') {
-                    drawContPracCanvas();
+                    if (currentUnit === 'u1') drawContPracCanvas();
                 } else if (currentMainTab === 'economicas') {
-                    drawAllEconCanvases();
+                    if (currentUnit === 'u1') drawAllEconCanvases();
+                    else drawAllU2EconCanvases();
                 }
             });
         };
