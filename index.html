@@ -2537,7 +2537,7 @@
                             <p class="text-sm font-bold text-slate-900">Paso 6. Determinamos el intervalo de convergencia</p>
                             <p class="text-sm text-slate-700">La serie obtenida es geométrica, con razón $q=-(x-1)$. Una serie geométrica converge cuando $|q|<1$:</p>
                             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
-                                $$|-(x-1)|<1\iff |x-1|<1\iff 0<x<2$$
+                                $$\left|-(x-1)\right|\lt 1\iff \left|x-1\right|\lt 1\iff 0\lt x\lt 2$$
                             </div>
                             <p class="text-sm text-slate-700">En los extremos, la serie no converge: para $x=0$ sus términos son todos iguales a $1$, y para $x=2$ los términos alternan entre $1$ y $-1$; en ambos casos el término general no tiende a cero.</p>
                         </div>
@@ -3051,33 +3051,33 @@
                 </button>
             </div>
             <ul class="space-y-2 text-sm">
-                <li class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold flex items-center justify-between gap-2 cursor-pointer" onclick="switchUnit('u1')">
+                <li data-unit-item="u1" class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold flex items-center justify-between gap-2 cursor-pointer" onclick="switchUnit('u1')">
                     <span>Unidad 1: Límites y continuidad</span>
-                    <span class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                    <span id="badge-u1" class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u2')">
+                <li data-unit-item="u2" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u2')">
                     <span>Unidad 2: Derivadas</span>
-                    <span class="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                    <span id="badge-u2" class="hidden text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u3')">
+                <li data-unit-item="u3" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u3')">
                     <span>Unidad 3: Teoremas del Cálculo. Indeterminaciones</span>
-                    <span class="text-xs bg-rose-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                    <span id="badge-u3" class="hidden text-xs bg-rose-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u4')">
+                <li data-unit-item="u4" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u4')">
                     <span>Unidad 4: Aplicaciones de la Derivada</span>
-                    <span class="text-xs bg-amber-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                    <span id="badge-u4" class="hidden text-xs bg-amber-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u5')">
+                <li data-unit-item="u5" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u5')">
                     <span>Unidad 5: Integrales y EDOs</span>
-                    <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                    <span id="badge-u5" class="hidden text-xs bg-cyan-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u6')">
+                <li data-unit-item="u6" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u6')">
                     <span>Unidad 6: Func. 2 Variables (I)</span>
-                    <span class="text-xs bg-fuchsia-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                    <span id="badge-u6" class="hidden text-xs bg-fuchsia-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
-                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u7')">
+                <li data-unit-item="u7" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u7')">
                     <span>Unidad 7: Sucesiones y Series</span>
-                    <span class="text-xs bg-violet-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                    <span id="badge-u7" class="hidden text-xs bg-violet-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
                 </li>
             </ul>
             <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
@@ -3123,8 +3123,38 @@
         let currentMainTab = 'teoria';
         let currentUnit = 'u1';
 
+        function updateTemarioActiveState(unit) {
+            const unitStyles = {
+                u1: { item: 'bg-blue-50 border-blue-200 text-blue-900', badge: 'bg-blue-600' },
+                u2: { item: 'bg-purple-50 border-purple-200 text-purple-900', badge: 'bg-purple-600' },
+                u3: { item: 'bg-rose-50 border-rose-200 text-rose-900', badge: 'bg-rose-600' },
+                u4: { item: 'bg-amber-50 border-amber-200 text-amber-900', badge: 'bg-amber-600' },
+                u5: { item: 'bg-cyan-50 border-cyan-200 text-cyan-900', badge: 'bg-cyan-600' },
+                u6: { item: 'bg-fuchsia-50 border-fuchsia-200 text-fuchsia-900', badge: 'bg-fuchsia-600' },
+                u7: { item: 'bg-violet-50 border-violet-200 text-violet-900', badge: 'bg-violet-600' }
+            };
+
+            Object.keys(unitStyles).forEach(key => {
+                const item = document.querySelector(`[data-unit-item="${key}"]`);
+                const badge = document.getElementById(`badge-${key}`);
+                const isActive = key === unit;
+
+                if (item) {
+                    item.className = isActive
+                        ? `p-3 rounded-xl border flex items-center justify-between gap-2 cursor-pointer font-semibold ${unitStyles[key].item}`
+                        : 'p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white';
+                }
+
+                if (badge) {
+                    badge.className = `${isActive ? '' : 'hidden '}text-xs ${unitStyles[key].badge} text-white px-2 py-0.5 rounded-full shrink-0`;
+                    badge.textContent = 'Activa';
+                }
+            });
+        }
+
         function switchUnit(unit) {
             currentUnit = unit;
+            updateTemarioActiveState(unit);
             
             // Botones del header: una única configuración para las siete unidades.
             const navConfig = {
