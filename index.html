@@ -160,6 +160,12 @@
                 <button type="button" onclick="switchUnit('u3')" id="nav-u3" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
                     <i class="ph-bold ph-book-open"></i> Unidad 3: Teoremas del Cálculo
                 </button>
+                <button type="button" onclick="switchUnit('u4')" id="nav-u4" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 4: Aplicaciones
+                </button>
+                <button type="button" onclick="switchUnit('u5')" id="nav-u5" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 5: Integrales
+                </button>
             </div>
         </div>
     </header>
@@ -219,6 +225,42 @@
                 </h2>
                 <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
                     Explorá los cimientos del cálculo: Teoremas de Rolle, Lagrange y Cauchy, junto a la potente Regla de L'Hôpital para el cálculo avanzado de límites y sus aplicaciones en el análisis económico.
+                </p>
+            </div>
+        </div>
+
+        <!-- HERO DE LA UNIDAD 4 -->
+        <div id="u4-hero" class="hidden bg-gradient-to-r from-slate-900 via-amber-950 to-orange-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $f''$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-amber-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 4: Aplicaciones de la Derivada
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Optimizá funciones estudiando su monotonía, extremos relativos y absolutos, concavidad y puntos de inflexión para resolver problemas económicos complejos.
+                </p>
+            </div>
+        </div>
+
+        <!-- HERO DE LA UNIDAD 5 -->
+        <div id="u5-hero" class="hidden bg-gradient-to-r from-slate-900 via-cyan-950 to-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\int$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-cyan-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 5: Integrales
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Comprendé el concepto de antiderivada, los métodos analíticos de integración, la integral definida mediante sumas de Riemann, la Regla de Barrow y su uso en ecuaciones diferenciales.
                 </p>
             </div>
         </div>
@@ -898,6 +940,236 @@
                     </div>
                 </article>
             </div> <!-- FIN TEORIA U3 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 4 -->
+            <div id="u4-teoria" class="hidden space-y-10">
+                <!-- 1. CRECIMIENTO Y EXTREMOS RELATIVOS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-amber-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Monotonía y Extremos Relativos</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Criterio de la Primera Derivada y Teorema de Fermat</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                El signo de la primera derivada $f'(x)$ indica si la función crece o decrece:
+                            </p>
+                            <ul class="text-sm text-slate-700 list-disc pl-5 space-y-2">
+                                <li>Si $f'(x) > 0$ en $(a, b)$, $f(x)$ es <strong>creciente</strong>.</li>
+                                <li>Si $f'(x) < 0$ en $(a, b)$, $f(x)$ es <strong>decreciente</strong>.</li>
+                            </ul>
+                            <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 mt-4">
+                                <p class="text-sm font-bold text-slate-900 mb-1">Teorema de Fermat (Puntos Críticos)</p>
+                                <p class="text-sm text-slate-700">Si $f$ tiene un extremo local en $x_0$ y es derivable allí, su recta tangente debe ser horizontal: $f'(x_0) = 0$. Estos puntos, junto donde la derivada no existe, se llaman <strong>puntos críticos</strong>.</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-700 mt-4">
+                                <p class="font-bold mb-1">Criterio de la Primera Derivada</p>
+                                <p>Al atravesar un punto crítico $x_0$:</p>
+                                <ul class="list-disc pl-5 mt-1 space-y-1">
+                                    <li>De $(+)$ a $(-)$ $\implies$ <strong>Máximo Relativo</strong>.</li>
+                                    <li>De $(-)$ a $(+)$ $\implies$ <strong>Mínimo Relativo</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Visualizador de Extremos</h4>
+                            <div id="u4-teoria1-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u4-teoria1-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <p class="text-xs text-slate-600 text-center">Gráfica de $f(x) = x^3 - 12x^2 + 36x + 8$.<br>Máximo en $x=2$, Mínimo en $x=6$.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. EXTREMOS ABSOLUTOS Y CRITERIO 2DA DERIVADA -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-orange-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Extremos Absolutos y Generalización</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Teorema de Weierstrass y Criterio de la Segunda Derivada</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 border-l-4 border-orange-500 rounded-r-xl p-4">
+                                <p class="text-sm font-bold text-slate-900 mb-1">Teorema de Weierstrass</p>
+                                <p class="text-sm text-slate-700">Toda función continua en un intervalo cerrado $[a, b]$ alcanza indefectiblemente un valor máximo absoluto y un mínimo absoluto, ya sea en el interior (extremos relativos) o en los bordes $a$ y $b$.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-700">
+                                <p class="font-bold text-slate-900 mb-1">Criterio de la Segunda Derivada</p>
+                                <p>Si $f'(x_0) = 0$ (punto crítico):</p>
+                                <ul class="list-disc pl-5 mt-1 space-y-1">
+                                    <li>$f''(x_0) < 0 \implies$ <strong>Máximo Local</strong>.</li>
+                                    <li>$f''(x_0) > 0 \implies$ <strong>Mínimo Local</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 text-sm text-slate-700 shadow-sm mt-4">
+                        <p class="font-bold text-slate-900 mb-1">Generalización de Derivadas Sucesivas</p>
+                        <p>Si $f''(x_0) = 0$, se derivan sucesivamente hasta hallar la primera derivada no nula en $x_0$. Si es de orden <strong>par</strong> (4ta, 6ta), existe extremo local (max si $<0$, min si $>0$). Si es de orden <strong>impar</strong> (3ra, 5ta), <strong>NO</strong> hay extremo.</p>
+                    </div>
+                </article>
+
+                <!-- 3. CONCAVIDAD E INFLEXIÓN -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-red-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Concavidad y Puntos de Inflexión</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Comportamiento de la segunda derivada</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-4 text-sm text-slate-700">
+                            <p>La <strong>concavidad</strong> de una función determina si la curva queda por encima o por debajo de sus rectas tangentes, y se evalúa con el signo de $f''(x)$:</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>$f''(x) > 0 \implies$ <strong>Convexa (Hacia arriba)</strong>. La pendiente crece.</li>
+                                <li>$f''(x) < 0 \implies$ <strong>Cóncava (Hacia abajo)</strong>. La pendiente decrece.</li>
+                            </ul>
+                            <div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-4 mt-4">
+                                <p class="text-sm font-bold text-slate-900 mb-1">Punto de Inflexión</p>
+                                <p class="text-sm text-slate-700">Es el punto donde la función cambia de concavidad. Condiciones:</p>
+                                <ol class="list-decimal pl-5 mt-1 space-y-1 font-mono text-xs">
+                                    <li>$f''(x_0) = 0$ (Condición necesaria)</li>
+                                    <li>$f'''(x_0) \neq 0$ (Condición suficiente)</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Visualizador de Inflexión</h4>
+                            <div id="u4-teoria2-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u4-teoria2-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <p class="text-xs text-slate-600 text-center">Punto de Inflexión en $x=4$.<br>La curva cambia de cóncava (rojo) a convexa (verde).</p>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN TEORIA U4 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 5 -->
+            <div id="u5-teoria" class="hidden space-y-10">
+                <!-- 1. PRIMITIVAS Y MÉTODOS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-cyan-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Primitivas y Métodos de Integración</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Antiderivación, Sustitución y Partes</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                        <p>Se dice que $F(x)$ es una <strong>primitiva</strong> de $f(x)$ si $F'(x) = f(x)$. Todas las primitivas de una misma función difieren en una constante $C$. A la familia de todas las primitivas se la llama <strong>Integral Indefinida</strong>: $\int f(x)dx = F(x) + C$.</p>
+                        
+                        <div class="bg-slate-50 border-l-4 border-cyan-500 rounded-r-xl p-4">
+                            <p class="font-bold text-slate-900 mb-1">Teorema: Dos primitivas difieren en una constante</p>
+                            <p><strong>Demostración:</strong> Si $F$ y $G$ son primitivas de $f$, entonces $F'(x) = f(x)$ y $G'(x) = f(x)$.</p>
+                            <p>Restamos ambas: $(F(x) - G(x))' = F'(x) - G'(x) = f(x) - f(x) = 0$.</p>
+                            <p>Como la única función con derivada siempre nula es la constante, $F(x) - G(x) = C \implies F(x) = G(x) + C$.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white shadow-sm">
+                                <p class="font-bold text-cyan-900 mb-2">Integración por Sustitución</p>
+                                <p class="text-xs text-slate-600 mb-2">Basado en la regla de la cadena.</p>
+                                <div class="bg-slate-50 p-2 rounded text-center text-xs">
+                                    $$\int f(g(x))g'(x)dx = \int f(u)du$$
+                                </div>
+                                <p class="text-xs mt-2">Haciendo $u = g(x) \implies du = g'(x)dx$.</p>
+                            </div>
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white shadow-sm">
+                                <p class="font-bold text-indigo-900 mb-2">Integración por Partes</p>
+                                <p class="text-xs text-slate-600 mb-2">Basado en la regla del producto.</p>
+                                <div class="bg-slate-50 p-2 rounded text-center text-xs">
+                                    $$\int u \, dv = u v - \int v \, du$$
+                                </div>
+                                <p class="text-xs mt-2">Se elige $u$ fácil de derivar y $dv$ fácil de integrar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. INTEGRAL DEFINIDA (RIEMANN Y BARROW) -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Integral Definida y Regla de Barrow</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Área bajo la curva y el Teorema Fundamental del Cálculo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4 text-sm text-slate-700">
+                            <p>La <strong>Integral Definida</strong> $\int_a^b f(x)dx$ representa el área neta entre la curva $f(x)$ y el eje $X$ en el intervalo $[a, b]$. Se define formalmente como el límite de las <strong>Sumas de Riemann</strong> cuando la cantidad de rectángulos $n \to \infty$.</p>
+                            
+                            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 mt-2">
+                                <p class="font-bold text-slate-900 mb-1">Teorema Fundamental del Cálculo (1ra Parte)</p>
+                                <p>Si $f(t)$ es continua en $[a, b]$, entonces la <em>función integral</em> $I(x) = \int_a^x f(t)dt$ es derivable y su derivada es $\mathbf{I'(x) = f(x)}$. Es decir, la integral indefinida es la operación inversa de la derivada.</p>
+                            </div>
+                            
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mt-4">
+                                <p class="font-bold text-slate-900 mb-1">Regla de Barrow (2da Parte del TFC)</p>
+                                <p>Permite evaluar la integral definida sin usar límites de sumatorias. Si $F(x)$ es una primitiva cualquiera de $f(x)$:</p>
+                                <div class="mt-2 text-center text-sm bg-white rounded-lg py-2 px-2 border border-slate-200 shadow-xs">
+                                    $$\int_a^b f(x)dx = F(b) - F(a)$$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Sumas de Riemann</h4>
+                            </div>
+                            <div id="u5-riemann-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u5-riemann-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                    <span>n = 2</span>
+                                    <span id="u5-lbl-n" class="font-mono font-bold text-blue-700">n = 10</span>
+                                    <span>n = 50</span>
+                                </div>
+                                <input id="u5-slider-n" type="range" min="2" max="50" step="1" value="10" oninput="updateU5Riemann(this.value)" class="w-full bg-blue-200">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. ECUACIONES DIFERENCIALES ORDINARIAS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Ecuaciones Diferenciales Ordinarias (EDO)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Separación de variables y Ecuaciones Lineales</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-3">
+                            <p class="font-bold text-indigo-900">Variables Separables</p>
+                            <p class="text-sm text-slate-700">Tienen la forma $P(x)dx = Q(y)dy$. Se integran directamente ambos miembros:</p>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center text-sm">
+                                $$\int P(x)dx = \int Q(y)dy + C$$
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-3">
+                            <p class="font-bold text-indigo-900">Lineales de 1er Orden</p>
+                            <p class="text-sm text-slate-700">Tienen la forma $y' + P(x)y = Q(x)$. Se resuelven usando el factor integrante $e^{\int P(x)dx}$:</p>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center text-xs">
+                                $$y = e^{-\int P(x)dx} \left[ \int Q(x) e^{\int P(x)dx} dx + C \right]$$
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN TEORIA U5 -->
         </section>
 
         <!-- ========================================================= -->
@@ -1243,6 +1515,26 @@
                 </div>
                 <div id="u3-practica-list" class="space-y-6"></div>
             </div> <!-- FIN PRACTICA U3 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 4 -->
+            <div id="u4-practica" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Optimización Matemática</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Cálculo de Extremos y Puntos de Inflexión</h3>
+                    <p class="text-sm text-slate-600 mt-2">Aplicación paso a paso de los criterios de la primera y segunda derivada para clasificar la geometría de las funciones polinómicas.</p>
+                </div>
+                <div id="u4-practica-list" class="space-y-6"></div>
+            </div> <!-- FIN PRACTICA U4 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 5 -->
+            <div id="u5-practica" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Cálculo Integral</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Áreas y Ecuaciones Diferenciales</h3>
+                    <p class="text-sm text-slate-600 mt-2">Aplicación de la Regla de Barrow para áreas entre curvas y resolución analítica de EDOs de primer orden.</p>
+                </div>
+                <div id="u5-practica-list" class="space-y-6"></div>
+            </div> <!-- FIN PRACTICA U5 -->
 
         </section>
 
@@ -1592,6 +1884,118 @@
                 <div id="u3-econ-list" class="space-y-8"></div>
             </div> <!-- FIN ECONOMICAS U3 -->
 
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 4 -->
+            <div id="u4-economicas" class="hidden space-y-8">
+                <!-- Problema 1 Costo Medio -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-600 text-white">Problema 1: Minimización de Costos</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                            Dada la función de costo total $CT(q) = \frac{1}{2}q^2 + 10q + 50$, determine el nivel de producción que minimiza el costo medio, y el costo medio mínimo.
+                        </p>
+                    </div>
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span id="u4_econ1-progress-text" class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">0 de 3 pasos visibles</span>
+                                <div class="flex items-center gap-1.5">
+                                    <button id="u4_econ1-btn-next" type="button" onclick="nextStep('u4_econ1')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold transition"><i class="ph-bold ph-play"></i> <span>Siguiente</span></button>
+                                    <button type="button" onclick="showAllSteps('u4_econ1')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"><span>Ver todo</span></button>
+                                    <button type="button" onclick="resetSteps('u4_econ1', 1)" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition"><i class="ph ph-arrow-counter-clockwise"></i></button>
+                                </div>
+                            </div>
+                            <div id="u4_econ1-steps-container" class="space-y-3"></div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Curva de Costo Medio</h4>
+                            </div>
+                            <div id="u4-econ1-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u4-econ1-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Problema 2 Utilidad y Rendimientos -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-600 text-white">Problema 2: Utilidad y Rendimientos</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                            Con $IT = 10q$ y $CT = q^3 - \frac{15}{2}q^2 + 22q + 2$: Maximice la utilidad, determine los intervalos de concavidad de CT y encuentre dónde se minimiza el Costo Marginal.
+                        </p>
+                    </div>
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span id="u4_econ2-progress-text" class="text-xs font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full">0 de 3 pasos visibles</span>
+                                <div class="flex items-center gap-1.5">
+                                    <button id="u4_econ2-btn-next" type="button" onclick="nextStep('u4_econ2')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold transition"><i class="ph-bold ph-play"></i> <span>Siguiente</span></button>
+                                    <button type="button" onclick="showAllSteps('u4_econ2')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"><span>Ver todo</span></button>
+                                    <button type="button" onclick="resetSteps('u4_econ2', 1)" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition"><i class="ph ph-arrow-counter-clockwise"></i></button>
+                                </div>
+                            </div>
+                            <div id="u4_econ2-steps-container" class="space-y-3"></div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Brecha IT vs CT (Utilidad)</h4>
+                            </div>
+                            <div id="u4-econ2-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u4-econ2-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Problema 3 Demanda no lineal -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 border-b border-slate-200 p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-600 text-white">Problema 3: Maximización con Demanda</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                            Si $CT(q) = 50 + 25q$ y la demanda es $p = \frac{150}{\sqrt{q}}$, obtenga el nivel de producción y precio óptimo que maximizan la utilidad.
+                        </p>
+                    </div>
+                    <div class="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span id="u4_econ3-progress-text" class="text-xs font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-full">0 de 3 pasos visibles</span>
+                                <div class="flex items-center gap-1.5">
+                                    <button id="u4_econ3-btn-next" type="button" onclick="nextStep('u4_econ3')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition"><i class="ph-bold ph-play"></i> <span>Siguiente</span></button>
+                                    <button type="button" onclick="showAllSteps('u4_econ3')" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"><span>Ver todo</span></button>
+                                    <button type="button" onclick="resetSteps('u4_econ3', 1)" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition"><i class="ph ph-arrow-counter-clockwise"></i></button>
+                                </div>
+                            </div>
+                            <div id="u4_econ3-steps-container" class="space-y-3"></div>
+                        </div>
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">Curva de Utilidad</h4>
+                            </div>
+                            <div id="u4-econ3-canvas-wrap" class="w-full aspect-[4/3] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+                                <canvas id="u4-econ3-canvas" class="w-full h-full block"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN ECONOMICAS U4 -->
+
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 5 -->
+            <div id="u5-economicas" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Integración Económica</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Reconstrucción de Funciones Totales</h3>
+                    <p class="text-sm text-slate-600 mt-2">Uso de la integral indefinida para obtener Costos e Ingresos Totales a partir de funciones marginales, determinando la constante $C$ con datos iniciales.</p>
+                </div>
+                <div id="u5-econ-list" class="space-y-8"></div>
+            </div> <!-- FIN ECONOMICAS U5 -->
+
         </section>
 
     </main>
@@ -1616,7 +2020,15 @@
                 </li>
                 <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u3')">
                     <span>Unidad 3: Teoremas del Cálculo. Indeterminaciones</span>
-                    <span class="text-xs bg-rose-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                    <span class="text-xs bg-rose-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u4')">
+                    <span>Unidad 4: Aplicaciones de la Derivada</span>
+                    <span class="text-xs bg-amber-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u5')">
+                    <span>Unidad 5: Integrales y EDOs</span>
+                    <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
                 </li>
             </ul>
             <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
@@ -1669,19 +2081,39 @@
             const navU1 = document.getElementById('nav-u1');
             const navU2 = document.getElementById('nav-u2');
             const navU3 = document.getElementById('nav-u3');
+            const navU4 = document.getElementById('nav-u4');
+            const navU5 = document.getElementById('nav-u5');
             
             if (unit === 'u1') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
             } else if (unit === 'u2') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else {
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else if (unit === 'u3') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else if (unit === 'u4') {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
             }
             
             // Heros
@@ -1689,22 +2121,38 @@
             document.getElementById('u2-hero').classList.toggle('hidden', unit !== 'u2');
             const hero3 = document.getElementById('u3-hero');
             if(hero3) hero3.classList.toggle('hidden', unit !== 'u3');
+            const hero4 = document.getElementById('u4-hero');
+            if(hero4) hero4.classList.toggle('hidden', unit !== 'u4');
+            const hero5 = document.getElementById('u5-hero');
+            if(hero5) hero5.classList.toggle('hidden', unit !== 'u5');
             
             // Secciones internas
             document.getElementById('u1-teoria').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-teoria').classList.toggle('hidden', unit !== 'u2');
             const t3 = document.getElementById('u3-teoria');
             if(t3) t3.classList.toggle('hidden', unit !== 'u3');
+            const t4 = document.getElementById('u4-teoria');
+            if(t4) t4.classList.toggle('hidden', unit !== 'u4');
+            const t5 = document.getElementById('u5-teoria');
+            if(t5) t5.classList.toggle('hidden', unit !== 'u5');
             
             document.getElementById('u1-practica').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-practica').classList.toggle('hidden', unit !== 'u2');
             const p3 = document.getElementById('u3-practica');
             if(p3) p3.classList.toggle('hidden', unit !== 'u3');
+            const p4 = document.getElementById('u4-practica');
+            if(p4) p4.classList.toggle('hidden', unit !== 'u4');
+            const p5 = document.getElementById('u5-practica');
+            if(p5) p5.classList.toggle('hidden', unit !== 'u5');
             
             document.getElementById('u1-economicas').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-economicas').classList.toggle('hidden', unit !== 'u2');
             const e3 = document.getElementById('u3-economicas');
             if(e3) e3.classList.toggle('hidden', unit !== 'u3');
+            const e4 = document.getElementById('u4-economicas');
+            if(e4) e4.classList.toggle('hidden', unit !== 'u4');
+            const e5 = document.getElementById('u5-economicas');
+            if(e5) e5.classList.toggle('hidden', unit !== 'u5');
 
             const modal = document.getElementById('modal-temario');
             if(modal && !modal.classList.contains('hidden')) {
@@ -1753,6 +2201,11 @@
                         drawU2GeoCanvas();
                     } else if (currentUnit === 'u3') {
                         drawU3LagrangeCanvas();
+                    } else if (currentUnit === 'u4') {
+                        drawU4Teoria1Canvas();
+                        drawU4Teoria2Canvas();
+                    } else if (currentUnit === 'u5') {
+                        drawU5RiemannCanvas();
                     }
                 });
             } else if (tab === 'practica') {
@@ -1763,6 +2216,7 @@
                 requestAnimationFrame(() => {
                     if (currentUnit === 'u1') drawAllEconCanvases();
                     else if (currentUnit === 'u2') drawAllU2EconCanvases();
+                    else if (currentUnit === 'u4') drawAllU4EconCanvases();
                 });
             }
 
@@ -2734,6 +3188,130 @@
                     { badge: 'Paso 3 • Reducción', title: 'Como $f(a)=g(a)=0$, la expresión de la derecha se reduce al cociente original.', math: '$$\\frac{f\'(c)}{g\'(c)} = \\frac{f(x)}{g(x)}$$' },
                     { badge: 'Paso 4 • Límite final', title: 'Al tender $x \\to a$, el punto intermedio $c$ (atrapado entre $a$ y $x$) también está obligado a tender a $a$.', math: '$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{c \\to a} \\frac{f\'(c)}{g\'(c)} \\quad \\blacksquare$$' }
                 ]
+            },
+
+            /* ==================== UNIDAD 4: PRÁCTICA Y ECONÓMICAS ==================== */
+            u4_p1: {
+                number: 'Ejemplo 1', tags: [], tagLabel: 'Extremos', statement: 'Hallar máximos y mínimos de $f(x) = x^3 - 12x^2 + 36x + 8$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Derivada primera y Puntos Críticos', math: '$$f\'(x) = 3x^2 - 24x + 36 = 0 \\implies x^2 - 8x + 12 = 0 \\implies x_1=2, x_2=6$$' },
+                    { badge: 'Paso 2', title: 'Criterio de la segunda derivada', math: '$$f\'\'(x) = 6x - 24$$' },
+                    { badge: 'Paso 3', title: 'Evaluación y clasificación', math: '$$f\'\'(2) = -12 < 0 \\implies \\text{Máximo relativo en } (2, 40) \\\\ f\'\'(6) = 12 > 0 \\implies \\text{Mínimo relativo en } (6, 8)$$', note: 'Reemplazando $x_1$ y $x_2$ en la función original $f(x)$ obtenemos los valores $y$ correspondientes ($40$ y $8$).' }
+                ]
+            },
+            u4_p2: {
+                number: 'Ejemplo 2', tags: [], tagLabel: 'Concavidad', statement: 'Hallar el punto de inflexión de $f(x) = x^3 - 12x^2 + 36x + 8$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Segunda derivada nula', math: '$$f\'\'(x) = 6x - 24 = 0 \\implies x=4$$' },
+                    { badge: 'Paso 2', title: 'Verificación (tercera derivada)', math: '$$f\'\'\'(x) = 6 \\neq 0 \\implies \\text{Es punto de inflexión}$$' },
+                    { badge: 'Paso 3', title: 'Intervalos de concavidad', math: '$$x < 4 \\implies f\'\' < 0 \\text{ (Cóncava hacia abajo)} \\\\ x > 4 \\implies f\'\' > 0 \\text{ (Convexa hacia arriba)}$$', note: 'En $x=4$, cuya ordenada es $y=24$, la función cambia su curvatura.' }
+                ]
+            },
+            u4_econ1: {
+                revealed: 1,
+                steps: [
+                    { badge: 'Paso 1 • Función a minimizar', title: 'Armar la función de Costo Medio', math: '$$CMe(q) = \\frac{CT(q)}{q} = \\frac{0.5q^2 + 10q + 50}{q} = 0.5q + 10 + \\frac{50}{q}$$' },
+                    { badge: 'Paso 2 • Primera derivada', title: 'Derivar e igualar a cero para hallar cantidad óptima', math: '$$CMe\'(q) = 0.5 - \\frac{50}{q^2} = 0 \\implies q^2 = 100 \\implies q=10$$' },
+                    { badge: 'Paso 3 • Segunda derivada', title: 'Verificar mínimo y calcular CMe', math: '$$CMe\'\'(10) = \\frac{100}{10^3} = 0.1 > 0 \\implies \\text{Mínimo. } CMe(10) = 20$$' }
+                ]
+            },
+            u4_econ2: {
+                revealed: 1,
+                steps: [
+                    { badge: 'Paso 1 • Maximizar Utilidad', title: 'Armar U = IT - CT, derivar y clasificar', math: '$$U(q) = -q^3 + 7.5q^2 - 12q - 2 \\implies U\'(q) = -3q^2 + 15q - 12 = 0$$', note: 'Raíces: $q=1$ (Mín, pues $U\'\'(1)=9>0$) y $q=4$ (Máx, pues $U\'\'(4)=-9<0$).' },
+                    { badge: 'Paso 2 • Concavidad de CT', title: 'Análisis de la Segunda derivada del Costo Total', math: '$$CT\'\'(q) = 6q - 15 = 0 \\implies q = 2.5$$', note: 'Para $q < 2.5$ el costo es cóncavo (rendimientos crecientes). Para $q > 2.5$ es convexo (rendimientos decrecientes).' },
+                    { badge: 'Paso 3 • Minimizar CMg', title: 'Buscar el Mínimo del Costo Marginal', math: '$$CMg(q) = CT\'(q) \\implies CMg\'(q) = CT\'\'(q) = 6q - 15 = 0 \\implies q=2.5$$', note: 'El punto donde se minimiza el Costo Marginal ($q=2.5$) coincide exactamente con el punto de inflexión del Costo Total.' }
+                ]
+            },
+            u4_econ3: {
+                revealed: 1,
+                steps: [
+                    { badge: 'Paso 1 • Función de Utilidad', title: 'Sustituir la curva de demanda en el Ingreso Total', math: '$$U(q) = p \\cdot q - CT = \\left(\\frac{150}{\\sqrt{q}}\\right)q - (50+25q) = 150\\sqrt{q} - 25q - 50$$' },
+                    { badge: 'Paso 2 • Derivar Utilidad', title: 'Maximizar resolviendo U\'(q) = 0', math: '$$U\'(q) = \\frac{75}{\\sqrt{q}} - 25 = 0 \\implies \\sqrt{q} = 3 \\implies q=9$$' },
+                    { badge: 'Paso 3 • Precio óptimo', title: 'Reemplazar cantidad óptima en la función de demanda', math: '$$p(9) = \\frac{150}{\\sqrt{9}} = \\frac{150}{3} = \\boxed{\\$50}$$', note: 'La segunda derivada es $U\'\'(q) = -37.5 / q^{1.5} < 0$, garantizando que $q=9$ es un máximo absoluto.' }
+                ]
+            },
+
+            /* ==================== UNIDAD 5: PRÁCTICA Y ECONÓMICAS ==================== */
+            u5_p_indef1: {
+                number: 'Actividad 1', tags: [], tagLabel: 'Integrales Indefinidas • Sustitución', statement: '$$\\int x e^{x^2} dx$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Cambio de variable', math: '$$u = x^2 \\implies du = 2x dx \\implies \\frac{du}{2} = x dx$$' },
+                    { badge: 'Paso 2', title: 'Sustitución en la integral', math: '$$\\int e^u \\frac{du}{2} = \\frac{1}{2} \\int e^u du$$' },
+                    { badge: 'Paso 3', title: 'Integrar y volver a la variable original', math: '$$\\frac{1}{2} e^u + C \\implies \\boxed{\\frac{1}{2} e^{x^2} + C}$$' }
+                ]
+            },
+            u5_p_indef2: {
+                number: 'Actividad 2', tags: [], tagLabel: 'Integrales Indefinidas • Por Partes', statement: '$$\\int x \\ln(x) dx$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Elección de u y dv (Regla ALPES/ILATE)', math: '$$u = \\ln(x) \\implies du = \\frac{1}{x} dx \\\\ dv = x dx \\implies v = \\frac{x^2}{2}$$' },
+                    { badge: 'Paso 2', title: 'Aplicar fórmula de integración por partes', math: '$$\\int u \\, dv = u v - \\int v \\, du \\implies \\frac{x^2}{2}\\ln(x) - \\int \\frac{x^2}{2} \\cdot \\frac{1}{x} dx$$' },
+                    { badge: 'Paso 3', title: 'Resolver integral restante', math: '$$\\frac{x^2}{2}\\ln(x) - \\frac{1}{2} \\int x dx = \\boxed{\\frac{x^2}{2}\\ln(x) - \\frac{x^2}{4} + C}$$' }
+                ]
+            },
+            u5_p1: {
+                number: 'Actividad 3', tags: [], tagLabel: 'Área bajo la curva', statement: 'Calcular el área entre $f(x) = -x^2 + 4$ y $g(x) = x + 2$ en $[-2, 1]$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Definir integral de la diferencia', math: '$$A = \\int_{-2}^1 (f(x) - g(x))dx = \\int_{-2}^1 ((-x^2 + 4) - (x + 2))dx$$', note: 'La parábola está por encima de la recta en ese intervalo.' },
+                    { badge: 'Paso 2', title: 'Simplificar e integrar (Barrow)', math: '$$A = \\int_{-2}^1 (-x^2 - x + 2)dx = \\left[ -\\frac{x^3}{3} - \\frac{x^2}{2} + 2x \\right]_{-2}^1$$' },
+                    { badge: 'Paso 3', title: 'Evaluar límites', math: '$$A = \\left(-\\frac{1}{3} - \\frac{1}{2} + 2\\right) - \\left(\\frac{8}{3} - 2 - 4\\right) = \\frac{7}{6} - \\left(-\\frac{10}{3}\\right) = \\boxed{\\frac{9}{2}}$$' }
+                ]
+            },
+            u5_p2: {
+                number: 'Actividad 4', tags: [], tagLabel: 'Área entre curvas simétricas', statement: 'Calcular el área encerrada entre $y = x^2$ y $y = -x^2 + 2$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Intersecciones', math: '$$x^2 = -x^2 + 2 \\implies 2x^2 = 2 \\implies x^2 = 1 \\implies x = \\pm 1$$' },
+                    { badge: 'Paso 2', title: 'Plantear integral (aprovechando simetría)', math: '$$A = \\int_{-1}^1 ((-x^2+2) - x^2)dx = 2 \\int_0^1 (-2x^2 + 2)dx$$' },
+                    { badge: 'Paso 3', title: 'Resolver por Barrow', math: '$$A = 2 \\left[ -\\frac{2x^3}{3} + 2x \\right]_0^1 = 2 \\left(-\\frac{2}{3} + 2\\right) = 2 \\left(\\frac{4}{3}\\right) = \\boxed{\\frac{8}{3}}$$' }
+                ]
+            },
+            u5_p3: {
+                number: 'Actividad 5', tags: [], tagLabel: 'EDO Variables Separables', statement: 'Resolver $x \\, dx = \\frac{1}{y} \\, dy$ con condición inicial $y(-1) = 1$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Integrar ambos miembros', math: '$$\\int x \\, dx = \\int \\frac{1}{y} \\, dy \\implies \\frac{x^2}{2} + C = \\ln(y)$$' },
+                    { badge: 'Paso 2', title: 'Despejar y (Solución General)', math: '$$y_G = e^{\\frac{x^2}{2} + C} = K \\cdot e^{\\frac{x^2}{2}}$$' },
+                    { badge: 'Paso 3', title: 'Aplicar condición inicial', math: '$$y(-1) = 1 \\implies 1 = e^{\\frac{1}{2} + C} \\implies C = -\\frac{1}{2} \\implies y_P = \\boxed{e^{\\frac{x^2 - 1}{2}}}$$' }
+                ]
+            },
+            u5_p5: {
+                number: 'Actividad 6', tags: [], tagLabel: 'EDO Variables Separables • Caso exponencial', statement: 'Resolver $y\' = -2xy$ con condición inicial $y(0) = 5$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Separar variables', math: '$$\\frac{dy}{dx} = -2xy \\implies \\frac{dy}{y} = -2x dx$$' },
+                    { badge: 'Paso 2', title: 'Integrar y obtener solución general', math: '$$\\int \\frac{1}{y} dy = \\int -2x dx \\implies \\ln|y| = -x^2 + C \\implies y_G = K e^{-x^2}$$' },
+                    { badge: 'Paso 3', title: 'Aplicar condición inicial', math: '$$y(0) = 5 \\implies 5 = K e^0 \\implies K = 5 \\implies y_P = \\boxed{5e^{-x^2}}$$' }
+                ]
+            },
+            u5_p4: {
+                number: 'Actividad 7', tags: [], tagLabel: 'EDO Lineal', statement: 'Resolver $xy\' + y = 4x^3$ con $y\'(1) = 2$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Forma canónica', math: '$$y\' + \\frac{1}{x}y = 4x^2 \\implies P(x) = \\frac{1}{x}, Q(x) = 4x^2$$' },
+                    { badge: 'Paso 2', title: 'Aplicar fórmula general', math: '$$FI = e^{\\int \\frac{1}{x}dx} = x \\implies y = \\frac{1}{x} \\int (4x^2 \\cdot x)dx = \\frac{1}{x}(x^4 + C) = x^3 + \\frac{C}{x}$$' },
+                    { badge: 'Paso 3', title: 'Condición inicial en y\'', math: '$$y\' = 3x^2 - \\frac{C}{x^2} \\implies 2 = 3(1)^2 - \\frac{C}{1} \\implies C = 1 \\implies \\boxed{y = x^3 + \\frac{1}{x}}$$' }
+                ]
+            },
+            u5_p6: {
+                number: 'Actividad 8', tags: [], tagLabel: 'EDO Lineal • Factor integrante exponencial', statement: 'Resolver $y\' - 2y = e^{3x}$ con condición inicial $y(0) = 2$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Identificar P(x), Q(x) y Factor Integrante (FI)', math: '$$P(x) = -2, \\; Q(x) = e^{3x} \\implies FI = e^{\\int -2 dx} = e^{-2x}$$' },
+                    { badge: 'Paso 2', title: 'Aplicar fórmula general', math: '$$y = \\frac{1}{e^{-2x}} \\int e^{3x} e^{-2x} dx = e^{2x} \\int e^x dx = e^{2x}(e^x + C) = e^{3x} + C e^{2x}$$' },
+                    { badge: 'Paso 3', title: 'Evaluar condición inicial', math: '$$y(0) = 2 \\implies 2 = e^0 + C e^0 \\implies 2 = 1 + C \\implies C = 1 \\implies \\boxed{y_P = e^{3x} + e^{2x}}$$' }
+                ]
+            },
+            u5_econ1: {
+                number: 'Económica 1', tags: [], tagLabel: 'Costo Marginal a Total', statement: 'El costo marginal es $CMg(q) = 3q^2 + 24q + 50$. Si $CT(10) = 4200$, halle $CT(q)$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Integrar CMg', math: '$$CT(q) = \\int (3q^2 + 24q + 50)dq = q^3 + 12q^2 + 50q + C$$' },
+                    { badge: 'Paso 2', title: 'Evaluar condición inicial', math: '$$CT(10) = 1000 + 1200 + 500 + C = 4200 \\implies 2700 + C = 4200$$' },
+                    { badge: 'Paso 3', title: 'Despejar Costo Fijo (C)', math: '$$C = 1500 \\implies \\boxed{CT(q) = q^3 + 12q^2 + 50q + 1500}$$' }
+                ]
+            },
+            u5_econ2: {
+                number: 'Económica 2', tags: [], tagLabel: 'Ingreso Marginal a Demanda', statement: 'El Ingreso Marginal es $IMg(q) = \\frac{3}{q^2} - \\frac{2}{q}$. Si $IT(1) = 6$, halle la función Demanda $p(q)$.', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Integrar IMg para obtener IT', math: '$$IT(q) = \\int \\left(\\frac{3}{q^2} - \\frac{2}{q}\\right)dq = -\\frac{3}{q} - 2\\ln(q) + C$$' },
+                    { badge: 'Paso 2', title: 'Hallar C con IT(1)=6', math: '$$IT(1) = -\\frac{3}{1} - 2(0) + C = 6 \\implies -3 + C = 6 \\implies C = 9$$' },
+                    { badge: 'Paso 3', title: 'Obtener Demanda p = IT/q', math: '$$IT(q) = -\\frac{3}{q} - 2\\ln(q) + 9 \\implies \\boxed{p(q) = -\\frac{3}{q^2} - \\frac{2\\ln(q)}{q} + \\frac{9}{q}}$$' }
+                ]
             }
         };
 
@@ -2778,17 +3356,43 @@
                 containerU3E.innerHTML = keysU3E.map((key) => buildExerciseShellHTML(key, 'rose')).join('');
             }
 
+            // Renderizar Práctica de Unidad 4
+            const containerU4P = document.getElementById('u4-practica-list');
+            if (containerU4P) {
+                const keysU4P = ['u4_p1', 'u4_p2'];
+                containerU4P.innerHTML = keysU4P.map((key) => buildExerciseShellHTML(key, 'amber')).join('');
+            }
+
+            // Renderizar Práctica de Unidad 5
+            const containerU5P = document.getElementById('u5-practica-list');
+            if (containerU5P) {
+                const keysU5P = ['u5_p_indef1', 'u5_p_indef2', 'u5_p1', 'u5_p2', 'u5_p3', 'u5_p5', 'u5_p4', 'u5_p6'];
+                containerU5P.innerHTML = keysU5P.map((key) => buildExerciseShellHTML(key, 'cyan')).join('');
+            }
+            const containerU5E = document.getElementById('u5-econ-list');
+            if (containerU5E) {
+                const keysU5E = ['u5_econ1', 'u5_econ2'];
+                containerU5E.innerHTML = keysU5E.map((key) => buildExerciseShellHTML(key, 'cyan')).join('');
+            }
+
             // Inicializar contenido interno de cada ejercicio y demostraciones
-            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4', 'u3_proof_rolle', 'u3_proof_lagrange', 'u3_proof_cauchy', 'u3_proof_lhopital'].forEach((k) => updateStepsView(k));
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4', 'u3_proof_rolle', 'u3_proof_lagrange', 'u3_proof_cauchy', 'u3_proof_lhopital', 'u4_p1', 'u4_p2', 'u4_econ1', 'u4_econ2', 'u4_econ3', 'u5_p_indef1', 'u5_p_indef2', 'u5_p1', 'u5_p2', 'u5_p3', 'u5_p5', 'u5_p4', 'u5_p6', 'u5_econ1', 'u5_econ2'].forEach((k) => updateStepsView(k));
         }
 
         function buildExerciseShellHTML(exKey, colorTheme) {
             const ex = allExercises[exKey];
             const statement = ex.variants ? ex.variants[ex.activeVariant].statement : ex.statement;
             const stepsLen = getStepsForExercise(exKey).length;
-            const badgeBg = colorTheme === 'blue' ? 'bg-blue-600' : (colorTheme === 'rose' ? 'bg-rose-600' : 'bg-indigo-600');
-            const btnBg = colorTheme === 'blue' ? 'bg-blue-600 hover:bg-blue-700' : (colorTheme === 'rose' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-indigo-600 hover:bg-indigo-700');
-            const progStyle = colorTheme === 'blue' ? 'text-blue-700 bg-blue-50' : (colorTheme === 'rose' ? 'text-rose-700 bg-rose-50' : 'text-indigo-700 bg-indigo-50');
+            
+            let badgeBg = 'bg-indigo-600';
+            let btnBg = 'bg-indigo-600 hover:bg-indigo-700';
+            let progStyle = 'text-indigo-700 bg-indigo-50';
+            
+            if(colorTheme === 'blue') { badgeBg = 'bg-blue-600'; btnBg = 'bg-blue-600 hover:bg-blue-700'; progStyle = 'text-blue-700 bg-blue-50'; }
+            if(colorTheme === 'rose') { badgeBg = 'bg-rose-600'; btnBg = 'bg-rose-600 hover:bg-rose-700'; progStyle = 'text-rose-700 bg-rose-50'; }
+            if(colorTheme === 'amber') { badgeBg = 'bg-amber-600'; btnBg = 'bg-amber-600 hover:bg-amber-700'; progStyle = 'text-amber-700 bg-amber-50'; }
+            if(colorTheme === 'cyan') { badgeBg = 'bg-cyan-600'; btnBg = 'bg-cyan-600 hover:bg-cyan-700'; progStyle = 'text-cyan-700 bg-cyan-50'; }
+
             const tagsAttr = ex.tags ? ex.tags.join(',') : '';
 
             const variantSelector = ex.variants ? `
@@ -3331,6 +3935,113 @@
             }
         }
 
+        // ---------- NUEVOS CANVASES DE UNIDAD 4 ---------- //
+        function drawU4Teoria1Canvas() {
+            const setup = setupHiDPICanvas('u4-teoria1-canvas', 'u4-teoria1-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+            
+            const pW = W - 40; const pH = H - 40;
+            const toX = (x) => 20 + ((x - 0) / 8) * pW;
+            const toY = (y) => 20 + pH - ((y - 0) / 60) * pH;
+            
+            // f(x) = x^3 - 12x^2 + 36x + 8
+            const f = (x) => x*x*x - 12*x*x + 36*x + 8;
+            
+            ctx.strokeStyle = '#d97706'; ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for(let i=0; i<=50; i++) {
+                let x = (i/50)*8;
+                if(i===0) ctx.moveTo(toX(x), toY(f(x)));
+                else ctx.lineTo(toX(x), toY(f(x)));
+            }
+            ctx.stroke();
+            
+            // Tangentes horizontales en x=2 y x=6
+            ctx.strokeStyle = '#b45309'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+            ctx.beginPath(); ctx.moveTo(toX(0.5), toY(40)); ctx.lineTo(toX(3.5), toY(40)); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(toX(4.5), toY(8)); ctx.lineTo(toX(7.5), toY(8)); ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#b45309';
+            ctx.beginPath(); ctx.arc(toX(2), toY(40), 5, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(toX(6), toY(8), 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillText('Máx (2, 40)', toX(2)-30, toY(40)-10);
+            ctx.fillText('Mín (6, 8)', toX(6)-25, toY(8)+15);
+        }
+
+        function drawU4Teoria2Canvas() {
+            const setup = setupHiDPICanvas('u4-teoria2-canvas', 'u4-teoria2-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+            
+            const pW = W - 40; const pH = H - 40;
+            const toX = (x) => 20 + ((x - 0) / 8) * pW;
+            const toY = (y) => 20 + pH - ((y - 0) / 60) * pH;
+            
+            const f = (x) => x*x*x - 12*x*x + 36*x + 8;
+            
+            // Cóncava x < 4
+            ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3;
+            ctx.beginPath();
+            for(let i=0; i<=25; i++) {
+                let x = (i/25)*4;
+                if(i===0) ctx.moveTo(toX(x), toY(f(x)));
+                else ctx.lineTo(toX(x), toY(f(x)));
+            }
+            ctx.stroke();
+            
+            // Convexa x > 4
+            ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 3;
+            ctx.beginPath();
+            for(let i=0; i<=25; i++) {
+                let x = 4 + (i/25)*4;
+                if(i===0) ctx.moveTo(toX(x), toY(f(x)));
+                else ctx.lineTo(toX(x), toY(f(x)));
+            }
+            ctx.stroke();
+            
+            ctx.fillStyle = '#1e293b';
+            ctx.beginPath(); ctx.arc(toX(4), toY(24), 6, 0, Math.PI*2); ctx.fill();
+            ctx.font = 'bold 11px sans-serif';
+            ctx.fillText('P. Inflexión (4, 24)', toX(4)+10, toY(24));
+        }
+
+        function drawAllU4EconCanvases() {
+            const s1 = setupHiDPICanvas('u4-econ1-canvas', 'u4-econ1-canvas-wrap');
+            if(s1) {
+                s1.ctx.fillStyle = '#ffffff'; s1.ctx.fillRect(0,0,s1.W,s1.H);
+                s1.ctx.fillStyle = '#b45309'; s1.ctx.font = '12px sans-serif'; 
+                s1.ctx.fillText('Costo Medio Mínimo', 10, 20);
+                s1.ctx.strokeStyle = '#d97706'; s1.ctx.lineWidth = 2.5;
+                s1.ctx.beginPath(); s1.ctx.moveTo(10, 40); s1.ctx.quadraticCurveTo(s1.W/2, s1.H, s1.W-10, 40); s1.ctx.stroke();
+                s1.ctx.fillStyle = '#b45309'; s1.ctx.beginPath(); s1.ctx.arc(s1.W/2, s1.H - s1.H/4 + 10, 5, 0, Math.PI*2); s1.ctx.fill();
+            }
+
+            const s2 = setupHiDPICanvas('u4-econ2-canvas', 'u4-econ2-canvas-wrap');
+            if(s2) {
+                s2.ctx.fillStyle = '#ffffff'; s2.ctx.fillRect(0,0,s2.W,s2.H);
+                s2.ctx.fillStyle = '#c2410c'; s2.ctx.font = '12px sans-serif'; 
+                s2.ctx.fillText('IT y CT (Máx Beneficio)', 10, 20);
+                s2.ctx.strokeStyle = '#3b82f6'; s2.ctx.lineWidth = 2; // IT
+                s2.ctx.beginPath(); s2.ctx.moveTo(10, s2.H-10); s2.ctx.lineTo(s2.W-10, 30); s2.ctx.stroke();
+                s2.ctx.strokeStyle = '#ef4444'; s2.ctx.lineWidth = 2; // CT
+                s2.ctx.beginPath(); s2.ctx.moveTo(10, s2.H-30); s2.ctx.quadraticCurveTo(s2.W/2, s2.H, s2.W-10, 10); s2.ctx.stroke();
+            }
+
+            const s3 = setupHiDPICanvas('u4-econ3-canvas', 'u4-econ3-canvas-wrap');
+            if(s3) {
+                s3.ctx.fillStyle = '#ffffff'; s3.ctx.fillRect(0,0,s3.W,s3.H);
+                s3.ctx.fillStyle = '#b91c1c'; s3.ctx.font = '12px sans-serif'; 
+                s3.ctx.fillText('Utilidad Máxima (q=9)', 10, 20);
+                s3.ctx.strokeStyle = '#dc2626'; s3.ctx.lineWidth = 2.5;
+                s3.ctx.beginPath(); s3.ctx.moveTo(10, s3.H-10); s3.ctx.quadraticCurveTo(s3.W/2, 20, s3.W-10, s3.H-10); s3.ctx.stroke();
+                s3.ctx.fillStyle = '#b91c1c'; s3.ctx.beginPath(); s3.ctx.arc(s3.W/2, s3.H/4 + 10, 5, 0, Math.PI*2); s3.ctx.fill();
+            }
+        }
+
         // ---------- NUEVO CANVAS DE UNIDAD 3 (LAGRANGE) ---------- //
         function drawU3LagrangeCanvas() {
             const setup = setupHiDPICanvas('u3-lagrange-canvas', 'u3-lagrange-canvas-wrap');
@@ -3396,6 +4107,78 @@
             ctx.beginPath(); ctx.moveTo(toX(c), toY(fc)); ctx.lineTo(toX(c), pad.top+pH); ctx.stroke();
             ctx.setLineDash([]);
             ctx.fillStyle = '#334155'; ctx.fillText('c', toX(c), pad.top+pH+15);
+        }
+
+        // ---------- NUEVO CANVAS DE UNIDAD 5 (RIEMANN) ---------- //
+        let u5RiemannN = 10;
+        function updateU5Riemann(val) {
+            u5RiemannN = parseInt(val);
+            document.getElementById('u5-lbl-n').textContent = `n = ${u5RiemannN}`;
+            drawU5RiemannCanvas();
+        }
+
+        function drawU5RiemannCanvas() {
+            const setup = setupHiDPICanvas('u5-riemann-canvas', 'u5-riemann-canvas-wrap');
+            if (!setup) return;
+            const { ctx, W, H } = setup;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 30, right: 20, top: 20, bottom: 30 };
+            const pW = W - pad.left - pad.right;
+            const pH = H - pad.top - pad.bottom;
+
+            const xMin = 0, xMax = 4;
+            const yMin = 0, yMax = 5;
+            const toX = (x) => pad.left + ((x - xMin) / (xMax - xMin)) * pW;
+            const toY = (y) => pad.top + pH - ((y - yMin) / (yMax - yMin)) * pH;
+
+            // f(x) = -0.5*(x-2)^2 + 4.5
+            const f = (x) => -0.5 * (x - 2)*(x - 2) + 4.5;
+            
+            // Grilla
+            ctx.strokeStyle = '#f1f5f9'; ctx.lineWidth = 1;
+            for(let i=1; i<=3; i++) {
+                ctx.beginPath(); ctx.moveTo(toX(i), pad.top); ctx.lineTo(toX(i), pad.top+pH); ctx.stroke();
+            }
+            for(let i=1; i<=4; i++) {
+                ctx.beginPath(); ctx.moveTo(pad.left, toY(i)); ctx.lineTo(pad.left+pW, toY(i)); ctx.stroke();
+            }
+            // Ejes
+            ctx.strokeStyle = '#475569'; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top+pH); ctx.lineTo(pad.left+pW, pad.top+pH); ctx.stroke();
+
+            const a = 0.5, b = 3.5;
+            const dx = (b - a) / u5RiemannN;
+
+            // Rectángulos
+            ctx.fillStyle = 'rgba(14, 165, 233, 0.2)'; // cyan-500 tint
+            ctx.strokeStyle = '#0284c7'; // cyan-600
+            ctx.lineWidth = 1;
+            for(let i=0; i<u5RiemannN; i++) {
+                let xi = a + i*dx;
+                let width = dx;
+                let height = f(xi); // suma izquierda
+                ctx.fillRect(toX(xi), toY(height), (toX(xi+dx) - toX(xi)), (toY(0) - toY(height)));
+                ctx.strokeRect(toX(xi), toY(height), (toX(xi+dx) - toX(xi)), (toY(0) - toY(height)));
+            }
+
+            // Curva f(x)
+            ctx.strokeStyle = '#0369a1'; // cyan-700
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for(let i=0; i<=50; i++){
+                let xv = xMin + (i/50)*(xMax - xMin);
+                if(i===0) ctx.moveTo(toX(xv), toY(f(xv)));
+                else ctx.lineTo(toX(xv), toY(f(xv)));
+            }
+            ctx.stroke();
+
+            // Extremos a, b
+            ctx.fillStyle = '#0f172a'; ctx.font = 'bold 12px sans-serif';
+            ctx.fillText('a', toX(a), pad.top+pH+15);
+            ctx.fillText('b', toX(b), pad.top+pH+15);
         }
 
         /* ---------------------------------------------------------
@@ -3770,12 +4553,18 @@
                         drawU2GeoCanvas();
                     } else if (currentUnit === 'u3') {
                         drawU3LagrangeCanvas();
+                    } else if (currentUnit === 'u4') {
+                        drawU4Teoria1Canvas();
+                        drawU4Teoria2Canvas();
+                    } else if (currentUnit === 'u5') {
+                        drawU5RiemannCanvas();
                     }
                 } else if (currentMainTab === 'practica') {
                     if (currentUnit === 'u1') drawContPracCanvas();
                 } else if (currentMainTab === 'economicas') {
                     if (currentUnit === 'u1') drawAllEconCanvases();
                     else if (currentUnit === 'u2') drawAllU2EconCanvases();
+                    else if (currentUnit === 'u4') drawAllU4EconCanvases();
                 }
             });
         };
