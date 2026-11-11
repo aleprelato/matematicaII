@@ -2092,121 +2092,460 @@
                     <p class="text-sm text-slate-600 mt-2">Recorrido de los ejemplos de la presentación: aplicación de D’Alembert, Raabe y Leibniz; determinación de radios e intervalos de convergencia; y desarrollos de funciones mediante Taylor y Maclaurin.</p>
                 </div>
 
-                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
                         <h3 class="text-lg font-bold text-slate-900">1. Criterio de D’Alembert</h3>
                         <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositiva 22</p>
-                            <div class="text-center">$$\sum_{n=0}^{\infty}\frac{4^n}{n!}$$</div>
-                            <p class="text-sm text-slate-700">El límite del cociente es $L=0<1$.</p>
-                            <p class="text-sm font-bold text-emerald-700">Conclusión: converge.</p>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositiva 22</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=0}^{\infty} \frac{4^n}{n!} = 1 + 4 + 8 + \frac{32}{3} + \cdots$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">Aplicamos el criterio de D’Alembert. Para simplificar el cociente, usamos que $(n+1)! = (n+1)n!$.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Aplicación del criterio y desarrollo</p>
+                            $$\begin{aligned}
+                            \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
+                            &= \lim_{n \to \infty} \frac{\frac{4^{n+1}}{(n+1)!}}{\frac{4^n}{n!}} \\
+                            &= \lim_{n \to \infty} \frac{4^{n+1}n!}{4^n(n+1)!}
+                            = \lim_{n \to \infty} \frac{4}{n+1}
+                            = 0 < 1
+                            \end{aligned}$$
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 23</p>
-                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{4^n}{n^4}$$</div>
-                            <p class="text-sm text-slate-700">El límite del cociente es $L=4>1$.</p>
-                            <p class="text-sm font-bold text-rose-700">Conclusión: diverge.</p>
+                        <p class="text-sm text-emerald-800">Por el criterio de D’Alembert, la serie <strong>converge</strong>.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 23</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} \frac{4^n}{(n+2)^2} = \frac{4^1}{3^2} + \frac{4^2}{4^2} + \frac{4^3}{5^2} + \cdots$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">Aplicamos el criterio de D’Alembert.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Cálculo del límite</p>
+                            $$\begin{aligned}
+                            \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
+                            &= \lim_{n \to \infty} \frac{\frac{4^{n+1}}{(n+3)^2}}{\frac{4^n}{(n+2)^2}}
+                            = \lim_{n \to \infty} \frac{4^{n+1}(n+2)^2}{4^n(n+3)^2} \\
+                            &= \lim_{n \to \infty} 4\frac{(n+2)^2}{(n+3)^2}
+                            = 4 \lim_{n \to \infty} \frac{(n+2)^2}{(n+3)^2}
+                            \end{aligned}$$
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 24</p>
-                            <p class="text-sm text-slate-700">La presentación obtiene $L=1$ luego de resolver una indeterminación con la regla de L’Hôpital.</p>
-                            <p class="text-sm font-bold text-amber-700">Conclusión: el criterio no permite decidir.</p>
-                            <p class="text-xs text-slate-500">La expresión completa del enunciado no se reproduce aquí porque no se distingue con suficiente nitidez en la transcripción.</p>
+                        <p class="text-sm text-slate-700">El límite presenta una indeterminación del tipo $\frac{\infty}{\infty}$. Aplicamos la regla de L’Hôpital dos veces.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$4 \lim_{n \to \infty} \frac{(n+2)^2}{(n+3)^2}
+                            \overset{\text{L'H}}{=}
+                            4 \lim_{n \to \infty} \frac{2(n+2)}{2(n+3)}
+                            \overset{\text{L'H}}{=}
+                            4 \cdot \frac{2}{2} = 4 > 1$$
                         </div>
+                        <p class="text-sm text-rose-800">Por el criterio de D’Alembert, la serie <strong>diverge</strong>.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 24</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} \frac{1}{n(n+3)} = \frac{1}{1(1+3)} + \frac{1}{2(2+3)} + \frac{1}{3(3+3)} + \cdots$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">Aplicamos el criterio de D’Alembert.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Cálculo del límite</p>
+                            $$\begin{aligned}
+                            \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
+                            &= \lim_{n \to \infty} \frac{\frac{1}{(n+1)(n+4)}}{\frac{1}{n(n+3)}}
+                            = \lim_{n \to \infty} \frac{n(n+3)}{(n+1)(n+4)} \\
+                            &= \lim_{n \to \infty} \frac{n^2 + 3n}{n^2 + 4n + n + 4}
+                            = \lim_{n \to \infty} \frac{n^2 + 3n}{n^2 + 5n + 4}
+                            \end{aligned}$$
+                        </div>
+                        <p class="text-sm text-slate-700">El límite presenta una indeterminación del tipo $\frac{\infty}{\infty}$. Aplicamos la regla de L’Hôpital dos veces.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\lim_{n \to \infty} \frac{n^2 + 3n}{n^2 + 5n + 4}
+                            \overset{\text{L'H}}{=}
+                            \lim_{n \to \infty} \frac{2n + 3}{2n + 5}
+                            \overset{\text{L'H}}{=}
+                            \frac{2}{2} = 1$$
+                        </div>
+                        <p class="text-sm text-amber-800">Como $L=1$, el criterio de D’Alembert <strong>no permite decidir</strong> si la serie converge o diverge.</p>
                     </div>
                 </article>
 
-                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
                         <h3 class="text-lg font-bold text-slate-900">2. Criterio de Raabe</h3>
                         <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">2 ejemplos</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 26–27</p>
-                            <p class="text-sm text-slate-700">Se retoma la serie del ejemplo 3 de D’Alembert y se aplica Raabe. Luego de resolver una indeterminación mediante L’Hôpital, se obtiene:</p>
-                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=2>1$$</div>
-                            <p class="text-sm font-bold text-emerald-700">Conclusión: converge.</p>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 26–27</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} \frac{1}{n(n+3)}$$</div>
+                        <p class="text-sm text-slate-700">En el ejercicio anterior, el criterio de D’Alembert dio $L=1$. Aplicamos ahora el criterio de Raabe.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Aplicación y desarrollo del criterio</p>
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} n \left( 1 - \frac{a_{n+1}}{a_n} \right)
+                            = \lim_{n \to \infty} n \left( 1 - \frac{\frac{1}{(n+1)(n+4)}}{\frac{1}{n(n+3)}} \right) \\
+                            &= \lim_{n \to \infty} n \left( 1 - \frac{n(n+3)}{(n+1)(n+4)} \right) \\
+                            &= \lim_{n \to \infty} n \left( \frac{(n+1)(n+4) - n(n+3)}{(n+1)(n+4)} \right) \\
+                            &= \lim_{n \to \infty} n \left( \frac{n^2 + 5n + 4 - n^2 - 3n}{n^2 + 5n + 4} \right) \\
+                            &= \lim_{n \to \infty} n \left( \frac{2n + 4}{n^2 + 5n + 4} \right)
+                            = \lim_{n \to \infty} \frac{2n^2 + 4n}{n^2 + 5n + 4}
+                            \end{aligned}$$
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositivas 28–30</p>
-                            <p class="text-sm text-slate-700">Se desarrolla el cociente, se simplifican los factores y se calcula el límite:</p>
-                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$L=\frac12<1$$</div>
-                            <p class="text-sm font-bold text-rose-700">Conclusión: diverge.</p>
-                            <p class="text-xs text-slate-500">La expresión inicial de la serie aparece como imagen y no se recuperó con suficiente nitidez.</p>
+                        <p class="text-sm text-slate-700">El límite presenta una indeterminación del tipo $\frac{\infty}{\infty}$. Aplicamos la regla de L’Hôpital dos veces.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} \frac{2n^2 + 4n}{n^2 + 5n + 4} \\
+                            &\overset{\text{L'H}}{=} \lim_{n \to \infty} \frac{4n + 4}{2n + 5} \\
+                            &\overset{\text{L'H}}{=} \frac{4}{2} = 2 > 1
+                            \end{aligned}$$
                         </div>
+                        <p class="text-sm text-emerald-800">Por el criterio de Raabe, la serie <strong>converge</strong>.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositivas 28–30</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} \frac{(2n)!}{4^n(n!)^2}$$</div>
+                        <p class="text-sm font-semibold text-slate-800">Paso 1. Sustituimos los términos y escribimos el cociente como una sola fracción.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} n \left( 1 - \frac{a_{n+1}}{a_n} \right)
+                            = \lim_{n \to \infty} n \left( 1 - \frac{\frac{(2n+2)!}{4^{n+1}((n+1)!)^2}}{\frac{(2n)!}{4^n(n!)^2}} \right) \\
+                            &= \lim_{n \to \infty} n \left( 1 - \frac{(2n+2)! 4^n(n!)^2}{(2n)! 4^{n+1}((n+1)!)^2} \right)
+                            \end{aligned}$$
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">Paso 2. Desarrollamos los factoriales y simplificamos.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            (2n+2)! &= (2n+2)(2n+1)(2n)! \\
+                            ((n+1)!)^2 &= [(n+1)n!]^2 = (n+1)^2(n!)^2
+                            \end{aligned}$$
+                        </div>
+                        <p class="text-sm text-slate-700">Por ejemplo, para $n=3$, la segunda identidad queda $(4!)^2 = (4 \cdot 3!)^2 = 4^2(3!)^2$.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} n \left( 1 - \frac{(2n+2)(2n+1)(2n)! 4^n(n!)^2}{(2n)! 4^{n+1}(n+1)^2(n!)^2} \right) \\
+                            &= \lim_{n \to \infty} n \left( 1 - \frac{(2n+2)(2n+1)}{4(n+1)^2} \right)
+                            \end{aligned}$$
+                        </div>
+                        <p class="text-sm text-slate-700">Como $2n+2 = 2(n+1)$, simplificamos un factor $n+1$ y un factor $2$.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$L = \lim_{n \to \infty} n \left( 1 - \frac{2(n+1)(2n+1)}{4(n+1)^2} \right)
+                            = \lim_{n \to \infty} n \left( 1 - \frac{2n+1}{2(n+1)} \right)$$
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">Paso 3. Escribimos la resta con denominador común y calculamos el límite.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} n \left( \frac{2(n+1) - (2n+1)}{2(n+1)} \right) \\
+                            &= \lim_{n \to \infty} n \left( \frac{2n+2 - 2n - 1}{2n+2} \right)
+                            = \lim_{n \to \infty} \frac{n}{2n+2}
+                            \end{aligned}$$
+                        </div>
+                        <p class="text-sm text-slate-700">El límite presenta una indeterminación del tipo $\frac{\infty}{\infty}$. Aplicamos la regla de L’Hôpital.</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                            $$\begin{aligned}
+                            L &= \lim_{n \to \infty} \frac{n}{2n+2} \\
+                            &\overset{\text{L'H}}{=} \frac{1}{2} < 1
+                            \end{aligned}$$
+                        </div>
+                        <p class="text-sm text-rose-800">Por el criterio de Raabe, la serie <strong>diverge</strong>.</p>
                     </div>
                 </article>
 
-                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
                         <h3 class="text-lg font-bold text-slate-900">3. Criterio de Leibniz</h3>
                         <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 33–34</p>
-                            <p class="text-sm text-slate-700">La serie alternada converge por Leibniz. La serie de valores absolutos diverge.</p>
-                            <p class="text-sm font-bold text-emerald-700">Conclusión: convergencia condicional.</p>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 33–34</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{3^n}$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">El factor $(-1)^{n+1}$ determina el signo de cada término y $a_n = \frac{1}{3^n}$ es su valor absoluto. Verificamos las condiciones del criterio de Leibniz.</p>
+                        <div class="space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">a) Los valores absolutos de los términos son monótonos no crecientes.</p>
+                                <p class="text-sm text-slate-700">Para todo $n \ge 1$, se cumple:</p>
+                                <div class="text-center overflow-x-auto">$$a_n = \frac{1}{3^n} > \frac{1}{3^{n+1}} = a_{n+1}$$</div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">b) Los valores absolutos de los términos tienden a cero.</p>
+                                <div class="text-center overflow-x-auto">$$\lim_{n \to \infty} a_n = \lim_{n \to \infty} \frac{1}{3^n} = 0$$</div>
+                            </div>
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 35</p>
-                            <p class="text-sm text-slate-700">Se analiza una serie alternada de tipo armónico. Converge por Leibniz, pero la serie de valores absolutos es armónica y diverge.</p>
-                            <p class="text-sm font-bold text-emerald-700">Conclusión: convergencia condicional.</p>
+                        <p class="text-sm text-emerald-800">Como se cumplen ambas condiciones, la serie <strong>converge</strong> por el criterio de Leibniz.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 35</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} (-1)^{n+1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">Esta es la <strong>serie armónica alternada</strong>. Verificamos las condiciones del criterio de Leibniz con $a_n = \frac{1}{n}$.</p>
+                        <div class="space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">a) Los valores absolutos de los términos son monótonos no crecientes.</p>
+                                <p class="text-sm text-slate-700">Los primeros cumplen $1 > \frac{1}{2} > \frac{1}{3}$. En general, para todo $n \ge 1$, se cumple:</p>
+                                <div class="text-center overflow-x-auto">$$a_n = \frac{1}{n} > \frac{1}{n+1} = a_{n+1}$$</div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">b) Los valores absolutos de los términos tienden a cero.</p>
+                                <div class="text-center overflow-x-auto">$$\lim_{n \to \infty} a_n = \lim_{n \to \infty} \frac{1}{n} = 0$$</div>
+                            </div>
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 36</p>
-                            <p class="text-sm text-slate-700">El término en valor absoluto tiende a cero, pero no se cumple la condición de monotonía indicada por Leibniz.</p>
-                            <p class="text-sm font-bold text-amber-700">Conclusión: el criterio no permite asegurar la convergencia.</p>
+                        <p class="text-sm text-emerald-800">Como se cumplen ambas condiciones, la <strong>serie armónica alternada converge</strong> por Leibniz.</p>
+                        <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl p-4 space-y-2">
+                            <p class="text-sm text-amber-950">Al tomar el valor absoluto de cada término, obtenemos la <strong>serie armónica</strong> $\sum_{n=1}^{\infty} \frac{1}{n}$, que diverge.</p>
+                            <p class="text-sm font-bold text-amber-950">Por lo tanto, la serie alternada es condicionalmente convergente.</p>
                         </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 3 · Diapositiva 36</p>
+                        <div class="text-center text-base sm:text-lg">$$\sum_{n=1}^{\infty} (-1)^{n+1} \left( 2 + \frac{1}{n} \right)$$</div>
+                        <p class="text-sm text-slate-700 leading-relaxed">Verificamos las condiciones del criterio de Leibniz con $a_n = 2 + \frac{1}{n}$.</p>
+                        <div class="space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">a) Los valores absolutos de los términos son monótonos no crecientes.</p>
+                                <p class="text-sm text-slate-700">Para todo $n \ge 1$, se cumple:</p>
+                                <div class="text-center overflow-x-auto">$$a_n = 2 + \frac{1}{n} > 2 + \frac{1}{n+1} = a_{n+1}$$</div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-800">b) Los valores absolutos de los términos deben tender a cero.</p>
+                                <div class="text-center overflow-x-auto">$$\lim_{n \to \infty} a_n = \lim_{n \to \infty} \left( 2 + \frac{1}{n} \right) = 2 \neq 0$$</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-amber-900 leading-relaxed">La segunda condición de Leibniz no se cumple, por lo que <strong>este criterio no permite asegurar la convergencia</strong>. Como el valor absoluto del término general tiende a $2$, el término general no tiende a cero. Así, no se cumple la <strong>condición necesaria (no suficiente) de convergencia</strong>.</p>
+                        <p class="text-sm font-bold text-rose-800">Por lo tanto, la serie no es convergente.</p>
                     </div>
                 </article>
 
-                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                        <h3 class="text-lg font-bold text-slate-900">4. Radio e intervalo de convergencia</h3>
-                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">2 ejemplos</span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">4. Radio e intervalo de convergencia</h3>
+                            <p class="text-xs sm:text-sm text-slate-500 mt-1">Cálculo del radio y análisis de los extremos del intervalo</p>
+                        </div>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full shrink-0">2 ejemplos</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1 · Diapositivas 42–45</p>
-                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{2^n}{n+1}x^n$$</div>
-                            <p class="text-sm text-slate-700">Aplicando D’Alembert se obtiene la condición $2|x|<1$.</p>
-                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$r=\frac12,\qquad I=\left(-\frac12,\frac12\right)$$</div>
-                            <p class="text-xs text-slate-500">Los extremos se consideran por separado.</p>
+                            <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Radio finito</span>
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
+                        <div class="text-center text-base sm:text-lg">$$\text{a) } \sum_{n=1}^{\infty} \frac{2^n}{n+1}x^n$$</div>
+
+                        <div class="space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 1. Aplicamos el criterio de D’Alembert</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">Para $x \neq 0$, calculamos el límite del cociente entre términos consecutivos, tomamos su valor absoluto y extraemos $|x|$:</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                                $$\lim_{n \to \infty} \left| \frac{\frac{2^{n+1}x^{n+1}}{n+2}}{\frac{2^n x^n}{n+1}} \right| = \lim_{n \to \infty} \left| \frac{2^{n+1}x^{n+1}(n+1)}{2^n x^n(n+2)} \right| = |x|\lim_{n \to \infty}\frac{2(n+1)}{n+2}$$
+                            </div>
+                            <p class="text-sm text-slate-700">Para que el límite del cociente sea menor que $1$, debe cumplirse:</p>
+                            <div class="text-center overflow-x-auto">$$|x| < \frac{1}{\lim_{n \to \infty}\frac{2(n+1)}{n+2}} \iff |x| < \frac12$$</div>
+                            <p class="text-sm text-slate-700">Por lo tanto, el radio de convergencia es $r=\frac12$. En el interior del intervalo, la serie converge en $\left(-\frac12,\frac12\right)$.</p>
+                            <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 space-y-2">
+                                <p class="text-sm font-semibold text-blue-950">Otra opción: aplicar directamente la fórmula del radio</p>
+                                <div class="text-center overflow-x-auto">$$r = \lim_{n \to \infty}\left|\frac{a_n}{a_{n+1}}\right| = \lim_{n \to \infty}\frac{\frac{2^n}{n+1}}{\frac{2^{n+1}}{n+2}} = \lim_{n \to \infty}\frac{n+2}{2(n+1)} \overset{\text{L’Hôpital}}{=} \frac12$$</div>
+                                <p class="text-sm text-blue-950">Como la serie está centrada en $0$, obtenemos el mismo resultado: $r=\frac12$ y el intervalo abierto inicial es $\left(-\frac12,\frac12\right)$.</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-3">
+                            <p class="text-sm font-bold text-slate-900">Paso 2. Analizamos los extremos por separado</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">Para $x=-\frac12$ y $x=\frac12$, el límite del cociente de D’Alembert vale $2|x|=1$. En esos puntos el criterio no permite decidir, por lo que reemplazamos cada valor en la serie original.</p>
+
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-900">Extremo izquierdo: $x=-\frac12$</p>
+                                <div class="text-center overflow-x-auto">$$\sum_{n=1}^{\infty}\frac{2^n}{n+1}\left(-\frac12\right)^n = \sum_{n=1}^{\infty}\frac{(-1)^n}{n+1} = -\frac12 + \frac13 - \frac14 + \frac15 - \cdots$$</div>
+                                <p class="text-sm text-slate-700">Es una serie alternada. Para aplicar Leibniz, verificamos que los valores absolutos decrecen y tienden a cero:</p>
+                                <div class="text-center overflow-x-auto">$$\frac{2^n}{n+1}\left(-\frac12\right)^n = \frac{(-1)^n}{n+1}$$</div>
+                                <div class="text-center overflow-x-auto">$$\frac{1}{n+2} < \frac{1}{n+1} \qquad \text{y} \qquad \lim_{n \to \infty}\frac{1}{n+1}=0$$</div>
+                                <p class="text-sm font-semibold text-emerald-800">Por el criterio de Leibniz, la serie converge. Se incluye $x=-\frac12$ en el intervalo de convergencia.</p>
+                                <p class="text-xs text-slate-600">Además, no converge absolutamente porque la serie de valores absolutos es la serie armónica a partir del segundo término; por eso converge condicionalmente.</p>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2">
+                                <p class="text-sm font-semibold text-slate-900">Extremo derecho: $x=\frac12$</p>
+                                <div class="text-center overflow-x-auto">$$\sum_{n=1}^{\infty}\frac{2^n}{n+1}\left(\frac12\right)^n = \sum_{n=1}^{\infty}\frac{1}{n+1} = \frac12 + \frac13 + \frac14 + \frac15 + \cdots$$</div>
+                                <p class="text-sm text-slate-700">Esta es la serie armónica sin su primer término. Quitar una cantidad finita de términos no cambia la naturaleza de una serie. Como la serie armónica diverge, esta también diverge y $x=\frac12$ queda excluido.</p>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <p class="text-sm font-bold text-emerald-950">Resultado final</p>
+                            <div class="text-center text-base">$$r=\frac12 \qquad I=\left[-\frac12,\frac12\right)$$</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2 · Diapositiva 46</p>
-                            <div class="text-center">$$\sum_{n=1}^{\infty}\frac{x^n}{n!}$$</div>
-                            <p class="text-sm text-slate-700">El criterio de D’Alembert conduce a un radio infinito.</p>
-                            <div class="bg-slate-50 rounded-lg p-3 text-center">$$r=\infty,\qquad I=(-\infty,+\infty)$$</div>
+                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Radio infinito</span>
+                        </div>
+                        <div class="text-center text-base sm:text-lg">$$\text{b) } \sum_{n=1}^{\infty}\frac{x^n}{n!}$$</div>
+                        <div class="space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 1. Calculamos el radio de convergencia</p>
+                            <p class="text-sm text-slate-700">Aplicamos directamente la fórmula del radio. Para simplificar el cociente, usamos que $(n+1)!=(n+1)n!$.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                                $$r = \lim_{n \to \infty}\left|\frac{a_n}{a_{n+1}}\right| = \lim_{n \to \infty}\frac{\frac{1}{n!}}{\frac{1}{(n+1)!}} = \lim_{n \to \infty}\frac{(n+1)!}{n!} = \lim_{n \to \infty}(n+1)=\infty$$
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 2. Determinamos el intervalo de convergencia</p>
+                            <p class="text-sm text-slate-700">Como el radio de convergencia es infinito, la serie converge para todo $x\in\mathbb{R}$. No hay extremos finitos que deban analizarse por separado.</p>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <p class="text-sm font-bold text-emerald-950">Resultado final</p>
+                            <div class="text-center text-base">$$r=\infty \qquad I=(-\infty,\infty)$$</div>
                         </div>
                     </div>
                 </article>
 
-                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
                     <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                        <h3 class="text-lg font-bold text-slate-900">5. Desarrollos de Taylor y Maclaurin</h3>
-                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full">3 ejemplos</span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">5. Desarrollos de Taylor y Maclaurin</h3>
+                            <p class="text-sm text-slate-600 mt-1">Dos ejemplos guiados para construir una serie a partir de las derivadas de una función.</p>
+                        </div>
+                        <span class="text-xs font-semibold text-violet-700 bg-violet-50 px-2.5 py-1 rounded-full shrink-0">2 ejemplos desarrollados</span>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Maclaurin · $e^x$ · Diapositivas 49–50</p>
-                            <div class="text-center">$$e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}$$</div>
-                            <p class="text-xs text-slate-600">Radio infinito; converge para todo $x\in\mathbb{R}$.</p>
+
+                    <!-- EJEMPLO 1: MACLAURIN DE e^x -->
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-4">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 1</span>
+                            <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Maclaurin · Centro $c=0$</span>
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Maclaurin · $\sen(x)$ · Diapositivas 51–53</p>
-                            <div class="text-center">$$\sen(x)=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots$$</div>
-                            <p class="text-xs text-slate-600">Radio infinito; converge para todo $x\in\mathbb{R}$.</p>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-900">Desarrollar $f(x)=e^x$ en una serie de Maclaurin</h4>
+                        <p class="text-sm text-slate-700 leading-relaxed">La serie de Maclaurin es un caso particular de la serie de Taylor: se utiliza cuando el centro de desarrollo es $c=0$. Su fórmula es:</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                            $$f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n$$
                         </div>
-                        <div class="rounded-xl border border-slate-200 p-4 space-y-2">
-                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Taylor · $1/x$ en $c=1$ · Diapositivas 54–55</p>
-                            <div class="text-center">$$\frac1x=\sum_{n=0}^{\infty}(-1)^n(x-1)^n$$</div>
-                            <p class="text-xs text-slate-600">Radio $r=1$ e intervalo de convergencia $(0,2)$.</p>
+
+                        <div class="space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 1. Identificamos la función y el centro</p>
+                            <p class="text-sm text-slate-700">Trabajamos con $f(x)=e^x$ y desarrollamos alrededor de $c=0$.</p>
+                            <div class="bg-slate-50 rounded-xl p-3 text-center">$$f(x)=e^x,\qquad c=0$$</div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 2. Calculamos las derivadas y las evaluamos en $0$</p>
+                            <p class="text-sm text-slate-700">La función exponencial tiene una propiedad útil: todas sus derivadas son iguales a la función original.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                                $$\begin{aligned}
+                                f(x)&=e^x &\Rightarrow&& f(0)&=1\\
+                                f'(x)&=e^x &\Rightarrow&& f'(0)&=1\\
+                                f''(x)&=e^x &\Rightarrow&& f''(0)&=1\\
+                                f'''(x)&=e^x &\Rightarrow&& f'''(0)&=1\\
+                                f^{(n)}(x)&=e^x &\Rightarrow&& f^{(n)}(0)&=1
+                                \end{aligned}$$
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 3. Reemplazamos en la fórmula de Maclaurin</p>
+                            <p class="text-sm text-slate-700">Como todas las derivadas evaluadas en cero valen $1$, cada coeficiente queda dividido únicamente por el factorial correspondiente.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                                $$\begin{aligned}
+                                e^x&=\sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n\\
+                                &=\sum_{n=0}^{\infty}\frac{x^n}{n!}\\
+                                &=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\cdots
+                                \end{aligned}$$
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 4. Construimos un polinomio aproximante</p>
+                            <p class="text-sm text-slate-700">Si detenemos el desarrollo después del término de grado cuatro, obtenemos el polinomio de Maclaurin de orden cuatro:</p>
+                            <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                                $$P_4(x)=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}$$
+                            </div>
+                            <p class="text-sm text-slate-700">Este polinomio permite aproximar $e^x$ cerca de $x=0$. Cuantos más términos se incorporan, mejor es la aproximación dentro de la región de convergencia.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 space-y-1">
+                            <p class="text-sm font-bold text-emerald-950">Resultado y convergencia</p>
+                            <p class="text-sm text-emerald-900">La serie obtenida es la serie de Maclaurin de $e^x$. Su radio de convergencia es infinito, por lo que converge para todo número real.</p>
+                            <div class="text-center">$$r=\infty,\qquad I=(-\infty,\infty)$$</div>
+                        </div>
+                    </div>
+
+                    <!-- EJEMPLO 2: TAYLOR DE 1/x EN c=1 -->
+                    <div class="rounded-xl border border-slate-200 p-4 sm:p-5 space-y-4">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Ejemplo 2</span>
+                            <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">Taylor · Centro $c=1$</span>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-900">Desarrollar $f(x)=\frac{1}{x}$ alrededor de $c=1$</h4>
+                        <p class="text-sm text-slate-700 leading-relaxed">A diferencia de Maclaurin, aquí el centro no es cero. La fórmula general de Taylor alrededor de $c$ es:</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                            $$f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(c)}{n!}(x-c)^n$$
+                        </div>
+
+                        <div class="space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 1. Identificamos la función y el centro</p>
+                            <div class="bg-slate-50 rounded-xl p-3 text-center">$$f(x)=\frac{1}{x}=x^{-1},\qquad c=1$$</div>
+                            <p class="text-sm text-slate-700">Como el centro es $1$, en la serie aparecerán potencias de $(x-1)$.</p>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 2. Calculamos las derivadas</p>
+                            <p class="text-sm text-slate-700">Derivamos sucesivamente. Observamos que aparece un factorial y que el signo alterna.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                                $$\begin{aligned}
+                                f(x)&=x^{-1}\\
+                                f'(x)&=-x^{-2}\\
+                                f''(x)&=2x^{-3}\\
+                                f'''(x)&=-6x^{-4}\\
+                                f^{(4)}(x)&=24x^{-5}
+                                \end{aligned}$$
+                            </div>
+                            <p class="text-sm text-slate-700">El patrón general es:</p>
+                            <div class="bg-slate-50 rounded-xl p-3 text-center overflow-x-auto">$$f^{(n)}(x)=(-1)^n n!\,x^{-(n+1)}$$</div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 3. Evaluamos las derivadas en el centro $c=1$</p>
+                            <p class="text-sm text-slate-700">Al reemplazar $x=1$, la potencia de $x$ vale uno y quedan los factoriales con signo alternado.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                                $$\begin{aligned}
+                                f(1)&=1, & f'(1)&=-1, & f''(1)&=2,\\
+                                f'''(1)&=-6, & f^{(4)}(1)&=24, & f^{(n)}(1)&=(-1)^n n!
+                                \end{aligned}$$
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 4. Reemplazamos en la fórmula de Taylor</p>
+                            <p class="text-sm text-slate-700">Dividimos cada derivada evaluada por su factorial y multiplicamos por la potencia correspondiente de $(x-1)$.</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 overflow-x-auto">
+                                $$\begin{aligned}
+                                \frac1x&=\sum_{n=0}^{\infty}\frac{f^{(n)}(1)}{n!}(x-1)^n\\
+                                &=\sum_{n=0}^{\infty}\frac{(-1)^n n!}{n!}(x-1)^n\\
+                                &=\sum_{n=0}^{\infty}(-1)^n(x-1)^n\\
+                                &=1-(x-1)+(x-1)^2-(x-1)^3+\cdots
+                                \end{aligned}$$
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 5. Construimos un polinomio aproximante</p>
+                            <p class="text-sm text-slate-700">Tomando los términos hasta grado tres, obtenemos:</p>
+                            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                                $$P_3(x)=1-(x-1)+(x-1)^2-(x-1)^3$$
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-2">
+                            <p class="text-sm font-bold text-slate-900">Paso 6. Determinamos el intervalo de convergencia</p>
+                            <p class="text-sm text-slate-700">La serie obtenida es geométrica, con razón $q=-(x-1)$. Una serie geométrica converge cuando $|q|<1$:</p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 text-center overflow-x-auto">
+                                $$|-(x-1)|<1\iff |x-1|<1\iff 0<x<2$$
+                            </div>
+                            <p class="text-sm text-slate-700">En los extremos, la serie no converge: para $x=0$ sus términos son todos iguales a $1$, y para $x=2$ los términos alternan entre $1$ y $-1$; en ambos casos el término general no tiende a cero.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 space-y-1">
+                            <p class="text-sm font-bold text-emerald-950">Resultado final</p>
+                            <p class="text-sm text-emerald-900">El desarrollo de Taylor de $1/x$ centrado en $c=1$ tiene radio $1$ y converge únicamente en el intervalo abierto $(0,2)$.</p>
+                            <div class="text-center">$$r=1,\qquad I=(0,2)$$</div>
                         </div>
                     </div>
                 </article>
