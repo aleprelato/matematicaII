@@ -166,6 +166,9 @@
                 <button type="button" onclick="switchUnit('u5')" id="nav-u5" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
                     <i class="ph-bold ph-book-open"></i> Unidad 5: Integrales
                 </button>
+                <button type="button" onclick="switchUnit('u6')" id="nav-u6" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition">
+                    <i class="ph-bold ph-book-open"></i> Unidad 6: Func. 2 Variables (I)
+                </button>
             </div>
         </div>
     </header>
@@ -261,6 +264,24 @@
                 </h2>
                 <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
                     Comprendé el concepto de antiderivada, los métodos analíticos de integración, la integral definida mediante sumas de Riemann, la Regla de Barrow y su uso en ecuaciones diferenciales.
+                </p>
+            </div>
+        </div>
+
+        <!-- HERO DE LA UNIDAD 6 -->
+        <div id="u6-hero" class="hidden bg-gradient-to-r from-slate-900 via-fuchsia-950 to-pink-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none select-none text-8xl sm:text-9xl font-serif">
+                $\partial$
+            </div>
+            <div class="max-w-3xl relative z-10">
+                <p class="text-fuchsia-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                    Facultad de Ciencias Económicas • Contenido Didáctico Interactivo
+                </p>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight mb-3 font-serif">
+                    Unidad 6: Funciones de Dos Variables
+                </h2>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                    Introducción al cálculo multivariable: topología en el plano, límites dobles, derivadas parciales, diferenciabilidad, regla de la cadena y optimización (extremos libres y condicionados).
                 </p>
             </div>
         </div>
@@ -1170,6 +1191,231 @@
                     </div>
                 </article>
             </div> <!-- FIN TEORIA U5 -->
+
+            <!-- CONTENEDOR TEORÍA UNIDAD 6 -->
+            <div id="u6-teoria" class="hidden space-y-10">
+                <!-- 1. DEFINICIÓN, DOMINIO Y GRÁFICA -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-fuchsia-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Funciones de Dos Variables Independientes</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Definición, Dominio e Imagen en el espacio</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                        <p>Una función real de dos variables independientes es una regla que asigna a cada par ordenado $(x,y)$ de un conjunto $D$ (Dominio) del plano $\mathbb{R}^2$, un único número real $z$ (Imagen). Lo denotamos $z = f(x,y)$.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                <p class="font-bold text-slate-900 mb-1">Dominio e Imagen</p>
+                                <ul class="list-disc pl-5 space-y-1 text-xs">
+                                    <li><strong>Dominio ($D$):</strong> Es una región en el plano $XY$ ($\mathbb{R}^2$). Para hallarlo analíticamente se evitan denominadores nulos, raíces pares negativas y logaritmos nulos/negativos.</li>
+                                    <li><strong>Imagen:</strong> Es un subconjunto del eje $Z$ ($\mathbb{R}$).</li>
+                                </ul>
+                            </div>
+                            <div class="bg-fuchsia-50 border border-fuchsia-200 rounded-xl p-4">
+                                <p class="font-bold text-fuchsia-900 mb-1">Gráfica (Superficie en $\mathbb{R}^3$)</p>
+                                <p class="text-xs text-fuchsia-800">
+                                    La gráfica es el conjunto de puntos $(x,y,z)$ tales que $z = f(x,y)$. Mientras que una función de 1 variable dibuja una <em>curva</em>, una de 2 variables dibuja una <strong>superficie o "manta"</strong> en el espacio tridimensional.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. LÍMITE Y CONTINUIDAD -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-pink-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Límite y Continuidad</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Acercamiento multidireccional en el plano</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border-l-4 border-pink-500 rounded-r-xl p-4">
+                                <p class="text-sm font-bold text-slate-900 mb-2">Límite Doble o Simultáneo</p>
+                                <div class="mt-2 text-center text-sm bg-white rounded-lg py-2 px-2 border border-slate-200">
+                                    $$\lim_{(x,y) \to (x_0,y_0)} f(x,y) = L$$
+                                </div>
+                                <p class="text-xs text-slate-600 mt-2">Significa que para cualquier entorno del límite $L$ (en el eje Z), existe un <strong>entorno circular (o rectangular) reducido</strong> alrededor de $(x_0,y_0)$ en el plano XY tal que todas sus imágenes caen cerca de $L$.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-pink-50 border border-pink-200 rounded-xl p-4 text-sm text-pink-950">
+                                <p class="font-bold mb-1">¡Peligro de las Infinitas Direcciones!</p>
+                                <p class="text-xs leading-relaxed">En funciones de 1 variable solo podíamos acercarnos por izquierda o derecha. En $\mathbb{R}^2$, podemos acercarnos a $(x_0,y_0)$ por <strong>infinitos caminos</strong> (rectas, parábolas). Si el límite da distinto por dos trayectorias diferentes, <strong>el límite doble no existe</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 text-sm text-slate-700 shadow-sm mt-4">
+                        <p class="font-bold text-slate-900 mb-1">Continuidad</p>
+                        <p>Una función es continua en $P_0(x_0, y_0)$ si cumple las 3 reglas de oro: 1) Existe $f(P_0)$, 2) Existe el límite doble $L$, 3) Ambos valores son iguales. Superficies continuas no tienen desgarros, agujeros ni saltos abruptos.</p>
+                    </div>
+                </article>
+
+                <!-- 3. INCREMENTOS Y DERIVADAS PARCIALES -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Incrementos y Derivadas Parciales</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Congelando variables para estudiar el cambio direccional</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                <p class="font-bold text-slate-900 mb-2 text-sm">Incrementos Parciales y Total</p>
+                                <ul class="list-disc pl-5 space-y-1 text-xs text-slate-700">
+                                    <li>$\Delta_x z = f(x+\Delta x, y) - f(x,y)$ (solo varía X)</li>
+                                    <li>$\Delta_y z = f(x, y+\Delta y) - f(x,y)$ (solo varía Y)</li>
+                                    <li>$\Delta z = f(x+\Delta x, y+\Delta y) - f(x,y)$ (Incremento Total)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 border border-purple-200 rounded-xl p-4">
+                                <p class="font-bold text-purple-900 mb-2 text-sm">Cálculo Práctico (Derivadas Parciales)</p>
+                                <p class="text-xs text-purple-800 leading-relaxed">
+                                    Para derivar $f_x = \frac{\partial z}{\partial x}$, se aplica la tabla de derivadas a $x$ <strong>asumiendo que $y$ es un simple número constante</strong>. Inversamente, para $f_y$, asumimos $x$ como constante.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-purple-500 rounded-r-xl p-4 shadow-sm">
+                            <p class="text-sm font-bold text-slate-900 mb-2">Interpretación Geométrica</p>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Si cortamos la superficie $z = f(x,y)$ con un plano constante $y = y_0$, obtenemos una curva. La derivada parcial $\frac{\partial z}{\partial x}(x_0, y_0)$ representa la <strong>pendiente de la recta tangente</strong> a esa curva en el punto dado. Es la tasa de inclinación de la montaña si caminamos estrictamente de Este a Oeste.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. DERIVADAS SUPERIORES Y DIFERENCIAL -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">4</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Derivadas Sucesivas y Diferencial</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Teorema de Schwarz y aproximaciones del plano tangente</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                <p class="text-sm font-bold text-slate-900 mb-2">Derivadas de Orden Superior</p>
+                                <p class="text-xs text-slate-600">Volver a derivar las derivadas parciales produce derivadas de segundo orden ($f_{xx}, f_{yy}, f_{xy}, f_{yx}$).</p>
+                                <div class="mt-2 bg-white border border-slate-200 rounded p-2 text-xs">
+                                    <p class="font-bold text-blue-800">Teorema de Schwarz (Clairaut):</p>
+                                    <p>Si las derivadas cruzadas son continuas, entonces no importa el orden de derivación: $$f_{xy} = f_{yx}$$</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                                <p class="text-sm font-bold text-blue-950 mb-2">Diferenciales Parciales y Total</p>
+                                <p class="text-xs text-blue-800 leading-relaxed mb-2">El <strong>Diferencial Total</strong> ($dz$) aproxima el incremento real $\Delta z$ usando el plano tangente de la superficie:</p>
+                                <div class="bg-white p-2 rounded text-center text-sm shadow-xs border border-blue-100">
+                                    $$dz = \frac{\partial z}{\partial x} dx + \frac{\partial z}{\partial y} dy$$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. EXTREMOS LIBRES (PARTE 2) -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-rose-600 text-white font-bold flex items-center justify-center shrink-0">5</span>
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">Segunda Parte • Unidad 6</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Extremos Libres (Sin Restricción)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Máximos, Mínimos, Puntos de Silla y el Determinante Hessiano</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                <p class="font-bold text-slate-900 mb-2 text-sm">Condición Necesaria (Puntos Críticos)</p>
+                                <p class="text-xs text-slate-700 leading-relaxed mb-2">Para que haya un extremo relativo en $(x_0,y_0)$, el plano tangente debe ser horizontal (gradiente nulo):</p>
+                                <div class="bg-white p-2 rounded text-center text-sm shadow-xs border border-slate-200">
+                                    $$f_x(x_0,y_0) = 0 \quad \text{y} \quad f_y(x_0,y_0) = 0$$
+                                </div>
+                            </div>
+                            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4">
+                                <p class="font-bold text-rose-900 mb-2 text-sm">Extremos Absolutos</p>
+                                <p class="text-xs text-rose-800 leading-relaxed">
+                                    Por el Teorema de Weierstrass bidimensional, si $f(x,y)$ es continua en una región <strong>cerrada y acotada</strong>, alcanza un máximo y un mínimo absoluto, ya sea en un punto crítico interior o en el límite de la región (borde).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mt-4">
+                            <p class="text-sm font-bold text-slate-900 mb-3">Condición Suficiente: Determinante Hessiano</p>
+                            <p class="text-xs text-slate-600 mb-3">Se construye la Matriz Hessiana evaluada en el punto crítico $(x_0,y_0)$ y se calcula su determinante $H$ (o $\Delta$):</p>
+                            <div class="text-center text-sm mb-4">
+                                $$H(x_0,y_0) = \begin{vmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{vmatrix} = f_{xx} \cdot f_{yy} - (f_{xy})^2$$
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                                    <p class="font-bold text-emerald-900 text-center">Extremo Local ($H > 0$)</p>
+                                    <ul class="mt-2 space-y-1 text-emerald-800">
+                                        <li>Si $f_{xx} > 0 \implies$ <strong>Mín. Relativo</strong> (Cóncava arriba)</li>
+                                        <li>Si $f_{xx} < 0 \implies$ <strong>Máx. Relativo</strong> (Cóncava abajo)</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex flex-col justify-center items-center text-center">
+                                    <p class="font-bold text-amber-900">Punto de Silla ($H < 0$)</p>
+                                    <p class="mt-1 text-amber-800">Sube en una dirección y baja en otra. No hay extremo.</p>
+                                </div>
+                                <div class="bg-slate-100 border border-slate-300 rounded-lg p-3 flex flex-col justify-center items-center text-center">
+                                    <p class="font-bold text-slate-700">Caso Dudoso ($H = 0$)</p>
+                                    <p class="mt-1 text-slate-600">El criterio falla. Se debe analizar por definición incrementos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6. EXTREMOS CONDICIONADOS -->
+                <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="w-9 h-9 rounded-xl bg-orange-600 text-white font-bold flex items-center justify-center shrink-0">6</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Extremos Condicionados</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Optimización con restricciones ($g(x,y) = k$)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                                <p class="text-sm font-bold text-slate-900 mb-2">Método de la Variable Ligada</p>
+                                <p class="text-xs text-slate-600 mb-2">Se utiliza cuando la restricción es fácil de despejar.</p>
+                                <ol class="list-decimal pl-4 space-y-1 text-xs text-slate-700">
+                                    <li>Despejar una variable (ej. $y$) de la restricción $g(x,y)=k$.</li>
+                                    <li>Sustituir en la función objetivo: $h(x) = f(x, y(x))$.</li>
+                                    <li>Derivar $h'(x) = 0$ y clasificar usando derivadas de 1 variable.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                                <p class="text-sm font-bold text-orange-950 mb-2">Multiplicadores de Lagrange</p>
+                                <p class="text-xs text-orange-800 leading-relaxed mb-2">Se construye la función Lagrangiana introduciendo el multiplicador $\lambda$:</p>
+                                <div class="bg-white p-2 rounded text-center text-sm shadow-xs border border-orange-100">
+                                    $$\mathcal{L}(x,y,\lambda) = f(x,y) + \lambda(k - g(x,y))$$
+                                </div>
+                                <p class="text-xs text-orange-800 mt-2"><strong>Cond. Necesaria:</strong> Sistema $\mathcal{L}_x = 0, \mathcal{L}_y = 0, \mathcal{L}_\lambda = 0$.<br><strong>Cond. Suficiente:</strong> Evaluar el Hessiano Orlado $\bar{H}$.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div> <!-- FIN TEORIA U6 -->
         </section>
 
         <!-- ========================================================= -->
@@ -1535,6 +1781,16 @@
                 </div>
                 <div id="u5-practica-list" class="space-y-6"></div>
             </div> <!-- FIN PRACTICA U5 -->
+
+            <!-- CONTENEDOR PRÁCTICA UNIDAD 6 -->
+            <div id="u6-practica" class="hidden space-y-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-wider text-fuchsia-700 bg-fuchsia-50 px-2.5 py-0.5 rounded-full mb-3 inline-block">Cálculo Multivariable</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Derivadas y Optimización Superficial</h3>
+                    <p class="text-sm text-slate-600 mt-2">Ejemplos de Límites por trayectorias, Regla de la Cadena, y métodos de Optimización con y sin restricciones.</p>
+                </div>
+                <div id="u6-practica-list" class="space-y-6"></div>
+            </div> <!-- FIN PRACTICA U6 -->
 
         </section>
 
@@ -1996,6 +2252,19 @@
                 <div id="u5-econ-list" class="space-y-8"></div>
             </div> <!-- FIN ECONOMICAS U5 -->
 
+            <!-- CONTENEDOR ECONÓMICAS UNIDAD 6 -->
+            <div id="u6-economicas" class="hidden space-y-8">
+                <div class="bg-fuchsia-50 rounded-2xl border-2 border-dashed border-fuchsia-200 p-8 shadow-sm text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-fuchsia-100 text-fuchsia-600 mb-4">
+                        <i class="ph-bold ph-info text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-fuchsia-950 mb-2">Información de la Cátedra</h3>
+                    <p class="text-sm text-fuchsia-800/80 max-w-lg mx-auto leading-relaxed">
+                        Esta unidad no tiene ejercicios de aplicación económica directa en esta plataforma.<br><br>Se utiliza la matemática de esta unidad (optimización de funciones multivariables y multiplicadores de Lagrange) como una herramienta analítica fundamental en materias avanzadas como <strong>Microeconomía I</strong> y <strong>Macroeconomía</strong>.
+                    </p>
+                </div>
+            </div> <!-- FIN ECONOMICAS U6 -->
+
         </section>
 
     </main>
@@ -2028,7 +2297,11 @@
                 </li>
                 <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u5')">
                     <span>Unidad 5: Integrales y EDOs</span>
-                    <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
+                    <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded-full shrink-0">Activa</span>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-between gap-2 cursor-pointer hover:bg-white" onclick="switchUnit('u6')">
+                    <span>Unidad 6: Func. 2 Variables (I)</span>
+                    <span class="text-xs bg-fuchsia-600 text-white px-2 py-0.5 rounded-full shrink-0">Nueva</span>
                 </li>
             </ul>
             <button type="button" onclick="toggleTemarioModal(false)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
@@ -2083,6 +2356,7 @@
             const navU3 = document.getElementById('nav-u3');
             const navU4 = document.getElementById('nav-u4');
             const navU5 = document.getElementById('nav-u5');
+            const navU6 = document.getElementById('nav-u6');
             
             if (unit === 'u1') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
@@ -2090,30 +2364,42 @@
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
             } else if (unit === 'u2') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
             } else if (unit === 'u3') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
             } else if (unit === 'u4') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
                 if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
-            } else {
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else if (unit === 'u5') {
                 navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
                 if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+            } else {
+                navU1.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                navU2.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU3) navU3.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU4) navU4.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU5) navU5.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium shrink-0 hover:bg-slate-200 cursor-pointer transition';
+                if(navU6) navU6.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fuchsia-600 text-white font-semibold shrink-0 shadow-xs cursor-pointer transition';
             }
             
             // Heros
@@ -2125,6 +2411,8 @@
             if(hero4) hero4.classList.toggle('hidden', unit !== 'u4');
             const hero5 = document.getElementById('u5-hero');
             if(hero5) hero5.classList.toggle('hidden', unit !== 'u5');
+            const hero6 = document.getElementById('u6-hero');
+            if(hero6) hero6.classList.toggle('hidden', unit !== 'u6');
             
             // Secciones internas
             document.getElementById('u1-teoria').classList.toggle('hidden', unit !== 'u1');
@@ -2135,6 +2423,8 @@
             if(t4) t4.classList.toggle('hidden', unit !== 'u4');
             const t5 = document.getElementById('u5-teoria');
             if(t5) t5.classList.toggle('hidden', unit !== 'u5');
+            const t6 = document.getElementById('u6-teoria');
+            if(t6) t6.classList.toggle('hidden', unit !== 'u6');
             
             document.getElementById('u1-practica').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-practica').classList.toggle('hidden', unit !== 'u2');
@@ -2144,6 +2434,8 @@
             if(p4) p4.classList.toggle('hidden', unit !== 'u4');
             const p5 = document.getElementById('u5-practica');
             if(p5) p5.classList.toggle('hidden', unit !== 'u5');
+            const p6 = document.getElementById('u6-practica');
+            if(p6) p6.classList.toggle('hidden', unit !== 'u6');
             
             document.getElementById('u1-economicas').classList.toggle('hidden', unit !== 'u1');
             document.getElementById('u2-economicas').classList.toggle('hidden', unit !== 'u2');
@@ -2153,6 +2445,8 @@
             if(e4) e4.classList.toggle('hidden', unit !== 'u4');
             const e5 = document.getElementById('u5-economicas');
             if(e5) e5.classList.toggle('hidden', unit !== 'u5');
+            const e6 = document.getElementById('u6-economicas');
+            if(e6) e6.classList.toggle('hidden', unit !== 'u6');
 
             const modal = document.getElementById('modal-temario');
             if(modal && !modal.classList.contains('hidden')) {
@@ -3312,6 +3606,71 @@
                     { badge: 'Paso 2', title: 'Hallar C con IT(1)=6', math: '$$IT(1) = -\\frac{3}{1} - 2(0) + C = 6 \\implies -3 + C = 6 \\implies C = 9$$' },
                     { badge: 'Paso 3', title: 'Obtener Demanda p = IT/q', math: '$$IT(q) = -\\frac{3}{q} - 2\\ln(q) + 9 \\implies \\boxed{p(q) = -\\frac{3}{q^2} - \\frac{2\\ln(q)}{q} + \\frac{9}{q}}$$' }
                 ]
+            },
+
+            /* ==================== UNIDAD 6: PRÁCTICA (PRIMERA PARTE) ==================== */
+            u6_p1: {
+                number: 'Ejemplo 1', tags: [], tagLabel: 'Derivadas Parciales de Primer Orden', statement: '$$f(x,y) = x^2y^3 + \\operatorname{sen}(xy)$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Derivada parcial respecto de x', math: '$$f_x = \\frac{\\partial f}{\\partial x} = 2xy^3 + y \\cdot \\cos(xy)$$', note: 'Asumimos $y$ como constante. En $x^2y^3$, bajamos el 2 del $x$. En el seno, aplicamos regla de la cadena multiplicando por la derivada del argumento $(xy)\'_x = y$.' },
+                    { badge: 'Paso 2', title: 'Derivada parcial respecto de y', math: '$$f_y = \\frac{\\partial f}{\\partial y} = 3x^2y^2 + x \\cdot \\cos(xy)$$', note: 'Asumimos $x$ como constante. El proceso es análogo pero afectando la variable $y$.' }
+                ]
+            },
+            u6_p2: {
+                number: 'Ejemplo 2', tags: [], tagLabel: 'Límites por Trayectorias (No Existencia)', statement: '$$\\lim_{(x,y) \\to (0,0)} \\frac{xy}{x^2+y^2}$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Acercamiento por la recta y = 0 (Eje X)', math: '$$\\lim_{x \\to 0} \\frac{x(0)}{x^2+0^2} = \\lim_{x \\to 0} \\frac{0}{x^2} = 0$$' },
+                    { badge: 'Paso 2', title: 'Acercamiento por la recta y = x', math: '$$\\lim_{x \\to 0} \\frac{x(x)}{x^2+x^2} = \\lim_{x \\to 0} \\frac{x^2}{2x^2} = \\frac{1}{2}$$' },
+                    { badge: 'Paso 3', title: 'Conclusión de límites dobles', math: '$$0 \\neq \\frac{1}{2} \\implies \\boxed{\\text{No existe el límite doble}}$$', note: 'Con encontrar dos caminos distintos que generen resultados diferentes, queda demostrado que el límite no existe, ya que las trayectorias no convergen a un único punto $L$.' }
+                ]
+            },
+            u6_p3: {
+                number: 'Ejemplo 3', tags: [], tagLabel: 'Diferencial Total', statement: '$$z = \\ln(x^2 + y)$$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Plantear fórmula del Diferencial', math: '$$dz = \\frac{\\partial z}{\\partial x} dx + \\frac{\\partial z}{\\partial y} dy$$' },
+                    { badge: 'Paso 2', title: 'Calcular parciales', math: '$$\\frac{\\partial z}{\\partial x} = \\frac{2x}{x^2+y} \\quad \\text{y} \\quad \\frac{\\partial z}{\\partial y} = \\frac{1}{x^2+y}$$' },
+                    { badge: 'Paso 3', title: 'Ensamblar el diferencial total dz', math: '$$dz = \\boxed{\\frac{2x}{x^2+y} dx + \\frac{1}{x^2+y} dy}$$' }
+                ]
+            },
+            u6_p4: {
+                number: 'Ejemplo 4', tags: [], tagLabel: 'Derivada Función Compuesta (Regla Cadena)', statement: 'Si $z = u^2 + v^2$ con $u = e^x, v = e^{-x}$. Hallar $\\frac{dz}{dx}$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Árbol de derivación (Cadena)', math: '$$\\frac{dz}{dx} = \\frac{\\partial z}{\\partial u}\\frac{du}{dx} + \\frac{\\partial z}{\\partial v}\\frac{dv}{dx}$$' },
+                    { badge: 'Paso 2', title: 'Derivadas individuales', math: '$$\\frac{\\partial z}{\\partial u} = 2u, \\quad \\frac{\\partial z}{\\partial v} = 2v \\\\ \\frac{du}{dx} = e^x, \\quad \\frac{dv}{dx} = -e^{-x}$$' },
+                    { badge: 'Paso 3', title: 'Sustituir y simplificar en función de x', math: '$$\\frac{dz}{dx} = 2(e^x)e^x + 2(e^{-x})(-e^{-x}) = \\boxed{2e^{2x} - 2e^{-2x}}$$' }
+                ]
+            },
+            u6_p5: {
+                number: 'Ejemplo 5', tags: [], tagLabel: 'Derivación Implícita de una Superficie', statement: 'Hallar $\\frac{\\partial z}{\\partial x}$ si $x^2 + y^2 + z^2 - 1 = 0$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Fórmula de derivación implícita en $\\mathbb{R}^3$', math: '$$\\frac{\\partial z}{\\partial x} = -\\frac{F_x}{F_z} \\quad (F_z \\neq 0)$$', note: 'Donde $F(x,y,z) = x^2 + y^2 + z^2 - 1$' },
+                    { badge: 'Paso 2', title: 'Calcular parciales de la superficie de nivel', math: '$$F_x = 2x \\\\ F_z = 2z$$' },
+                    { badge: 'Paso 3', title: 'Aplicar cociente negativo', math: '$$\\frac{\\partial z}{\\partial x} = -\\frac{2x}{2z} = \\boxed{-\\frac{x}{z}}$$' }
+                ]
+            },
+            u6_p6: {
+                number: 'Ejemplo 6', tags: [], tagLabel: 'Extremos Libres', statement: 'Clasificar extremos de $f(x,y) = x^2 + y^2 - 2x - 4y + 5$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Derivadas primeras y Puntos Críticos', math: '$$f_x = 2x - 2 = 0 \\implies x=1 \\\\ f_y = 2y - 4 = 0 \\implies y=2$$', note: 'El único punto crítico es $P_0(1, 2)$.' },
+                    { badge: 'Paso 2', title: 'Derivadas segundas y Hessiano', math: '$$f_{xx} = 2 \\quad f_{yy} = 2 \\quad f_{xy} = f_{yx} = 0 \\\\ H(1,2) = \\begin{vmatrix} 2 & 0 \\\\ 0 & 2 \\end{vmatrix} = (2)(2) - (0)^2 = 4$$' },
+                    { badge: 'Paso 3', title: 'Clasificación', math: '$$H = 4 > 0 \\text{ y } f_{xx} = 2 > 0 \\implies \\boxed{\\text{Mínimo Relativo en } (1,2)}$$', note: 'Reemplazando en $f$, el valor mínimo absoluto de este paraboloide es $f(1,2) = 0$.' }
+                ]
+            },
+            u6_p7: {
+                number: 'Ejemplo 7', tags: [], tagLabel: 'Condicionado • Variable Ligada', statement: 'Optimizar $f(x,y) = x \\cdot y$ sujeto a la restricción $x + y = 10$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Despejar y sustituir', math: '$$y = 10 - x \\implies h(x) = f(x, 10-x) = x(10 - x) = 10x - x^2$$' },
+                    { badge: 'Paso 2', title: 'Optimizar la nueva función de 1 variable', math: '$$h\'(x) = 10 - 2x = 0 \\implies x = 5$$' },
+                    { badge: 'Paso 3', title: 'Clasificar y obtener y', math: '$$h\'\'(x) = -2 < 0 \\implies \\text{Máximo Relativo} \\\\ y = 10 - 5 = 5 \\implies \\boxed{\\text{Punto } P_0(5, 5)}$$', note: 'El valor máximo es $f(5,5) = 25$.' }
+                ]
+            },
+            u6_p8: {
+                number: 'Ejemplo 8', tags: [], tagLabel: 'Condicionado • Lagrange', statement: 'Optimizar $f(x,y) = x^2 + y^2$ sujeto a $x + y = 4$', revealed: 0,
+                steps: [
+                    { badge: 'Paso 1', title: 'Construir Lagrangiano', math: '$$\\mathcal{L}(x,y,\\lambda) = x^2 + y^2 + \\lambda(4 - x - y)$$' },
+                    { badge: 'Paso 2', title: 'Derivadas parciales e igualar a cero', math: '$$\\mathcal{L}_x = 2x - \\lambda = 0 \\implies \\lambda = 2x \\\\ \\mathcal{L}_y = 2y - \\lambda = 0 \\implies \\lambda = 2y \\\\ \\mathcal{L}_\\lambda = 4 - x - y = 0$$' },
+                    { badge: 'Paso 3', title: 'Resolver el sistema', math: '$$2x = 2y \\implies x = y \\\\ x + x = 4 \\implies 2x = 4 \\implies x = 2, y = 2$$', note: 'El punto crítico condicionado es $P_0(2, 2)$ con multiplicador $\\lambda = 4$. Al evaluarlo en el Hessiano orlado se confirma que es un Mínimo Relativo.' }
+                ]
             }
         };
 
@@ -3375,8 +3734,15 @@
                 containerU5E.innerHTML = keysU5E.map((key) => buildExerciseShellHTML(key, 'cyan')).join('');
             }
 
+            // Renderizar Práctica de Unidad 6
+            const containerU6P = document.getElementById('u6-practica-list');
+            if (containerU6P) {
+                const keysU6P = ['u6_p1', 'u6_p2', 'u6_p3', 'u6_p4', 'u6_p5', 'u6_p6', 'u6_p7', 'u6_p8'];
+                containerU6P.innerHTML = keysU6P.map((key) => buildExerciseShellHTML(key, 'fuchsia')).join('');
+            }
+
             // Inicializar contenido interno de cada ejercicio y demostraciones
-            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4', 'u3_proof_rolle', 'u3_proof_lagrange', 'u3_proof_cauchy', 'u3_proof_lhopital', 'u4_p1', 'u4_p2', 'u4_econ1', 'u4_econ2', 'u4_econ3', 'u5_p_indef1', 'u5_p_indef2', 'u5_p1', 'u5_p2', 'u5_p3', 'u5_p5', 'u5_p4', 'u5_p6', 'u5_econ1', 'u5_econ2'].forEach((k) => updateStepsView(k));
+            [...keysA, ...keysB, 'cont1', 'econ1', 'econ2', 'econ3', 'u2_p1', 'u2_p2', 'u2_econ1', 'u2_econ2', 'u3_p1', 'u3_p2', 'u3_econ1', 'u3_econ2', 'u3_econ3', 'u3_econ4', 'u3_proof_rolle', 'u3_proof_lagrange', 'u3_proof_cauchy', 'u3_proof_lhopital', 'u4_p1', 'u4_p2', 'u4_econ1', 'u4_econ2', 'u4_econ3', 'u5_p_indef1', 'u5_p_indef2', 'u5_p1', 'u5_p2', 'u5_p3', 'u5_p5', 'u5_p4', 'u5_p6', 'u5_econ1', 'u5_econ2', 'u6_p1', 'u6_p2', 'u6_p3', 'u6_p4', 'u6_p5', 'u6_p6', 'u6_p7', 'u6_p8'].forEach((k) => updateStepsView(k));
         }
 
         function buildExerciseShellHTML(exKey, colorTheme) {
@@ -3392,6 +3758,7 @@
             if(colorTheme === 'rose') { badgeBg = 'bg-rose-600'; btnBg = 'bg-rose-600 hover:bg-rose-700'; progStyle = 'text-rose-700 bg-rose-50'; }
             if(colorTheme === 'amber') { badgeBg = 'bg-amber-600'; btnBg = 'bg-amber-600 hover:bg-amber-700'; progStyle = 'text-amber-700 bg-amber-50'; }
             if(colorTheme === 'cyan') { badgeBg = 'bg-cyan-600'; btnBg = 'bg-cyan-600 hover:bg-cyan-700'; progStyle = 'text-cyan-700 bg-cyan-50'; }
+            if(colorTheme === 'fuchsia') { badgeBg = 'bg-fuchsia-600'; btnBg = 'bg-fuchsia-600 hover:bg-fuchsia-700'; progStyle = 'text-fuchsia-700 bg-fuchsia-50'; }
 
             const tagsAttr = ex.tags ? ex.tags.join(',') : '';
 
